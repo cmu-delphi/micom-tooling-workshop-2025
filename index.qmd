@@ -1,0 +1,51 @@
+---
+toc: false
+---
+
+::: {.grid}
+
+
+::: {.g-col-12 .g-col-lg-6 .px-5}
+
+![](assets/img/cover-art.svg){fig-align="center"}
+
+
+::: {layout-ncol=4}
+![](assets/img/delphi.jpg)
+
+![](assets/img/cmu.png)
+
+![](assets/img/berkeley.jpg)
+
+![](assets/img/ubc.jpg)
+:::
+
+
+:::
+
+::: {.g-col-12 .g-col-lg-6 .px-5}
+
+## Schedule
+
+In this short workshop, we plan to demonstrate how to use R to load, process,
+inspect, and forecast aggregate epi surveillance data. We will be presenting a
+few case studies to motivate the entire pipeline from signal discovery to the
+production of nowcasts and forecasts.
+
+1. [Understanding Data](slides/day1-morning.qmd)
+1. [Nowcasting](slides/day1-afternoon.qmd)
+1. [Time Series](slides/day2-morning.qmd)
+1. [Forecasting](slides/day2-afternoon.qmd)
+1. [Appendix: Background on `tidyverse`](slides/appendix-tidyverss.qmd)
+
+## Instructors
+
+* David Weber
+* Nat DeFries
+* Logan C. Brooks
+
+
+:::
+
+
+:::
