@@ -36,7 +36,7 @@ production of nowcasts and forecasts.
 1. [Nowcasting](slides/day1-afternoon.qmd)
 1. [Time Series](slides/day2-morning.qmd)
 1. [Forecasting](slides/day2-afternoon.qmd)
-1. [Appendix: Background on `tidyverse`](slides/appendix-tidyverss.qmd)
+1. [Appendix: Background on `tidyverse`](slides/appendix-tidyverse.qmd)
 
 ## Instructors
 
