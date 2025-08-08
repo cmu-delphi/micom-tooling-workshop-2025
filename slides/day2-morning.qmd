@@ -220,10 +220,12 @@ ggplot(train, aes(lagged_cases, deaths)) +
 
 # Evaluation
 
-## Error metrics
+## Different error metrics have pros and cons
 
+<!--
 * Assume we have predictions $\hat y_{new, t}$ for the unseen observations
 $y_{new,t}$ over times $t = 1, \dots, N$.
+-->
 
 * Four commonly used error metrics are:
 
@@ -235,6 +237,7 @@ $y_{new,t}$ over times $t = 1, \dots, N$.
 
   * mean absolute scaled error (MASE)
 
+<--
 ## Error metrics: MSE and MAE
 
 $$MSE = \frac{1}{N} \sum_{t=1}^N (y_{new, t}- \hat y_{new, t})^2$$
@@ -356,11 +359,14 @@ with(fake_upswing, data.frame(
 
 :::
 :::
+-->
 
+<!--
 ## Defining the error metrics in R
+-->
 
 ```{r error functions}
-#| echo: true
+#| echo: false
 MSE <- function(truth, prediction) {
   mean((truth - prediction)^2)}
 
@@ -467,6 +473,7 @@ They are [pessimistic]{.primary} if the relation between outcome and predictors
 changes over time.
 :::
 
+<!--
 ## Split-sample MSE
 
 Assume we want to make $h$-step ahead predictions, i.e. at time $t$ we want to
@@ -476,7 +483,7 @@ $$\text{SplitMSE} = \frac{1}{n-h-t_0} \sum_{t = t_0}^{n-h} (\hat y_{t+h|t_0} - y
 
 where	$\hat y_{t+h|t_0}$ indicates a prediction for $y$ at time $t+h$ that was made
 with a model that was fit on data up to time $t_0$.
-
+-->
 
 
 ## Split-sample error
@@ -549,7 +556,6 @@ ggplot(ca |>
   theme(legend.title = element_blank(),
         axis.title = element_text(size = 10))
 ```
-
 
 
 ## Time series cross-validation (CV)
