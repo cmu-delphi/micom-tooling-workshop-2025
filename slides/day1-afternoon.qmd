@@ -1135,7 +1135,7 @@ snapshots <- map(versions, \(v) {
 <!--
 ## Backfill American edition
 
-* Again, we can see a similar systematic underestimation problem for COVID-19 mortality rates in CA. <!-- 2023-2024 -->
+* Again, we can see a similar systematic underestimation problem for COVID-19 mortality rates in CA.
 
 * This plot also illustrates the [**revision process**]{.primary} - how the reported mortality changes & increases across multiple updates until it stabilizes at the final value (black line).
 
@@ -2405,7 +2405,7 @@ carefully tomorrow.
 
 * Ex. using the number of reported COVID-19 cases in British Columbia between Jan. 2020 and Apr. 15, 2023.
 
-<!-- This data is the number of reported COVID-19 cases in British Columbia between January 2020 and April 15, 2023. The values are.up-to-date as of August 2023. -->
+This data is the number of reported COVID-19 cases in British Columbia between January 2020 and April 15, 2023. The values are.up-to-date as of August 2023.
 ```{r rtestim}
 #| fig-width: 9
 #| fig-height: 3

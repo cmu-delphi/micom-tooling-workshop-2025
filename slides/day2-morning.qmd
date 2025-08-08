@@ -237,7 +237,7 @@ $y_{new,t}$ over times $t = 1, \dots, N$.
 
   * mean absolute scaled error (MASE)
 
-<--
+<!--
 ## Error metrics: MSE and MAE
 
 $$MSE = \frac{1}{N} \sum_{t=1}^N (y_{new, t}- \hat y_{new, t})^2$$
@@ -2076,5 +2076,4 @@ with $\theta_0 = 1$
 
 Assumes an $ARMA(p, q)$ model on the
 $d^{th}$-order differences of $y_t$
--->
 -->

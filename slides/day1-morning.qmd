@@ -414,7 +414,7 @@ lat_ca_june1 <- dv_ca |>
   pull() |> as.numeric()
 ```
 
-* On June 1, this signal is subject to [**revision**]{.primary} <!--over time (ex. consider Dec. 1's `percent_cli` across `version`):-->
+* On June 1, this signal is subject to [**revision**]{.primary} over time (ex. consider Dec. 1's `percent_cli` across `version`):
 
 ```{r revision-ca-ex}
 #| echo: false
@@ -601,13 +601,11 @@ In Bexar County, Texas, during the summer of 2020...
 * Auxilliary signals show no such dramatic increase
 * Reports themselves may not be trustworthy without context
 
-<!--
 
 * **Left**: On July 16, 4,810 [backlogged cases]{.primary} were reported, reflecting a 2-week delay. This caused a prolonged spike due to the 7-day trailing average applied to the counts.
 
 * **Right**: CTIS estimates of CLI-in-community showed more stable underlying trends.
 
--->
 
 ```{r fig4-Reinhart}
 #| echo: false
@@ -701,10 +699,10 @@ Added value
 ## Goals of Delphi Epidata platform and repository
 
 1. **Provide many aggregated epi-surveillance time-series ("epi-signals")**
-    + Mirror signals from other sources, especially if revisions are not tracked <!-- E.g. CDC's own NSSP, NWSS -->
+    + Mirror signals from other sources, especially if revisions are not tracked
     + Be the national historical repository of record & preserve the raw data
 
-<!-- Hence: include also signals available elsewhere, especially if they don't keep data revisions - E.g. CDC's own NSSP, NWSS -->
+Hence: include also signals available elsewhere, especially if they don't keep data revisions - E.g. CDC's own NSSP, NWSS
 
 2. **Be the go-to place for epi-signal discovery, including those held elsewhere**
 
@@ -715,6 +713,7 @@ Added value
 ::: {.callout-important appearance="simple"}
 Make epi-surveillance more nimble, complete, standardized, robust, and real-time
 :::
+
 -->
 
 
@@ -1340,7 +1339,7 @@ tail(dv_pa_issues_all) |>
 * Avoid queries with too-late minimum too-early maximum issue
 * Could be misleading results
 
-<!-- * We caution against starting queries with too late a minimum issue or too early maximum issue, as it could lead to incorrect or misleading results. You're safest bet to capture all issues is on the next slide... -->
+* We caution against starting queries with too late a minimum issue or too early maximum issue, as it could lead to incorrect or misleading results. You're safest bet to capture all issues is on the next slide...
 
 ## Obtaining all issues for one state
 
@@ -1420,14 +1419,15 @@ dv_state_default <- pub_covidcast(
 
 -->
 
+<!--
 ## Obtaining one issue for all states
-
+-->
 <!--
 [**Final question:**]{.primary}  What do you think happens when we adopt a "do nothing" approach to `geo_values` and `issues` (take both of them out)?
 
 <small> [**Hint**]{.primary}: remember a couple slides ago, when we removed `as_of`, we got the most recent estimate for PA. </small>
 -->
-
+<!--
 Defaults are intended to be "what you would expect"
 
 ```{r one-issue-all-states}
@@ -1508,7 +1508,7 @@ head(epidata) |> select(geo_value, signal, source, time_value, issue, lag, value
 ```
 </div>
 -->
--->
+
 
 
 ## Main takeaways
