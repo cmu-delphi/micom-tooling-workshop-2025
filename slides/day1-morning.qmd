@@ -19,57 +19,6 @@ ggplot2::theme_set(ggplot2::theme_bw())
 ```
 
 
-## Outline
-
-1. The Delphi Research Group
-
-1. Workshop Overview and System Setup
-
-1. Panel Data
-
-1. Versioned Data
-
-1. Epidata Repository and API
-
-1. Find Data Sources and Signals
-
-1. `{epidatr}`
-
-1. Versioning in `{epidatr}`
-
-
-# The Delphi Research Group
-
-## About Delphi
-
-* Founded in 2012 at Carnegie Mellon University, now expanded to UC Berkeley, and University of British Columbia.
-
-* Currently 5 faculty, ~10 PhD students, ~15 staff (mostly software engineers).
-
-* Easy to join us from anywhere (lots of volunteers during Covid-19 pandemic).
-
-* We are:
-    + CDC Center of Excellence for Influenza and Covid-19 Forecasting (2019-24).
-    + CDC Innovation Center for Outbreak Analytics and Disease Modeling (2024-29).
-
-[**Our mission:**]{.primary} To develop the theory and practice of [epidemic detection, tracking and forecasting]{.primary}, and their use in decision making, both public and private.
-
-## What does Delphi do?
-
-* Procure [real-time, aggregated data streams]{.primary} informative of infectious diseases and syndromes, in collaboration with partners in industry and government.
-
-* Extract signals and make them widely available via the [Epidata platform & API]{.primary}.
-
-* Develop and deploy algorithms for [epidemic detection, tracking, forecasting]{.primary}.
-
-* Develop and maintain statistical software packages for these tasks.
-
-* Make it all production-grade, maximally-accessible, and open-source (to serve CDC, state and local public health agencies, epi-forecasting researchers, data journalists, the public)
-
-## What we provide
-
-![](gfx/web_of_parts.svg){fig-align=center}
-
 # Workshop Overview and System Setup
 
 ## What we will cover
@@ -78,27 +27,6 @@ ggplot2::theme_set(ggplot2::theme_bw())
 - Tools for processing and plotting panel data
 - Statistical background on nowcasting and forecasting
 - Tools for building nowcasting and forecasting models
-- Plenty of examples throughout of real case studies
-
-## Goals part I
-
-- Expose you to a statistical way of thinking about now/forecasting
-- Certain basic mindsets (e.g., the importance of empirical validation
-  using techniques like time series cross-validation) are ubiquitous
-- Certain basic modeling considerations (e.g., starting simple and
-  building up complexity, taming variance through regularization,
-  addressing nonstationarity with trailing training windows) are also
-  ubiquitous
-
-## Goals part II
-
-- Expose you to software packages which aid processing, tracking,
-  nowcasting, and forecasting with panel data
-- These tools are still in development and we welcome your feedback
-- We have tried hard to get the framework right; but many individual
-  pieces themselves could still be improved
-- If these aren't working for you, then we want to hear from you!
-- We welcome collaboration, and everything we do is open source
 
 ## A disclaimer
 
@@ -109,39 +37,6 @@ ggplot2::theme_set(ggplot2::theme_bw())
   but we do have opinions about the pros/cons. Ask us at any point if
   you have a question about why we're doing things a certain way
 
-## One last slide
-
-- This workshop is supposed to be useful for YOU. Ask questions if
-  you have them, don't be shy
-- We may not (likely won't?) cover everything. Hopefully the materials
-  will be a resource for you beyond this workshop
-
-
-## System setup -- Passive viewing
-
-<br>
-
-### All of the slides are at
-
-<br>
-
-[<https://cmu-delphi.github.io/micom-tooling-workshop-2025>]{style="text-align: center;"}
-
-<br>
-
-### The source code is in the Repo
-
-<br>
-
-<https://github.com/cmu-delphi/micom-tooling-workshop-2025>
-
-<br>
-
-This is enough, but we hope you'll want to work through the code as we go along.
-
-<br>
-
-[Detailed versions of the next few slides are shown at the Repo Link above.]{.secondary}
 
 ## System setup -- Required software
 
@@ -158,6 +53,10 @@ This is enough, but we hope you'll want to work through the code as we go along.
 2. An IDE. We'll use RStudio, but you can use VSCode or Emacs or Whatnot
 
 ## System setup -- Downloading the materials
+
+<!--
+TODO
+-->
 
 ### Easy way:
 
@@ -177,6 +76,10 @@ This is enough, but we hope you'll want to work through the code as we go along.
 2. Proceed along the same lines as above.
 
 ## System setup -- Installing required packages
+
+<!--
+TODO
+-->
 
 We will use a [lot]{.tertiary} of packages.
 
@@ -298,6 +201,8 @@ as_epi_df(panel_data[[3]]) %>%
 <!--  Numerator = denote the Covid counts. Denominator be the total count of visits. Scaling by population is not necessary here because the signal is already normalized to the total number of visits, which acts as a proxy for population size. -->
 
 
+<!--
+
 ## Examples of panel data - HHS Admissions
 
 [[**Confirmed COVID-19 Hospital Admissions per 100k**]{.primary}](https://cmu-delphi.github.io/delphi-epidata/api/covidcast-signals/hhs.html) estimates the daily sum of adult and pediatric confirmed COVID-19 hospital admissions, per 100,000 population, averaged over the past 7 days.
@@ -312,7 +217,7 @@ as_epi_df(panel_data[[4]]) %>%
   xlab("Date") + ylab(units[4]) +
   scale_y_continuous(expand = expansion(c(0, 0.05)))
 ```
-
+-->
 
 <!--
 ## All together - Visualizing multiple panel data signals
@@ -489,14 +394,15 @@ weekly_snapshots |>
 
 ## Latency and revision in signals
 
-* [**Latency**]{.primary} the delay between data collection and availability
-
-**Example**: A signal based on insurance claims may take several days to appear as claims are processed
-
 * [**Revision**]{.primary} data is updated or corrected after initial publication
 
 **Example**: COVID-19 case reports are revised reporting backlogs are cleared
 
+* [**Latency**]{.primary} the delay between data collection and availability
+
+**Example**: A signal based on insurance claims may take several days to appear as claims are processed
+
+<!--
 ## Latency and revision in signals - Example
 
 * Recall the first example of panel & versioned data we've seen...
@@ -509,21 +415,23 @@ lat_ca_june1 <- dv_ca |>
   pull() |> as.numeric()
 ```
 
-* On June 1, this signal is `r lat_ca_june1` days [**latent**]{.primary}: `min(version - time_value)`
-
-```{r latency-ca-ex}
-#| echo: false
-x_dt_with_diff <- dv_ca |> mutate(version_time_diff = version - time_value)
-head(x_dt_with_diff |> group_by(time_value) |> slice(1) |> ungroup())
-```
-
-and subject to [**revision**]{.primary} <!--over time (ex. consider Dec. 1's `percent_cli` across `version`):-->
+* On June 1, this signal is subject to [**revision**]{.primary} <!--over time (ex. consider Dec. 1's `percent_cli` across `version`):-->
 
 ```{r revision-ca-ex}
 #| echo: false
 head(x_dt_with_diff) |> as_tibble()
 ```
 
+and `r lat_ca_june1` days [**latent**]{.primary}: `min(version - time_value)`
+
+```{r latency-ca-ex}
+#| echo: false
+x_dt_with_diff <- dv_ca |> mutate(version_time_diff = version - time_value)
+head(x_dt_with_diff |> group_by(time_value) |> slice(1) |> ungroup())
+```
+-->
+
+<!--
 ## Revision triangle, Outpatient visits in WA 2022
 
 * 7-day trailing average to smooth day-of-week effects
@@ -574,6 +482,7 @@ p2 <- dv_cli |>
 
 cowplot::plot_grid(p1, p2)
 ```
+-->
 
 ## Revisions
 Many data sources are subject to revisions:
@@ -684,6 +593,7 @@ Large spikes or anomalies can occur as
 : Reporting backlogs are cleared
 : Changes in case definitions are implemented
 
+<!--
 ## Reporting backlogs - Example
 
 In Bexar County, Texas, during the summer of 2020...
@@ -748,7 +658,9 @@ g2 <- reinhart |>
 
 cowplot::plot_grid(g1, g2, ncol = 2, rel_widths = c(.38, .62))
 ```
+-->
 
+<!--
 ## Reporting backlogs - Key takeaways
 
 <br><br>
@@ -762,7 +674,7 @@ cowplot::plot_grid(g1, g2, ncol = 2, rel_widths = c(.38, .62))
 <br><br>
 
 * [Cross-checking data with external sources from different reporting systems]{.primary}
-
+-->
 
 # Epidata Repository and API
 
@@ -770,7 +682,7 @@ cowplot::plot_grid(g1, g2, ncol = 2, rel_widths = c(.38, .62))
 
 [**Epidata:**]{.primary} repository of aggregated epi-surveillance time series
 
-Code is open-source. Signals can be either public or restricted.
+Code is open-source. Indicators can be either public or restricted.
 
 * To date, it has accumulated over 5 billion records.
 
@@ -786,7 +698,7 @@ Data from
 Added value
 : revision tracking, anomaly detection, trend detection, smoothing, imputation, geo-temporal-demographic disaggregation.
 
-
+<!--
 ## Goals of Delphi Epidata platform and repository
 
 1. **Provide many aggregated epi-surveillance time-series ("epi-signals")**
@@ -804,7 +716,7 @@ Added value
 ::: {.callout-important appearance="simple"}
 Make epi-surveillance more nimble, complete, standardized, robust, and real-time
 :::
-
+-->
 
 
 
@@ -825,6 +737,7 @@ Make epi-surveillance more nimble, complete, standardized, robust, and real-time
 
 * Signals are as accessible (w/ API, SDK) as allowed by DUAs
 
+<!--
 ## Epidata Documentation
 
 <br>
@@ -838,8 +751,9 @@ The [main endpoint](https://cmu-delphi.github.io/delphi-epidata/api/covidcast.ht
 <br>
 
 A [variety of other endpoints](https://cmu-delphi.github.io/delphi-epidata/api/README.html) international historical data for COVID-19, influenza, dengue, norovirus
+-->
 
-
+<!--
 ## Some of our data sources
 
 
@@ -926,7 +840,7 @@ Docs are great for a deep dive into the data, while the apps & tools are useful 
 <br>
 [Dashboard builder](https://delphi.cmu.edu/covidcast/dashboard/)
 
-
+-->
 
 
 
@@ -959,6 +873,7 @@ pak::pkg_install("cmu-delphi/epidatr@dev")
 
 The CRAN listing is [here](https://cran.r-project.org/package=epidatr/index.html).
 
+<!--
 ## Python
 
 In Python, install [`delphi-epidata` from PyPI](https://pypi.org/project/delphi-epidata/) with
@@ -978,11 +893,11 @@ pip install -e "git+https://github.com/cmu-delphi/epidatpy.git#egg=epidatpy"
 # PyPI version (not yet available)
 pip install epidatpy
 ```
+-->
 
 
 
-
-## Using `{epidatr}` and `{epidatpy}`
+## Using `{epidatr}`
 
 ```{r hhs-influenza-pub-covidcast}
 #| echo: true
@@ -1002,14 +917,6 @@ head(hhs_flu_nc, n = 3)
 ```{r hhs-influenza-pub-covidcast-2}
 #| echo: false
 head(hhs_flu_nc, n = 3)
-```
-
-<br>
-
-Python equivalent:
-``` python
-res = Epidata.covidcast('hhs', 'confirmed_admissions_influenza_1d', 'day', 'state', [20240401, Epidata.range(20240405, 20240414)], 'nc')
-print(res['result'], res['message'], len(res['epidata']))
 ```
 
 
@@ -1035,50 +942,6 @@ print(res['result'], res['message'], len(res['epidata']))
 :::
 
 
-
-
-## Interactive tooling in R
-
-[**Find sources and signals in R?**]{.primary}
-
-Functions to enhance data discovery in `{epidatr}`:
-
-`avail_endpoints()`
-: Lists all endpoints with brief descriptions
-: Highlights endpoints that cover non-US locations
-
-```{r avail-endpoints-fun}
-#| echo: true
-avail_endpoints()
-```
-
-##  Using the `covidcast_epidata()`
-
-`covidcast_epidata()` details for signals at the COVIDcast endpoint
-
-<!-- detailed insights into data sources from the COVIDcast endpoint. -->
-
-Assign to an object
-
-``` r
-cc_ed <- covidcast_epidata()
-```
-
-List data sources
-: `cc_ed$sources`, with tibbles describing the included signals
-
-Editor Support
-: In RStudio or similar editors, use tab completion to explore:
-: `cc_ed$source$` to view available data sources.
-: `cc_ed$signals$` to see signal options with autocomplete assistance.
-
-Filtering Convenience
-: Signals are prefixed with their source for easier navigation
-
-``` r
-cc_ed <- covidcast_epidata()
-head(cc_ed$sources, n = 2) # head(list, n = 2) will print the first two elements of the list
-```
 
 ## Fetching data - COVIDcast main endpoint
 
@@ -1213,6 +1076,7 @@ The `covidcast` endpoint supports `*` in its time and geo fields.
 Signal values for all available counties: replace `geo_values = "06059"` with `geo_values = "*"`.
 :::
 
+<!--
 ## Example queries - Other endpoints: Hospitalizations
 
 [**COVID-19 Hospitalization: Facility Lookup**]{.primary}
@@ -1286,11 +1150,13 @@ Store the key in your `.Reviron` file, or set is as an environment variables
 
 [Examples](https://cmu-delphi.github.io/epidatr/articles/signal-discovery.html)
 :::
+-->
 
 <!-- Aside from these public methods (starting with `pub_`),
 there are private methods (starting with `pvt_` when you type `avail_endpoints()`) that require private access keys. To run these locally, store the keys in your `.Reviron` file, or set them as environmental variables.
 See [Private methods](https://cmu-delphi.github.io/epidatr/articles/signal-discovery.html) for examples of using private endpoints. -->
 
+<!--
 ## Signal metadata
 
 Some endpoints provide additional metadata
@@ -1303,6 +1169,8 @@ Metadata accessors
 * `pub_covidcast_meta()`: metadata for COVIDcast
 * `pub_fluview_meta()`: metadata for FluView
 * `pub_meta()`: general metadata for the Delphi Epidata API
+-->
+
 
 # Versioning in `{epidatr}`
 
@@ -1390,7 +1258,7 @@ head(dv_pa_final) |>
 
 * Overly optimistic
 
-
+<!--
 ## Obtaining multiple specific issues for one state
 Request all issues in a certain time period
 
@@ -1641,6 +1509,8 @@ head(epidata) |> select(geo_value, signal, source, time_value, issue, lag, value
 ```
 </div>
 -->
+-->
+
 
 ## Main takeaways
 
