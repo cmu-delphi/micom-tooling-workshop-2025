@@ -14,24 +14,6 @@ ggplot2::theme_set(ggplot2::theme_bw())
 ```
 
 
-## Outline
-
-1. Some Words About Forecasting
-
-1. Linear Regression for Time Series
-
-1. Evaluation Methods
-
-1. ARX Models
-
-1. Overfitting and Regularization
-
-1. Prediction Intervals
-
-1. Forecasting with Versioned Data
-
-1. Traditional Approaches to Time Series
-
 # Some Words About Forecasting
 
 ## Forecasting is not magic
@@ -40,7 +22,7 @@ ggplot2::theme_set(ggplot2::theme_bw())
 - Methods for detecting and projecting trends are not magic; in general they're
   not qualitatively that different from what you can do with your eyeballs
 - That said, assimilating information from exogenous features (ideally, leading
-  indicators) can lead highly nontrivial gains, beyond the eyeballs
+  indicators) can lead to highly nontrivial gains, beyond the eyeballs
 - Remember ... good data is just as (more?) important as a good model!
 - Seasonality can help short-term forecasts. Long-term forecasts, absent of
   strong seasonality, are generally not very tractable
@@ -1083,7 +1065,7 @@ ca_lags |>
   scale_y_continuous(expand = expansion(c(0, .05)))
 ```
 
-# Overfitting and Regularization
+# Overfitting
 
 ## ARX models with 2 and 3 lags
 
@@ -1105,6 +1087,7 @@ $$\hat y_{t+h} = \hat \phi + \hat\phi_0 y_{t} + \hat\phi_1 y_{t-7} + \hat\phi_2 
 
 and fit them using a trailing window with $w = 120$.
 
+<!--
 ## Fit ARX(2) and ARX(3) on trailing window
 
 ```{r arx-2-and-3}
@@ -1134,6 +1117,7 @@ for (t in t0:(n-h)) {
 }
 
 ```
+-->
 
 ## Time series CV (trailing): ARX(1), ARX(2), and ARX(3)
 
@@ -1184,9 +1168,7 @@ rbind(getErrors(ca$deaths[!is.na(pred_arx1) & no_omicron],
 
 As we add more predictors, [forecasts]{.primary} seem more [volatile]{.primary} and errors increase.
 
-::: {.callout-important icon="false"}
-## **Overfitting**
-:::
+
 
 ## Overfitting
 
@@ -1301,6 +1283,7 @@ Some predictions were negative, which doesn't make sense for count data, so we t
 :::
 
 
+<!--
 ## Back to ARX(1), ARX(2), and ARX(3)
 
 How can we
@@ -1657,6 +1640,7 @@ rbind(getErrors(y_test, pred_arx3[!is.na(pred_arx3)], "ARX(3)"),
 * Ridge worsens as more predictors are included
 
 * Lasso improves as more predictors are included
+-->
 
 
 # Prediction Intervals
