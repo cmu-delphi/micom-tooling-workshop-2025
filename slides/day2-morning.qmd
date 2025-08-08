@@ -1912,6 +1912,7 @@ getErrors((ca |> filter(time_value %in% (fc_time_values+h)))$deaths,
           pred_unaware$X1, "version-unaware")
 ```
 
+<!--
 # Traditional Approaches to Time Series
 
 ## Popular forecasting frameworks
@@ -2075,4 +2076,5 @@ with $\theta_0 = 1$
 
 Assumes an $ARMA(p, q)$ model on the
 $d^{th}$-order differences of $y_t$
+-->
 -->
