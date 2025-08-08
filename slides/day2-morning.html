@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html lang="en-CA"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.42">
+
+  <meta name="author" content="David Weber, Nat DeFries">
+  <title>MICOM EpiData Workshop 2025 – day2-morning</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-85ba6bfe3d302fa0501603b7b8722628.css">
+  <link rel="stylesheet" href="tachyons-minimal.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section class="slide level2">
+
+<div class="flex">
+<div class="w-20">
+
+</div>
+<section id="section" class="slide level2 w-80" data-background-image="gfx/cover-art-1.svg" data-background-position="bottom">
+<h2>Quick Tour of Time Series Forecasting</h2>
+<h3 id="section-1">MICOM Tooling Workshop 2025</h3>
+<p><br></p>
+<h4 id="section-2">David Weber, Nat DeFries</h4>
+<p><span class="fstyle">Adapted from slides by Alice Cima, Rachel Lobay, Daniel McDonald, Ryan Tibshirani, with huge thanks to Logan Brooks, Xueda Shen, and Dmitry Shemetov</span></p>
+<p>12 August 2025</p>
+</section>
+</div>
+</section>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ol type="1">
+<li><p>Some Words About Forecasting</p></li>
+<li><p>Linear Regression for Time Series</p></li>
+<li><p>Evaluation Methods</p></li>
+<li><p>ARX Models</p></li>
+<li><p>Overfitting and Regularization</p></li>
+<li><p>Prediction Intervals</p></li>
+<li><p>Forecasting with Versioned Data</p></li>
+<li><p>Traditional Approaches to Time Series</p></li>
+</ol>
+</section>
+<section>
+<section id="some-words-about-forecasting" class="title-slide slide level1 center" data-number="1">
+<h1><span class="header-section-number">1</span> Some Words About Forecasting</h1>
+
+</section>
+<section id="forecasting-is-not-magic" class="slide level2">
+<h2>Forecasting is not magic</h2>
+<ul>
+<li>Forecasts are generally comprised of two parts: trend and seasonality</li>
+<li>Methods for detecting and projecting trends are not magic; in general they’re not qualitatively that different from what you can do with your eyeballs</li>
+<li>That said, assimilating information from exogenous features (ideally, leading indicators) can lead highly nontrivial gains, beyond the eyeballs</li>
+<li>Remember … good data is just as (more?) important as a good model!</li>
+<li>Seasonality can help short-term forecasts. Long-term forecasts, absent of strong seasonality, are generally not very tractable</li>
+</ul>
+</section></section>
+<section>
+<section id="linear-regression-for-time-series" class="title-slide slide level1 center" data-number="2">
+<h1><span class="header-section-number">2</span> Linear Regression for Time Series</h1>
+
+</section>
+<section id="basics-of-linear-regression" class="slide level2">
+<h2>Basics of linear regression</h2>
+<ul>
+<li><p>Assume we observe a predictor <span class="math inline">\(x_i\)</span> and an outcome <span class="math inline">\(y_i\)</span> for <span class="math inline">\(i = 1, \dots, n\)</span>.</p></li>
+<li><p>Linear regression seeks coefficients <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> such that</p></li>
+</ul>
+<p><span class="math display">\[y_i \approx \beta_0 + \beta_1 x_i\]</span></p>
+<p>is a good approximation for every <span class="math inline">\(i = 1, \dots, n\)</span>.</p>
+<ul>
+<li>In R, the coefficients are found by running <code>lm(y ~ x)</code>, where <code>y</code> is the vector of responses and <code>x</code> the vector of predictors.</li>
+</ul>
+</section>
+<section id="multiple-linear-regression" class="slide level2">
+<h2>Multiple linear regression</h2>
+<ul>
+<li>Given <span class="math inline">\(p\)</span> different predictors, we seek <span class="math inline">\((p+1)\)</span> coefficients such that</li>
+</ul>
+<p><span class="math display">\[y_i \approx \beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}\]</span> is a good approximation for every <span class="math inline">\(i = 1, \dots, n\)</span>.</p>
+</section>
+<section id="linear-regression-with-lagged-predictor" class="slide level2">
+<h2>Linear regression with lagged predictor</h2>
+<ul>
+<li>In time series, outcomes and predictors are usually indexed by time <span class="math inline">\(t\)</span>.</li>
+</ul>
+<div class="fragment fade-in">
+<ul>
+<li><span class="primary">Goal</span>: predicting future <span class="math inline">\(y\)</span>, given present <span class="math inline">\(x\)</span>.</li>
+</ul>
+</div>
+<div class="fragment fade-in">
+<ul>
+<li><span class="primary">Model</span>: linear regression with lagged predictor</li>
+</ul>
+<p><span class="math display">\[\hat y_t = \hat \beta + \hat \beta_0 x_{t-k}\]</span></p>
+<p>i.e.&nbsp;regress the outcome <span class="math inline">\(y\)</span> at time <span class="math inline">\(t\)</span> on the predictor <span class="math inline">\(x\)</span> at time <span class="math inline">\(t-k\)</span>.</p>
+</div>
+<div class="fragment fade-in">
+<ul>
+<li><span class="primary">Equivalent</span> way to write the model:</li>
+</ul>
+<p><span class="math display">\[\hat y_{t+k} = \hat \beta + \hat \beta_0 x_t\]</span></p>
+</div>
+</section>
+<section id="example-predicting-covid-deaths" class="slide level2">
+<h2>Example: predicting COVID deaths</h2>
+<ul>
+<li><p>During the pandemic, interest in predicting COVID deaths 7, 14, 21, 28 days ahead.</p></li>
+<li><p>Can we reasonably <span class="primary">predict COVID deaths 28 days ahead</span> by just using cases today?</p></li>
+</ul>
+<div class="fragment fade-in">
+<ul>
+<li>If we let</li>
+</ul>
+<p><span class="math display">\[y_{t+28} = \text{deaths at time } t+28 \quad\quad x_{t} = \text{cases at time } t\]</span> is the following a good model?</p>
+<p><span class="math display">\[\hat y_{t+28} = \hat\beta_0 + \hat\beta_1 x_{t}\]</span></p>
+</div>
+</section>
+<section id="example-covid-cases-and-deaths-in-california" class="slide level2">
+<h2>Example: COVID cases and deaths in California</h2>
+<div class="flex">
+<div class="w-65">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="day2-morning_files/figure-revealjs/plot-ca-cases-deaths-1.svg" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="w-35">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">head</span>(ca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>An `epi_df` object, 6 x 4 with metadata:
+* geo_type  = state
+* time_type = day
+* as_of     = 2024-11-06 01:50:44.00687
+
+# A tibble: 6 × 4
+# Groups:   geo_value [1]
+  geo_value time_value cases deaths
+  &lt;chr&gt;     &lt;date&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+1 ca        2020-04-01  3.17 0.0734
+2 ca        2020-04-02  3.48 0.0835
+3 ca        2020-04-03  3.44 0.0894
+4 ca        2020-04-04  3.05 0.0778
+5 ca        2020-04-05  3.28 0.0876
+6 ca        2020-04-06  3.37 0.0848</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="primary">Cases</span> seem <span class="primary">highly correlated</span> with <span class="primary">deaths</span> several weeks later (but <span class="primary">relation</span> cases-deaths <span class="primary">changes</span> over time).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="checking-correlation" class="slide level2">
+<h2>Checking correlation</h2>
+<ul>
+<li><p>Let’s split the data into a training and a test set (before/after 2021-04-01).</p></li>
+<li><p>On training set: <span class="primary">large correlation</span> between cases and deaths 28 days ahead (&gt; 0.95).</p></li>
+</ul>
+
+<img data-src="day2-morning_files/figure-revealjs/correlation-cases-deaths-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="fragment fade-in">
+<ul>
+<li>Let’s use (base) R to prepare the data and fit</li>
+</ul>
+<p><span class="math display">\[\hat y_{t+28} = \hat\beta + \hat\beta_0 x_{t}\]</span></p>
+</div>
+</section>
+<section id="preparing-the-data" class="slide level2">
+<h2>Preparing the data</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>ca<span class="sc">$</span>lagged_cases <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(ca<span class="sc">$</span>cases, <span class="at">n =</span> k)     <span class="co"># Add column with cases lagged by k</span></span>
+<span id="cb3-2"><a></a>t0_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">'2021-04-01'</span>)                   <span class="co"># Split into train and test (before/after t0_date)</span></span>
+<span id="cb3-3"><a></a>train <span class="ot">&lt;-</span> ca <span class="sc">|&gt;</span> <span class="fu">filter</span>(time_value <span class="sc">&lt;=</span> t0_date)</span>
+<span id="cb3-4"><a></a>test <span class="ot">&lt;-</span> ca <span class="sc">|&gt;</span> <span class="fu">filter</span>(time_value <span class="sc">&gt;</span> t0_date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Check if <code>deaths</code> is approximately linear in <code>lagged_cases</code>:</p>
+
+<img data-src="day2-morning_files/figure-revealjs/plot-lag-cases-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="fitting-lagged-linear-regression-in-r" class="slide level2">
+<h2>Fitting lagged linear regression in R</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>reg_lagged <span class="ot">=</span> <span class="fu">lm</span>(deaths <span class="sc">~</span> lagged_cases, <span class="at">data =</span> train)</span>
+<span id="cb4-2"><a></a><span class="fu">coef</span>(reg_lagged)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> (Intercept) lagged_cases 
+   0.1171839    0.0112714 </code></pre>
+</div>
+</div>
+
+<img data-src="day2-morning_files/figure-revealjs/plot-linear-fit-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section></section>
+<section>
+<section id="evaluation" class="title-slide slide level1 center" data-number="3">
+<h1><span class="header-section-number">3</span> Evaluation</h1>
+
+</section>
+<section id="error-metrics" class="slide level2">
+<h2>Error metrics</h2>
+<ul>
+<li><p>Assume we have predictions <span class="math inline">\(\hat y_{new, t}\)</span> for the unseen observations <span class="math inline">\(y_{new,t}\)</span> over times <span class="math inline">\(t = 1, \dots, N\)</span>.</p></li>
+<li><p>Four commonly used error metrics are:</p>
+<ul>
+<li><p>mean squared error (MSE)</p></li>
+<li><p>mean absolute error (MAE)</p></li>
+<li><p>mean absolute percentage error (MAPE)</p></li>
+<li><p>mean absolute scaled error (MASE)</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="error-metrics-mse-and-mae" class="slide level2">
+<h2>Error metrics: MSE and MAE</h2>
+<p><span class="math display">\[MSE = \frac{1}{N} \sum_{t=1}^N (y_{new, t}- \hat y_{new, t})^2\]</span> <span class="math display">\[MAE = \frac{1}{N} \sum_{t=1}^N |y_{new, t}- \hat y_{new, t}|\]</span></p>
+<ul>
+<li><p>MAE gives less importance to extreme errors than MSE.</p></li>
+<li><p><span class="primary">Drawback</span>: both metrics are scale-dependent, so they are not universally interpretable. (For example, if <span class="math inline">\(y\)</span> captures height, MSE and MAE will vary depending on whether we measure in feet or meters.)</p></li>
+</ul>
+</section>
+<section id="error-metrics-mape" class="slide level2">
+<h2>Error metrics: MAPE</h2>
+<ul>
+<li>Fixing scale-dependence:</li>
+</ul>
+<p><span class="math display">\[MAPE = 100 \times \frac{1}{N} \sum_{t=1}^N
+\left|\frac{y_{new, t}- \hat y_{new, t}}{y_{new, t}}\right|\]</span></p>
+<ul>
+<li><p><span class="primary">Drawbacks</span>:</p>
+<ul>
+<li><p>Erratic behavior when <span class="math inline">\(y_{new, t}\)</span> is close to zero</p></li>
+<li><p>It assumes the unit of measurement has a meaningful zero (e.g.&nbsp;using Fahrenheit or Celsius to measure temperature will lead to different MAPE)</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="comparing-mae-and-mape" class="slide level2">
+<h2>Comparing MAE and MAPE</h2>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>There are situations when MAPE is problematic!</p>
+</div>
+</div>
+</div>
+<div class="flex">
+<div class="w-70">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="day2-morning_files/figure-revealjs/mae-mape-example-1.svg" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="w-30">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">MAE</th>
+<th style="text-align: right;">MAPE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">yhat1</td>
+<td style="text-align: right;">2.873</td>
+<td style="text-align: right;">43.140</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">yhat2</td>
+<td style="text-align: right;">5.382</td>
+<td style="text-align: right;">36.083</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="error-metrics-mase" class="slide level2">
+<h2>Error metrics: MASE</h2>
+<p><span class="math display">\[MASE = 100 \times \frac{\frac{1}{N} \sum_{t=1}^N
+|y_{new, t}- \hat y_{new, t}|}
+{\frac{1}{N-1} \sum_{t=2}^N
+|y_{new, t}- y_{new, t-1}|}\]</span></p>
+<ul>
+<li><p><span class="primary">Advantages</span>:</p>
+<ul>
+<li><p>is universally interpretable (not scale dependent)</p></li>
+<li><p>avoids the zero-pitfall</p></li>
+</ul></li>
+<li><p>MASE in words: we normalize the error of our forecasts by that of a naive method which always predicts the last observation.</p></li>
+</ul>
+</section>
+<section id="comparing-mae-mape-and-mase" class="slide level2">
+<h2>Comparing MAE, MAPE and MASE</h2>
+<div class="flex">
+<div class="w-70">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="day2-morning_files/figure-revealjs/mae-mape-mase-example-1.svg" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="w-35">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">MAE</th>
+<th style="text-align: right;">MAPE</th>
+<th style="text-align: right;">MASE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">yhat1</td>
+<td style="text-align: right;">2.873</td>
+<td style="text-align: right;">43.140</td>
+<td style="text-align: right;">66.100</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">yhat2</td>
+<td style="text-align: right;">5.382</td>
+<td style="text-align: right;">36.083</td>
+<td style="text-align: right;">123.817</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="defining-the-error-metrics-in-r" class="slide level2">
+<h2>Defining the error metrics in R</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>MSE <span class="ot">&lt;-</span> <span class="cf">function</span>(truth, prediction) {</span>
+<span id="cb6-2"><a></a>  <span class="fu">mean</span>((truth <span class="sc">-</span> prediction)<span class="sc">^</span><span class="dv">2</span>)}</span>
+<span id="cb6-3"><a></a></span>
+<span id="cb6-4"><a></a>MAE <span class="ot">&lt;-</span> <span class="cf">function</span>(truth, prediction) {</span>
+<span id="cb6-5"><a></a>  <span class="fu">mean</span>(<span class="fu">abs</span>(truth <span class="sc">-</span> prediction))}</span>
+<span id="cb6-6"><a></a></span>
+<span id="cb6-7"><a></a>MAPE <span class="ot">&lt;-</span> <span class="cf">function</span>(truth, prediction) {</span>
+<span id="cb6-8"><a></a>  <span class="dv">100</span> <span class="sc">*</span> <span class="fu">mean</span>(<span class="fu">abs</span>(truth <span class="sc">-</span> prediction) <span class="sc">/</span> truth)}</span>
+<span id="cb6-9"><a></a></span>
+<span id="cb6-10"><a></a>MASE <span class="ot">&lt;-</span> <span class="cf">function</span>(truth, prediction) {</span>
+<span id="cb6-11"><a></a>  <span class="dv">100</span> <span class="sc">*</span> <span class="fu">MAE</span>(truth, prediction) <span class="sc">/</span> <span class="fu">mean</span>(<span class="fu">abs</span>(<span class="fu">diff</span>(truth)))}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="estimating-the-prediction-error" class="slide level2">
+<h2>Estimating the prediction error</h2>
+<ul>
+<li><p>Given an error metric, we want to estimate the prediction error under that metric.</p></li>
+<li><p>This can be accomplished in different ways, using the</p>
+<ul>
+<li><p>Training error</p></li>
+<li><p>Split-sample error</p></li>
+<li><p>Time series cross-validation error (using all past data or a trailing window)</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="training-error" class="slide level2">
+<h2>Training error</h2>
+<ul>
+<li><p>The easiest but <span class="primary">worst</span> approach to estimate the prediction error is to use the training error, i.e.&nbsp;the average error on the training set that was used to fit the model.</p></li>
+<li><p>The training error is</p>
+<ul>
+<li><p>generally too optimistic as an estimate of prediction error</p></li>
+<li><p><span class="primary">more optimistic the more complex the model!</span><sup>1</sup></p></li>
+</ul></li>
+</ul>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>More on this when we talk about overfitting.</p></li></ol></aside></section>
+<section id="training-error-1" class="slide level2">
+<h2>Training error</h2>
+<h4 id="linear-regression-of-covid-deaths-on-lagged-cases">Linear regression of COVID deaths on lagged cases</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># Getting the predictions for the training set</span></span>
+<span id="cb7-2"><a></a>pred_train <span class="ot">&lt;-</span> <span class="fu">predict</span>(reg_lagged)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<img data-src="day2-morning_files/figure-revealjs/plot-train-predictions-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>               MAE     MASE
+training 0.0740177 380.9996</code></pre>
+</div>
+</div>
+</section>
+<section id="split-sample-error" class="slide level2">
+<h2>Split-sample error</h2>
+<p>To compute the split-sample error</p>
+<ol type="1">
+<li><p><span class="primary">Split</span> data into training (up to time <span class="math inline">\(t_0\)</span>), and test set (after <span class="math inline">\(t_0\)</span>)</p></li>
+<li><p><span class="primary">Fit</span> the model to the <span class="primary">training</span> data only</p></li>
+<li><p>Make <span class="primary">predictions</span> for the <span class="primary">test</span> set</p></li>
+<li><p>Compute the selected <span class="primary">error</span> metric on the <span class="primary">test</span> set only</p></li>
+</ol>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Split-sample estimates of prediction error don’t mimic a situation where we would refit the model in the future. They are <span class="primary">pessimistic</span> if the relation between outcome and predictors changes over time.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="split-sample-mse" class="slide level2">
+<h2>Split-sample MSE</h2>
+<p>Assume we want to make <span class="math inline">\(h\)</span>-step ahead predictions, i.e.&nbsp;at time <span class="math inline">\(t\)</span> we want to make a forecast for <span class="math inline">\(t+h\)</span>. Then, the split-sample MSE is</p>
+<p><span class="math display">\[\text{SplitMSE} = \frac{1}{n-h-t_0} \sum_{t = t_0}^{n-h} (\hat y_{t+h|t_0} - y_{t+h})^2\]</span></p>
+<p>where <span class="math inline">\(\hat y_{t+h|t_0}\)</span> indicates a prediction for <span class="math inline">\(y\)</span> at time <span class="math inline">\(t+h\)</span> that was made with a model that was fit on data up to time <span class="math inline">\(t_0\)</span>.</p>
+</section>
+<section id="split-sample-error-1" class="slide level2">
+<h2>Split-sample error</h2>
+<h4 id="linear-regression-of-covid-deaths-on-lagged-cases-1">Linear regression of COVID deaths on lagged cases</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># Getting h-step ahead predictions for the test set</span></span>
+<span id="cb9-2"><a></a>h <span class="ot">&lt;-</span> k</span>
+<span id="cb9-3"><a></a>test_h <span class="ot">&lt;-</span> test[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>h<span class="dv">-1</span>), ] <span class="co"># drop first h-1 rows to avoid data leakage</span></span>
+<span id="cb9-4"><a></a>pred_test <span class="ot">&lt;-</span> <span class="fu">predict</span>(reg_lagged, <span class="at">newdata =</span> test_h)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<img data-src="day2-morning_files/figure-revealjs/plot-test-predictions-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>                   MAE      MASE
+training     0.0740177  380.9996
+split-sample 0.3116854 2914.4575</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Note that we are overestimating the peak due to the changed relationship between cases - deaths over time.</p>
+<p>Talk about data leakage.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="warning" class="slide level2">
+<h2>Warning!</h2>
+<ul>
+<li><p><span class="primary">Predictions</span> are <span class="primary">overshooting</span> the target, especially in early 2022 (<span class="primary">Omicron</span> phase).</p></li>
+<li><p>This is because we are predicting <span class="primary">deaths</span> using <span class="primary">lagged cases</span>, but the <span class="primary">relation</span> between the two <span class="primary">changes</span> over time.</p></li>
+</ul>
+
+<img data-src="day2-morning_files/figure-revealjs/plot-ca-cases-deaths-again-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="time-series-cross-validation-cv" class="slide level2">
+<h2>Time series cross-validation (CV)</h2>
+<h4 id="h-step-ahead-predictions"><span class="math inline">\(h\)</span>-step ahead predictions</h4>
+<ul>
+<li><p>If we <span class="primary">refit</span> in the future once new data are available, a more appropriate way to estimate the prediction error is time series cross-validation.</p></li>
+<li><p>To get <span class="math inline">\(h\)</span>-step ahead predictions, for each time <span class="math inline">\(t = t_0, t_0+1, \dots\)</span>,</p>
+<ul>
+<li><p><span class="primary">Fit</span> the model using data <span class="primary">up to time <span class="math inline">\(t\)</span></span></p></li>
+<li><p>Make a <span class="primary">prediction for <span class="math inline">\(t+h\)</span></span></p></li>
+<li><p>Record the <span class="primary">prediction error</span></p></li>
+</ul></li>
+<li><p>The cross-validation MSE is then</p></li>
+</ul>
+<p><span class="math display">\[CVMSE = \frac{1}{n-h-t_0} \sum_{t = t_0}^{n-h} (\hat y_{t+h|t} - y_{t+h})^2\]</span></p>
+<p>where <span class="math inline">\(\hat y_{t+h|t}\)</span> indicates a prediction for <span class="math inline">\(y\)</span> at time <span class="math inline">\(t+h\)</span> that was made with data available up to time <span class="math inline">\(t\)</span>.</p>
+</section>
+<section id="time-series-cross-validation-cv-1" class="slide level2">
+<h2>Time series cross-validation (CV)</h2>
+<h4 id="linear-regression-of-covid-deaths-on-lagged-cases-2">Linear regression of COVID deaths on lagged cases</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(ca)                               <span class="co">#length of time series</span></span>
+<span id="cb11-2"><a></a>h <span class="ot">&lt;-</span> k                                      <span class="co">#number of days ahead for which prediction is wanted</span></span>
+<span id="cb11-3"><a></a>pred_all_past <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="at">length =</span> n)        <span class="co">#initialize vector of predictions</span></span>
+<span id="cb11-4"><a></a></span>
+<span id="cb11-5"><a></a><span class="cf">for</span> (t <span class="cf">in</span> t0<span class="sc">:</span>(n<span class="sc">-</span>h)) {</span>
+<span id="cb11-6"><a></a>  <span class="co"># fit to all past data and make h-step ahead prediction</span></span>
+<span id="cb11-7"><a></a>  reg_all_past <span class="ot">=</span> <span class="fu">lm</span>(deaths <span class="sc">~</span> lagged_cases, <span class="at">data =</span> ca, <span class="at">subset =</span> (<span class="dv">1</span><span class="sc">:</span>n) <span class="sc">&lt;=</span> t)</span>
+<span id="cb11-8"><a></a>  pred_all_past[t<span class="sc">+</span>h] <span class="ot">=</span> <span class="fu">predict</span>(reg_all_past, <span class="at">newdata =</span> <span class="fu">data.frame</span>(ca[t<span class="sc">+</span>h, ]))</span>
+<span id="cb11-9"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>With the current model, we can only predict <span class="math inline">\(k\)</span> days ahead (where <span class="math inline">\(k\)</span> = number of days by which predictor is lagged)!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="time-series-cross-validation-cv-2" class="slide level2">
+<h2>Time series cross-validation (CV)</h2>
+<h4 id="linear-regression-of-covid-deaths-on-lagged-cases-3">Linear regression of COVID deaths on lagged cases</h4>
+
+<img data-src="day2-morning_files/figure-revealjs/plot-cv-predictions-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>                     MAE      MASE
+training       0.0740177  380.9996
+split-sample   0.3116854 2914.4575
+time series CV 0.2374931 2212.5992</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Some improvement wrt split-sample, but still overestimating peak.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="warning-1" class="slide level2">
+<h2>Warning!</h2>
+<ul>
+<li><p><span class="primary">Predictions</span> are still <span class="primary">overshooting</span> the target, but <span class="primary">error</span> is <span class="primary">smaller</span> than split-sample.</p></li>
+<li><p>Why?</p>
+<ul>
+<li><p><span class="inner-list"> 👍 Forecaster is partially learning the change in cases-deaths relation (especially in late 2022)</span></p></li>
+<li><p><span class="inner-list">👎 We refit on all past data, so predictions are still influenced by old cases-deaths relation</span></p></li>
+</ul></li>
+</ul>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Idea 💡</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Ignore old data when refitting?</strong></p>
+</div>
+</div>
+</div>
+</section>
+<section id="regression-on-a-trailing-window" class="slide level2">
+<h2>Regression on a trailing window</h2>
+<ul>
+<li><p><span class="primary">Fit the model on a window of data of length <span class="math inline">\(w\)</span></span>, starting at <span class="math inline">\(t-w\)</span> and ending at <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="primary">Advantage</span>: if the predictors-outcome relation changes over time, training the forecaster on a window of recent data can better capture the recent relation which might be more relevant to predict the outcome in the near future.</p></li>
+<li><p>Window length <span class="primary"><span class="math inline">\(w\)</span></span> considerations:</p>
+<ul>
+<li><p><span class="inner-list">if <span class="math inline">\(w\)</span> is too <span class="primary">big</span>, the model <span class="primary">can’t adapt</span> to the recent predictors-outcome relation </span></p></li>
+<li><p><span class="inner-list">if <span class="math inline">\(w\)</span> is too <span class="primary">small</span>, the fitted model may be <span class="primary">too volatile</span> (trained on too little data)</span></p></li>
+</ul></li>
+</ul>
+</section>
+<section id="trailing-window" class="slide level2">
+<h2>Trailing window</h2>
+<h4 id="linear-regression-of-covid-deaths-on-lagged-cases-4">Linear regression of COVID deaths on lagged cases</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="co"># Getting the predictions through CV with trailing window</span></span>
+<span id="cb13-2"><a></a>w <span class="ot">&lt;-</span> <span class="dv">120</span>                                    <span class="co">#trailing window size</span></span>
+<span id="cb13-3"><a></a>h <span class="ot">&lt;-</span> k                                      <span class="co">#number of days ahead for which prediction is wanted</span></span>
+<span id="cb13-4"><a></a>pred_trailing <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="at">length =</span> n)        <span class="co">#initialize vector of predictions</span></span>
+<span id="cb13-5"><a></a></span>
+<span id="cb13-6"><a></a><span class="cf">for</span> (t <span class="cf">in</span> t0<span class="sc">:</span>(n<span class="sc">-</span>h)) {</span>
+<span id="cb13-7"><a></a>  <span class="co"># fit to a trailing window of size w and make h-step ahead prediction</span></span>
+<span id="cb13-8"><a></a>  reg_trailing <span class="ot">=</span> <span class="fu">lm</span>(deaths <span class="sc">~</span> lagged_cases, <span class="at">data =</span> ca,</span>
+<span id="cb13-9"><a></a>                    <span class="at">subset =</span> (<span class="dv">1</span><span class="sc">:</span>n) <span class="sc">&lt;=</span> t <span class="sc">&amp;</span> (<span class="dv">1</span><span class="sc">:</span>n) <span class="sc">&gt;</span> (t<span class="sc">-</span>w))</span>
+<span id="cb13-10"><a></a>  pred_trailing[t<span class="sc">+</span>h] <span class="ot">=</span> <span class="fu">predict</span>(reg_trailing, <span class="at">newdata =</span> <span class="fu">data.frame</span>(ca[t<span class="sc">+</span>h, ]))</span>
+<span id="cb13-11"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="time-series-cv-all-past-vs-trailing-window" class="slide level2">
+<h2>Time series CV: all past vs trailing window</h2>
+<h4 id="linear-regression-of-covid-deaths-on-lagged-cases-5">Linear regression of COVID deaths on lagged cases</h4>
+
+<img data-src="day2-morning_files/figure-revealjs/plot-cv-predictions-trailing-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>                                 MAE      MASE
+training                  0.07401770  380.9996
+split-sample              0.31168536 2914.4575
+time series CV            0.23749306 2212.5992
+time series CV + trailing 0.09932651  925.3734</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>A lot of improvement: trailing window allows to adapt to the change in relationship between cases and deaths over time.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="arx-models" class="title-slide slide level1 center" data-number="4">
+<h1><span class="header-section-number">4</span> ARX models</h1>
+
+</section>
+<section id="autoregressive-exogenous-input-arx-model" class="slide level2">
+<h2>Autoregressive exogenous input (ARX) model</h2>
+<ul>
+<li><p><span class="primary">Idea</span>: predicting the outcome via a linear combination of its lags and a set of exogenous (i.e.&nbsp;external) input variables</p></li>
+<li><p>Example:</p></li>
+</ul>
+<p><span class="math display">\[\hat y_{t+h} = \hat\phi + \sum_{i=0}^p \hat\phi_i y_{t-i} + \sum_{j=0}^q \hat\beta_j x_{t-j}\]</span></p>
+<ul>
+<li><span class="primary">Notice</span>: we don’t need to include all contiguous lags, and we could fit e.g.</li>
+</ul>
+<p><span class="math display">\[\hat y_{t+h} = \hat \phi + \hat\phi_0 y_{t} + \hat\phi_1 y_{t-7} + \hat\phi_2 y_{t-14} +
+\hat\beta_0 x_{t} + \hat\beta_1 x_{t-7} + \hat\beta_2 x_{t-14}\]</span></p>
+</section>
+<section id="arx-model-for-covid-deaths" class="slide level2">
+<h2>ARX model for COVID deaths</h2>
+<ul>
+<li>Let’s add lagged deaths as a predictor to our previous forecaster:</li>
+</ul>
+<p><span class="math display">\[\hat y_{t+28} = \hat\phi + \hat\phi_0 y_{t} + \hat\beta_0 x_{t}\]</span></p>
+<ul>
+<li>We will refer to this model as <span class="primary">ARX(1)</span>, as it only includes one lag for each predictor.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># Prepare data: add column with deaths lagged by 28</span></span>
+<span id="cb15-2"><a></a>ca<span class="sc">$</span>lagged_deaths <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(ca<span class="sc">$</span>deaths, <span class="at">n =</span> k)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>How does it compare to the previous model in terms of time series CV?</li>
+</ul>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>From now on, we will only consider regression on a <span class="primary">trailing window</span>, since regression on all past data leads to overshooting during Omicron.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="time-series-cv-trailing-arx1-vs-lm-on-lagged-cases" class="slide level2">
+<h2>Time series CV (trailing): ARX(1) vs <code>lm</code> on lagged cases</h2>
+
+<img data-src="day2-morning_files/figure-revealjs/arx-lm-plot-cv-predictions-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>                          MAE     MASE
+ARX(1)             0.07852942 731.6178
+lm on lagged cases 0.09932651 925.3734</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Errors under both metrics are smaller than with previous model.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="warning-2" class="slide level2">
+<h2>Warning!</h2>
+<p>Regression on a trailing window can be quite sensitive to data issues.</p>
+
+<img data-src="day2-morning_files/figure-revealjs/warning-cv-predictions-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="warning-3" class="slide level2">
+<h2>Warning!</h2>
+<ul>
+<li>At the <span class="primary">forecast date</span> when the downward dip in deaths is predicted, the coefficients estimated by <span class="primary">ARX(1)</span> are</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept) lagged_deaths  lagged_cases 
+  0.067259206   0.304075294  -0.004285251 </code></pre>
+</div>
+</div>
+<ul>
+<li><p>The downward dip is explained by the <span class="primary">negative coefficient on <code>lagged_cases</code></span>, and by the fact that at the forecast date</p>
+<ul>
+<li><p>observed deaths are exactly equal to 0 (data issue)</p></li>
+<li><p>observed cases are increasing</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="predictions-for-different-h" class="slide level2">
+<h2>Predictions for different <span class="math inline">\(h\)</span></h2>
+<ul>
+<li><p>So far we only focused on COVID death predictions 28 days ahead.</p></li>
+<li><p>We will now compare the model with lagged cases as predictor</p></li>
+</ul>
+<p><span class="math display">\[\hat y_{t+h} = \hat\beta + \hat\beta_0 x_t\]</span></p>
+<p>to the ARX(1) model</p>
+<p><span class="math display">\[\hat y_{t+h} = \hat\phi + \hat\phi_0 y_t + \hat\beta_0 x_t\]</span></p>
+<p>for <span class="primary">horizons <span class="math inline">\(h = 7, 14, 21, 28\)</span></span>.</p>
+<ul>
+<li>We will only make forecasts on the <span class="math inline">\(1^{st}\)</span> day of each month, and use a trailing window with <span class="math inline">\(w = 120\)</span>.</li>
+</ul>
+</section>
+<section id="predictions-for-different-h-1" class="slide level2">
+<h2>Predictions for different <span class="math inline">\(h\)</span></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>h_vals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">14</span>, <span class="dv">21</span>, <span class="dv">28</span>)  <span class="co">#horizons</span></span>
+<span id="cb18-2"><a></a>pred_m1 <span class="ot">=</span> pred_m2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> <span class="dv">0</span>, <span class="at">ncol =</span> <span class="dv">3</span>))  <span class="co">#initialize df for predictions</span></span>
+<span id="cb18-3"><a></a><span class="fu">colnames</span>(pred_m1) <span class="ot">=</span> <span class="fu">colnames</span>(pred_m2) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"forecast_date"</span>, <span class="st">"target_date"</span>, <span class="st">"prediction"</span>)</span>
+<span id="cb18-4"><a></a>w <span class="ot">&lt;-</span> <span class="dv">120</span>    <span class="co">#trailing window size</span></span>
+<span id="cb18-5"><a></a></span>
+<span id="cb18-6"><a></a>ca_lags <span class="ot">&lt;-</span> ca <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(lagged_cases, lagged_deaths))</span>
+<span id="cb18-7"><a></a></span>
+<span id="cb18-8"><a></a><span class="co"># Create lagged predictors</span></span>
+<span id="cb18-9"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(h_vals)) {</span>
+<span id="cb18-10"><a></a>  ca_lags[[<span class="fu">paste0</span>(<span class="st">"lagged_deaths_"</span>, h_vals[i])]] <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(ca_lags<span class="sc">$</span>deaths, <span class="at">n =</span> h_vals[i])</span>
+<span id="cb18-11"><a></a>  ca_lags[[<span class="fu">paste0</span>(<span class="st">"lagged_cases_"</span>, h_vals[i])]] <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(ca_lags<span class="sc">$</span>cases, <span class="at">n =</span> h_vals[i])</span>
+<span id="cb18-12"><a></a>}</span>
+<span id="cb18-13"><a></a></span>
+<span id="cb18-14"><a></a><span class="co"># Only forecast on 1st day of the months</span></span>
+<span id="cb18-15"><a></a>forecast_time <span class="ot">&lt;-</span> <span class="fu">which</span>(ca_lags<span class="sc">$</span>time_value <span class="sc">&gt;=</span> t0_date <span class="sc">&amp;</span></span>
+<span id="cb18-16"><a></a>                         ca_lags<span class="sc">$</span>time_value <span class="sc">&lt;</span> ca_lags<span class="sc">$</span>time_value[n<span class="sc">-</span><span class="fu">max</span>(h_vals)] <span class="sc">&amp;</span></span>
+<span id="cb18-17"><a></a>                         <span class="fu">day</span>(ca_lags<span class="sc">$</span>time_value) <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb18-18"><a></a></span>
+<span id="cb18-19"><a></a><span class="cf">for</span> (t <span class="cf">in</span> forecast_time) {</span>
+<span id="cb18-20"><a></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(h_vals)) {</span>
+<span id="cb18-21"><a></a>    h <span class="ot">=</span> h_vals[i]</span>
+<span id="cb18-22"><a></a>    <span class="co"># formulas including h-lagged variables</span></span>
+<span id="cb18-23"><a></a>    m1_formula <span class="ot">=</span> <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">"deaths ~ lagged_cases_"</span>, h))</span>
+<span id="cb18-24"><a></a>    m2_formula <span class="ot">=</span> <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">"deaths ~ lagged_cases_"</span>, h, <span class="st">" + lagged_deaths_"</span>, h))</span>
+<span id="cb18-25"><a></a>    <span class="co"># fit to trailing window of data</span></span>
+<span id="cb18-26"><a></a>    m1_fit <span class="ot">=</span> <span class="fu">lm</span>(m1_formula, <span class="at">data =</span> ca_lags, <span class="at">subset =</span> (<span class="dv">1</span><span class="sc">:</span>n) <span class="sc">&lt;=</span> t <span class="sc">&amp;</span> (<span class="dv">1</span><span class="sc">:</span>n) <span class="sc">&gt;</span> (t<span class="sc">-</span>w))</span>
+<span id="cb18-27"><a></a>    m2_fit <span class="ot">=</span> <span class="fu">lm</span>(m2_formula, <span class="at">data =</span> ca_lags, <span class="at">subset =</span> (<span class="dv">1</span><span class="sc">:</span>n) <span class="sc">&lt;=</span> t <span class="sc">&amp;</span> (<span class="dv">1</span><span class="sc">:</span>n) <span class="sc">&gt;</span> (t<span class="sc">-</span>w))</span>
+<span id="cb18-28"><a></a>    <span class="co"># make h-step ahead predictions</span></span>
+<span id="cb18-29"><a></a>    pred_m1 <span class="ot">=</span> <span class="fu">rbind</span>(pred_m1,</span>
+<span id="cb18-30"><a></a>                    <span class="fu">data.frame</span>(<span class="at">forecast_date =</span> ca_lags<span class="sc">$</span>time_value[t],</span>
+<span id="cb18-31"><a></a>                               <span class="at">target_date =</span> ca_lags<span class="sc">$</span>time_value[t<span class="sc">+</span>h],</span>
+<span id="cb18-32"><a></a>                               <span class="at">prediction =</span> <span class="fu">predict</span>(m1_fit, <span class="at">newdata =</span> <span class="fu">data.frame</span>(ca_lags[t<span class="sc">+</span>h, ]))))</span>
+<span id="cb18-33"><a></a>    pred_m2 <span class="ot">=</span> <span class="fu">rbind</span>(pred_m2,</span>
+<span id="cb18-34"><a></a>                    <span class="fu">data.frame</span>(<span class="at">forecast_date =</span> ca_lags<span class="sc">$</span>time_value[t],</span>
+<span id="cb18-35"><a></a>                               <span class="at">target_date =</span> ca_lags<span class="sc">$</span>time_value[t<span class="sc">+</span>h],</span>
+<span id="cb18-36"><a></a>                               <span class="at">prediction =</span> <span class="fu">predict</span>(m2_fit, <span class="at">newdata =</span> <span class="fu">data.frame</span>(ca_lags[t<span class="sc">+</span>h, ]))))</span>
+<span id="cb18-37"><a></a>    }</span>
+<span id="cb18-38"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="predictions-for-different-h-lm-on-lagged-cases" class="slide level2">
+<h2>Predictions for different <span class="math inline">\(h\)</span>, <code>lm</code> on lagged cases</h2>
+
+<img data-src="day2-morning_files/figure-revealjs/plot-m1-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>                         MAE    MASE
+lm on lagged cases 0.1049742 304.007</code></pre>
+</div>
+</div>
+</section>
+<section id="predictions-for-different-h-arx1" class="slide level2">
+<h2>Predictions for different <span class="math inline">\(h\)</span>, ARX(1)</h2>
+
+<img data-src="day2-morning_files/figure-revealjs/plot-m2-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>              MAE     MASE
+ARX(1) 0.04463132 129.2531</code></pre>
+</div>
+</div>
+</section>
+<section id="visualizing-predictions-for-multiple-horizons" class="slide level2">
+<h2>Visualizing predictions for multiple horizons</h2>
+<p>Different ways to visualize predictions for multiple <span class="math inline">\(h\)</span></p>
+<ul>
+<li><p>Last slides: <span class="primary">group by forecast date</span>, and show prediction “trajectories”</p></li>
+<li><p>Other approach: <span class="primary">one line and color per horizon</span> <span class="math inline">\(h\)</span></p></li>
+</ul>
+</section>
+<section id="predictions-by-horizon-arx1" class="slide level2">
+<h2>Predictions by horizon, ARX(1)</h2>
+
+<img data-src="day2-morning_files/figure-revealjs/plot-by-h-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section></section>
+<section>
+<section id="overfitting-and-regularization" class="title-slide slide level1 center" data-number="5">
+<h1><span class="header-section-number">5</span> Overfitting and Regularization</h1>
+
+</section>
+<section id="arx-models-with-2-and-3-lags" class="slide level2">
+<h2>ARX models with 2 and 3 lags</h2>
+<ul>
+<li><p>The <span class="primary">ARX(1)</span> model <span class="math inline">\(\hat y_{t+h} = \hat \phi + \hat\phi_0 y_{t} + \hat\beta_0 x_{t}\)</span> has good predictive performance</p></li>
+<li><p>We will now try to improve the ARX(1) model by including <span class="primary">more lags</span> in the set of predictors</p></li>
+<li><p>Let’s consider two extensions: the <span class="primary">ARX(2)</span> model</p></li>
+</ul>
+<p><span class="math display">\[\hat y_{t+h} = \hat \phi + \hat\phi_0 y_{t} + \hat\phi_1 y_{t-7} +
+\hat\beta_0 x_{t} + \hat\beta_1 x_{t-7}\]</span></p>
+<p>and the <span class="primary">ARX(3)</span> model</p>
+<p><span class="math display">\[\hat y_{t+h} = \hat \phi + \hat\phi_0 y_{t} + \hat\phi_1 y_{t-7} + \hat\phi_2 y_{t-14} +
+\hat\beta_0 x_{t} + \hat\beta_1 x_{t-7} + \hat\beta_2 x_{t-14}\]</span></p>
+<p>and fit them using a trailing window with <span class="math inline">\(w = 120\)</span>.</p>
+</section>
+<section id="fit-arx2-and-arx3-on-trailing-window" class="slide level2">
+<h2>Fit ARX(2) and ARX(3) on trailing window</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>pred_arx2 <span class="ot">=</span> pred_arx3 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="at">length =</span> n)</span>
+<span id="cb21-2"><a></a>w <span class="ot">&lt;-</span> <span class="dv">120</span>     <span class="co">#trailing window size</span></span>
+<span id="cb21-3"><a></a>h <span class="ot">&lt;-</span> <span class="dv">28</span>      <span class="co">#number of days ahead</span></span>
+<span id="cb21-4"><a></a></span>
+<span id="cb21-5"><a></a><span class="co"># create lagged predictors</span></span>
+<span id="cb21-6"><a></a>ca_lags<span class="sc">$</span>lagged_deaths_35 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(ca_lags<span class="sc">$</span>deaths, <span class="at">n =</span> <span class="dv">35</span>)</span>
+<span id="cb21-7"><a></a>ca_lags<span class="sc">$</span>lagged_deaths_42 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(ca_lags<span class="sc">$</span>deaths, <span class="at">n =</span> <span class="dv">42</span>)</span>
+<span id="cb21-8"><a></a>ca_lags<span class="sc">$</span>lagged_cases_35 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(ca_lags<span class="sc">$</span>cases, <span class="at">n =</span> <span class="dv">35</span>)</span>
+<span id="cb21-9"><a></a>ca_lags<span class="sc">$</span>lagged_cases_42 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(ca_lags<span class="sc">$</span>cases, <span class="at">n =</span> <span class="dv">42</span>)</span>
+<span id="cb21-10"><a></a></span>
+<span id="cb21-11"><a></a><span class="cf">for</span> (t <span class="cf">in</span> t0<span class="sc">:</span>(n<span class="sc">-</span>h)) {</span>
+<span id="cb21-12"><a></a>  arx2_formula <span class="ot">=</span> <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">"deaths ~ lagged_cases_"</span>, h, <span class="st">" + lagged_deaths_"</span>, h,</span>
+<span id="cb21-13"><a></a>                                  <span class="st">" + lagged_cases_"</span>, h<span class="sc">+</span><span class="dv">7</span>, <span class="st">" + lagged_deaths_"</span>, h<span class="sc">+</span><span class="dv">7</span>))</span>
+<span id="cb21-14"><a></a>  arx3_formula <span class="ot">=</span> <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">"deaths ~ lagged_cases_"</span>, h, <span class="st">" + lagged_deaths_"</span>, h,</span>
+<span id="cb21-15"><a></a>                                  <span class="st">" + lagged_cases_"</span>, h<span class="sc">+</span><span class="dv">7</span>, <span class="st">" + lagged_deaths_"</span>, h<span class="sc">+</span><span class="dv">7</span>,</span>
+<span id="cb21-16"><a></a>                                  <span class="st">" + lagged_cases_"</span>, h<span class="sc">+</span><span class="dv">14</span>, <span class="st">" + lagged_deaths_"</span>, h<span class="sc">+</span><span class="dv">14</span>))</span>
+<span id="cb21-17"><a></a>  <span class="co"># fit to trailing window of data</span></span>
+<span id="cb21-18"><a></a>  arx2_fit <span class="ot">=</span> <span class="fu">lm</span>(arx2_formula, <span class="at">data =</span> ca_lags, <span class="at">subset =</span> (<span class="dv">1</span><span class="sc">:</span>n) <span class="sc">&lt;=</span> t <span class="sc">&amp;</span> (<span class="dv">1</span><span class="sc">:</span>n) <span class="sc">&gt;</span> (t<span class="sc">-</span>w<span class="dv">-7</span>))</span>
+<span id="cb21-19"><a></a>  arx3_fit <span class="ot">=</span> <span class="fu">lm</span>(arx3_formula, <span class="at">data =</span> ca_lags, <span class="at">subset =</span> (<span class="dv">1</span><span class="sc">:</span>n) <span class="sc">&lt;=</span> t <span class="sc">&amp;</span> (<span class="dv">1</span><span class="sc">:</span>n) <span class="sc">&gt;</span> (t<span class="sc">-</span>w<span class="dv">-14</span>))</span>
+<span id="cb21-20"><a></a>  <span class="co"># make h-step ahead predictions</span></span>
+<span id="cb21-21"><a></a>  pred_arx2[t<span class="sc">+</span>h] <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="dv">0</span>, <span class="fu">predict</span>(arx2_fit, <span class="at">newdata =</span> <span class="fu">data.frame</span>(ca_lags[t<span class="sc">+</span>h, ])))</span>
+<span id="cb21-22"><a></a>  pred_arx3[t<span class="sc">+</span>h] <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="dv">0</span>, <span class="fu">predict</span>(arx3_fit, <span class="at">newdata =</span> <span class="fu">data.frame</span>(ca_lags[t<span class="sc">+</span>h, ])))</span>
+<span id="cb21-23"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="time-series-cv-trailing-arx1-arx2-and-arx3" class="slide level2">
+<h2>Time series CV (trailing): ARX(1), ARX(2), and ARX(3)</h2>
+
+<img data-src="day2-morning_files/figure-revealjs/arx-2-and-3-plot-cv-predictions-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>              MAE      MASE
+ARX(1) 0.07852942  731.6178
+ARX(2) 0.08716160  812.0393
+ARX(3) 0.12487694 1163.4135</code></pre>
+</div>
+</div>
+</section>
+<section id="warning-4" class="slide level2">
+<h2>Warning!</h2>
+<p>As we add more predictors, <span class="primary">forecasts</span> seem more <span class="primary">volatile</span> and errors increase.</p>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><strong>Overfitting</strong></strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</section>
+<section id="overfitting-1" class="slide level2">
+<h2>Overfitting</h2>
+<p>When we introduce <span class="primary">too many predictors</span> in the model</p>
+<ul>
+<li><p>The estimated coefficients will be chosen to mimic the observed data very closely on the training set, leading to <span class="primary">small training error</span></p></li>
+<li><p>The predictive performance on the test set might be very poor, producing <span class="primary">large split-sample and CV error</span></p></li>
+</ul>
+</section>
+<section id="extreme-case-arx-model-with-120-predictors" class="slide level2">
+<h2>Extreme case: ARX model with 120 predictors</h2>
+<ul>
+<li><p>What happens if we increase the number of predictors to 120?</p></li>
+<li><p>Let’s fit</p></li>
+</ul>
+<p><span class="math display">\[\hat y_{t+28} = \hat\phi + \hat\phi_0 y_{t} + \hat\phi_1 y_{t-1} + \dots +
+\hat\phi_{59} y_{t-59} +
+\hat\beta_0 x_{t} + \dots + \hat\beta_{t-59} x_{t-59}\]</span></p>
+<p>and compare <span class="primary">training vs split-sample errors</span></p>
+</section>
+<section id="extreme-case-predictions-on-training-and-test-set" class="slide level2">
+<h2>Extreme case: predictions on training and test set</h2>
+
+<img data-src="day2-morning_files/figure-revealjs/overfit-plot-train-test-trunc-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>                   MAE    MASE
+split-sample 0.3978198 3706.28</code></pre>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Some predictions were negative, which doesn’t make sense for count data, so we truncated them at 0.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="back-to-arx1-arx2-and-arx3" class="slide level2">
+<h2>Back to ARX(1), ARX(2), and ARX(3)</h2>
+<p>How can we</p>
+<ul>
+<li><p>select the “right” number of lags to include?</p></li>
+<li><p>avoid overfitting, while considering a large number of predictors?</p></li>
+</ul>
+</section>
+<section id="regularization" class="slide level2">
+<h2>Regularization</h2>
+<ul>
+<li><p><span class="primary">Idea</span>: introduce a regularization parameter <span class="math inline">\(\lambda\)</span> that <span class="primary">shrinks or sets</span> some of the estimated coefficients to zero, i.e.&nbsp;some predictors are estimated to have limited or no predictive power</p></li>
+<li><p>Most common regularization methods</p>
+<ul>
+<li><p><span class="primary">Ridge</span>: shrinks coefficients to zero</p></li>
+<li><p><span class="primary">Lasso</span>: sets some coefficients to zero</p></li>
+</ul></li>
+<li><p>Let’s predict <span class="math inline">\(h=28\)</span> days ahead by regularizing</p>
+<ul>
+<li>ARX(1)</li>
+<li>ARX(2)</li>
+<li>ARX(3)</li>
+</ul></li>
+</ul>
+</section>
+<section id="fit-arx3-ridgelasso-for-covid-deaths" class="slide level2">
+<h2>Fit ARX(3) + ridge/lasso for COVID deaths</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">library</span>(glmnet) <span class="co"># Implements ridge and lasso</span></span>
+<span id="cb24-2"><a></a></span>
+<span id="cb24-3"><a></a>h <span class="ot">&lt;-</span> <span class="dv">28</span></span>
+<span id="cb24-4"><a></a>X <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(ca_lags) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">"_28"</span>), <span class="fu">ends_with</span>(<span class="st">"_35"</span>), <span class="fu">ends_with</span>(<span class="st">"_42"</span>))</span>
+<span id="cb24-5"><a></a>y <span class="ot">&lt;-</span> ca_lags<span class="sc">$</span>deaths</span>
+<span id="cb24-6"><a></a></span>
+<span id="cb24-7"><a></a><span class="co"># We'll need to omit NA values explicitly, as otherwise glmnet will complain</span></span>
+<span id="cb24-8"><a></a>X_train <span class="ot">&lt;-</span> X[<span class="dv">43</span><span class="sc">:</span>t0, ]</span>
+<span id="cb24-9"><a></a>y_train <span class="ot">&lt;-</span> y[<span class="dv">43</span><span class="sc">:</span>t0]</span>
+<span id="cb24-10"><a></a></span>
+<span id="cb24-11"><a></a><span class="co"># Ridge regression: set alpha = 0, lambda sequence will be chosen automatically</span></span>
+<span id="cb24-12"><a></a>ridge <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(X_train, y_train, <span class="at">alpha =</span> <span class="dv">0</span>)</span>
+<span id="cb24-13"><a></a>beta_ridge <span class="ot">&lt;-</span> <span class="fu">coef</span>(ridge)       <span class="co"># matrix of estimated coefficients</span></span>
+<span id="cb24-14"><a></a>lambda_ridge <span class="ot">&lt;-</span> ridge<span class="sc">$</span>lambda    <span class="co"># sequence of lambdas used to fit ridge</span></span>
+<span id="cb24-15"><a></a></span>
+<span id="cb24-16"><a></a><span class="co"># Lasso regression: set alpha = 1, lambda sequence will be chosen automatically</span></span>
+<span id="cb24-17"><a></a>lasso <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(X_train, y_train, <span class="at">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb24-18"><a></a>beta_lasso <span class="ot">&lt;-</span> <span class="fu">coef</span>(lasso)       <span class="co"># matrix of estimated coefficients</span></span>
+<span id="cb24-19"><a></a>lambda_lasso <span class="ot">&lt;-</span> lasso<span class="sc">$</span>lambda    <span class="co"># sequence of lambdas used to fit lasso</span></span>
+<span id="cb24-20"><a></a></span>
+<span id="cb24-21"><a></a><span class="fu">dim</span>(beta_lasso)                 <span class="co"># One row per coefficient, one column per lambda value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  7 85</code></pre>
+</div>
+</div>
+</section>
+<section id="time-series-cv-trailing-for-arx3-ridgelasso" class="slide level2">
+<h2>Time series CV (trailing) for ARX(3) + ridge/lasso</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>h <span class="ot">&lt;-</span> <span class="dv">28</span>  <span class="co"># number of days ahead</span></span>
+<span id="cb26-2"><a></a>w <span class="ot">&lt;-</span> <span class="dv">120</span> <span class="co"># window length</span></span>
+<span id="cb26-3"><a></a></span>
+<span id="cb26-4"><a></a><span class="co"># Initialize matrices for predictions (one column per lambda value)</span></span>
+<span id="cb26-5"><a></a>yhat_ridge_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> n, <span class="at">ncol =</span> <span class="fu">length</span>(lambda_ridge))</span>
+<span id="cb26-6"><a></a>yhat_lasso_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> n, <span class="at">ncol =</span> <span class="fu">length</span>(lambda_lasso))</span>
+<span id="cb26-7"><a></a>yhat_ridge <span class="ot">=</span> yhat_lasso <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="at">length =</span> n)</span>
+<span id="cb26-8"><a></a></span>
+<span id="cb26-9"><a></a><span class="co"># Select index of best lambda value on training set</span></span>
+<span id="cb26-10"><a></a>ridge_index <span class="ot">=</span> <span class="fu">cv.glmnet</span>(<span class="fu">as.matrix</span>(X_train), y_train, <span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">lambda =</span> lambda_ridge)<span class="sc">$</span>index[<span class="dv">1</span>]</span>
+<span id="cb26-11"><a></a>lasso_index <span class="ot">=</span> <span class="fu">cv.glmnet</span>(<span class="fu">as.matrix</span>(X_train), y_train, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> lambda_lasso)<span class="sc">$</span>index[<span class="dv">1</span>]</span>
+<span id="cb26-12"><a></a></span>
+<span id="cb26-13"><a></a><span class="cf">for</span> (t <span class="cf">in</span> t0<span class="sc">:</span>(n<span class="sc">-</span>h)) {</span>
+<span id="cb26-14"><a></a>  <span class="co"># Indices of data within window</span></span>
+<span id="cb26-15"><a></a>  inds <span class="ot">=</span> t<span class="sc">-</span>w <span class="sc">&lt;</span> <span class="dv">1</span><span class="sc">:</span>n <span class="sc">&amp;</span> <span class="dv">1</span><span class="sc">:</span>n <span class="sc">&lt;=</span> t</span>
+<span id="cb26-16"><a></a>  <span class="co"># Fit ARX + ridge/lasso for each lambda value</span></span>
+<span id="cb26-17"><a></a>  ridge_trail <span class="ot">=</span> <span class="fu">glmnet</span>(X[inds, ], y[inds], <span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">lambda =</span> lambda_ridge)</span>
+<span id="cb26-18"><a></a>  lasso_trail <span class="ot">=</span> <span class="fu">glmnet</span>(X[inds, ], y[inds], <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> lambda_lasso)</span>
+<span id="cb26-19"><a></a>  <span class="co"># Predict for each lambda value</span></span>
+<span id="cb26-20"><a></a>  yhat_ridge_mat[t<span class="sc">+</span>h, ] <span class="ot">=</span> <span class="fu">predict</span>(ridge_trail, <span class="at">newx =</span> <span class="fu">as.matrix</span>(X[(t<span class="sc">+</span>h), ]))</span>
+<span id="cb26-21"><a></a>  yhat_lasso_mat[t<span class="sc">+</span>h, ] <span class="ot">=</span> <span class="fu">predict</span>(lasso_trail, <span class="at">newx =</span> <span class="fu">as.matrix</span>(X[(t<span class="sc">+</span>h), ]))</span>
+<span id="cb26-22"><a></a>  <span class="co"># Save prediction corresponding to best lambda so far</span></span>
+<span id="cb26-23"><a></a>  yhat_ridge[t<span class="sc">+</span>h] <span class="ot">=</span> <span class="fu">max</span>(<span class="dv">0</span>, yhat_ridge_mat[t<span class="sc">+</span>h, ridge_index])</span>
+<span id="cb26-24"><a></a>  yhat_lasso[t<span class="sc">+</span>h] <span class="ot">=</span> <span class="fu">max</span>(<span class="dv">0</span>, yhat_lasso_mat[t<span class="sc">+</span>h, lasso_index])</span>
+<span id="cb26-25"><a></a>  <span class="cf">if</span> (t <span class="sc">&gt;=</span> t0<span class="sc">+</span>h) {</span>
+<span id="cb26-26"><a></a>    <span class="co"># Prediction error</span></span>
+<span id="cb26-27"><a></a>    mae_ridge <span class="ot">=</span> <span class="fu">colMeans</span>(<span class="fu">abs</span>(yhat_ridge_mat[<span class="dv">1</span><span class="sc">:</span>(t<span class="sc">+</span><span class="dv">1</span>), ] <span class="sc">-</span> y[<span class="dv">1</span><span class="sc">:</span>(t<span class="sc">+</span><span class="dv">1</span>)]), <span class="at">na.rm =</span> T)</span>
+<span id="cb26-28"><a></a>    mae_lasso <span class="ot">=</span> <span class="fu">colMeans</span>(<span class="fu">abs</span>(yhat_lasso_mat[<span class="dv">1</span><span class="sc">:</span>(t<span class="sc">+</span><span class="dv">1</span>), ] <span class="sc">-</span> y[<span class="dv">1</span><span class="sc">:</span>(t<span class="sc">+</span><span class="dv">1</span>)]), <span class="at">na.rm =</span> T)</span>
+<span id="cb26-29"><a></a>    <span class="co"># Select index of lambda vector which gives lowest MAE so far</span></span>
+<span id="cb26-30"><a></a>    ridge_index <span class="ot">&lt;-</span> <span class="fu">which.min</span>(mae_ridge)</span>
+<span id="cb26-31"><a></a>    lasso_index <span class="ot">&lt;-</span> <span class="fu">which.min</span>(mae_lasso)</span>
+<span id="cb26-32"><a></a>  }</span>
+<span id="cb26-33"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="predictions-time-series-cv-trailing-for-arx1-ridgelasso" class="slide level2">
+<h2>Predictions: time series CV (trailing) for ARX(1) + ridge/lasso</h2>
+
+<img data-src="day2-morning_files/figure-revealjs/regularize-arx-1-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>                      MAE     MASE
+ARX(1)         0.07852942 731.6178
+ARX(1) + ridge 0.07004585 652.5808
+ARX(1) + lasso 0.07887651 734.8514</code></pre>
+</div>
+</div>
+</section>
+<section id="predictions-time-series-cv-trailing-for-arx2-ridgelasso" class="slide level2">
+<h2>Predictions: time series CV (trailing) for ARX(2) + ridge/lasso</h2>
+
+<img data-src="day2-morning_files/figure-revealjs/regularize-arx-2-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>                      MAE     MASE
+ARX(2)         0.08716160 812.0393
+ARX(2) + ridge 0.08143228 758.6622
+ARX(2) + lasso 0.07807801 727.4122</code></pre>
+</div>
+</div>
+</section>
+<section id="predictions-time-series-cv-trailing-for-arx3-ridgelasso" class="slide level2">
+<h2>Predictions: time series CV (trailing) for ARX(3) + ridge/lasso</h2>
+
+<img data-src="day2-morning_files/figure-revealjs/plot-arx3-regularization-cv-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>                      MAE      MASE
+ARX(3)         0.12487694 1163.4135
+ARX(3) + ridge 0.08555066  797.0310
+ARX(3) + lasso 0.07633053  711.1318</code></pre>
+</div>
+</div>
+</section>
+<section id="comparison-of-regularized-arx1-arx2-and-arx3" class="slide level2">
+<h2>Comparison of regularized ARX(1), ARX(2), and ARX(3)</h2>
+<ul>
+<li><p>Best model: ARX(1) + ridge</p></li>
+<li><p>Second best: ARX(3) + lasso</p></li>
+<li><p>Ridge worsens as more predictors are included</p></li>
+<li><p>Lasso improves as more predictors are included</p></li>
+</ul>
+</section></section>
+<section>
+<section id="prediction-intervals" class="title-slide slide level1 center" data-number="6">
+<h1><span class="header-section-number">6</span> Prediction Intervals</h1>
+
+</section>
+<section id="point-predictions-vs-intervals" class="slide level2">
+<h2>Point predictions vs intervals</h2>
+<ul>
+<li>So far, we have only considered <span class="primary">point predictions</span>, i.e. we have fitted models to provide our <span class="primary">best guess on the outcome</span> at time <span class="math inline">\(t+h\)</span>.</li>
+</ul>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>What if we want to provide a <span class="primary">measure of uncertainty</span> around the point prediction or a <span class="primary">likely range of values</span> for the outcome at time <span class="math inline">\(t+h\)</span>?</p>
+</div>
+</div>
+</div>
+<ul>
+<li>For each target time <span class="math inline">\(t+h\)</span>, we can construct <span class="primary">prediction intervals</span>, i.e.&nbsp;provide ranges of values that are expected to cover the true outcome value a fixed fraction of times.</li>
+</ul>
+</section>
+<section id="prediction-intervals-for-lm-fits" class="slide level2">
+<h2>Prediction intervals for <code>lm</code> fits</h2>
+<ul>
+<li><p>To get prediction intervals for the models we previously fitted, we only need to tweak our call to <code>predict</code> by adding as an input:</p>
+<p><code>interval = "prediction", level = p</code></p>
+<p>where <span class="math inline">\(p \in (0, 1)\)</span> is the desired coverage.</p></li>
+<li><p>The output from <code>predict</code> will then be a matrix with</p>
+<ul>
+<li><p>first column a <span class="primary">point estimate</span></p></li>
+<li><p>second column the <span class="primary">lower limit</span> of the interval</p></li>
+<li><p>third column the <span class="primary">upper limit</span> of the interval</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="prediction-intervals-for-arx-cv-trailing-window" class="slide level2">
+<h2>Prediction intervals for ARX (CV, trailing window)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="co"># Initialize matrices to store predictions</span></span>
+<span id="cb30-2"><a></a><span class="co"># 3 columns: point estimate, lower limit, and upper limit</span></span>
+<span id="cb30-3"><a></a>pred_interval_lm <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> n, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb30-4"><a></a><span class="fu">colnames</span>(pred_interval_lm) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'prediction'</span>, <span class="st">'lower'</span>, <span class="st">'upper'</span>)</span>
+<span id="cb30-5"><a></a></span>
+<span id="cb30-6"><a></a><span class="cf">for</span> (t <span class="cf">in</span> t0<span class="sc">:</span>(n<span class="sc">-</span>h)) {</span>
+<span id="cb30-7"><a></a>  <span class="co"># Fit ARX and predict</span></span>
+<span id="cb30-8"><a></a>  arx_trailing <span class="ot">=</span> <span class="fu">lm</span>(deaths <span class="sc">~</span> lagged_deaths <span class="sc">+</span> lagged_cases, <span class="at">data =</span> ca,</span>
+<span id="cb30-9"><a></a>                    <span class="at">subset =</span> (<span class="dv">1</span><span class="sc">:</span>n) <span class="sc">&lt;=</span> t <span class="sc">&amp;</span> (<span class="dv">1</span><span class="sc">:</span>n) <span class="sc">&gt;</span> (t<span class="sc">-</span>w))</span>
+<span id="cb30-10"><a></a>  pred_interval_lm[t<span class="sc">+</span>h, ] <span class="ot">=</span> <span class="fu">pmax</span>(<span class="dv">0</span>,</span>
+<span id="cb30-11"><a></a>                              <span class="fu">predict</span>(arx_trailing, <span class="at">newdata =</span> <span class="fu">data.frame</span>(ca[t<span class="sc">+</span>h, ]),</span>
+<span id="cb30-12"><a></a>                                      <span class="at">interval =</span> <span class="st">"prediction"</span>, <span class="at">level =</span> <span class="fl">0.8</span>))</span>
+<span id="cb30-13"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="prediction-intervals-for-arx-cv-trailing-window-1" class="slide level2">
+<h2>Prediction intervals for ARX (CV, trailing window)</h2>
+
+<img data-src="day2-morning_files/figure-revealjs/plot arx-intervals-cv-trailing-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>                   MAE     MASE
+lm.trailing 0.08932857 832.2278</code></pre>
+</div>
+</div>
+</section>
+<section id="expected-vs-actual-coverage" class="slide level2">
+<h2>Expected vs actual coverage</h2>
+<ul>
+<li><p>We would <span class="primary">expect</span> the ARX model to <span class="primary">cover</span> the truth about <span class="primary">80%</span> of the times. Is this actually true in practice?</p></li>
+<li><p>The actual coverage of the predictive intervals is <span class="primary">lower</span>:</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>         Actual Expected
+Coverage    0.6      0.8</code></pre>
+</div>
+</div>
+<ul>
+<li>We can use <span class="primary">calibration</span> to handle under-covering (more on this in the afternoon)</li>
+</ul>
+</section></section>
+<section>
+<section id="forecasting-with-versioned-data" class="title-slide slide level1 center" data-number="7">
+<h1><span class="header-section-number">7</span> Forecasting with Versioned Data</h1>
+
+</section>
+<section id="versioned-data" class="slide level2">
+<h2>Versioned data</h2>
+<p>So far: data never revised (or simply ignored revisions, <code>as_of</code> today)</p>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>How can we <span class="primary">train forecasters</span> when dealing with <span class="primary">versioned data</span>?</p>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>ca_archive</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>→ An `epi_archive` object, with metadata:
+ℹ Min/max time values: 2020-04-01 / 2023-03-09
+ℹ First/last version with update: 2020-04-02 / 2023-03-10
+ℹ Versions end: 2023-03-10
+ℹ A preview of the table (24953 rows x 5 columns):
+Key: &lt;geo_value, time_value, version&gt;
+       geo_value time_value    version case_rate death_rate
+          &lt;char&gt;     &lt;Date&gt;     &lt;Date&gt;     &lt;num&gt;      &lt;num&gt;
+    1:        ca 2020-04-01 2020-04-02  3.009195 0.06580240
+    2:        ca 2020-04-01 2020-05-07  3.009195 0.06327156
+    3:        ca 2020-04-01 2020-06-21  3.009195 0.06580242
+    4:        ca 2020-04-01 2020-07-02  2.978825 0.06580242
+    5:        ca 2020-04-01 2020-07-03  2.978825 0.06580242
+   ---                                                     
+24949:        ca 2023-03-07 2023-03-08  0.000000 0.00000000
+24950:        ca 2023-03-07 2023-03-10 27.397832 0.00000000
+24951:        ca 2023-03-08 2023-03-09 21.083071 0.00000000
+24952:        ca 2023-03-08 2023-03-10  0.000000 0.00000000
+24953:        ca 2023-03-09 2023-03-10 22.185487 0.52072650</code></pre>
+</div>
+</div>
+</section>
+<section id="version-aware-forecasting" class="slide level2">
+<h2>Version-aware forecasting</h2>
+<p><span class="primary">Important</span>: when fitting and predicting, only use data in the latest version available at the forecast date!</p>
+</section>
+<section id="version-aware-forecasting-1" class="slide level2">
+<h2>Version-aware forecasting</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="co"># initialize dataframe for predictions</span></span>
+<span id="cb35-2"><a></a><span class="co"># 5 columns: forecast date, target date, 10%, 50%, and 90% quantiles</span></span>
+<span id="cb35-3"><a></a>pred_aware <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol =</span> <span class="dv">5</span>, <span class="at">nrow =</span> <span class="dv">0</span>))</span>
+<span id="cb35-4"><a></a></span>
+<span id="cb35-5"><a></a>w <span class="ot">&lt;-</span> <span class="dv">120</span>         <span class="co">#trailing window size</span></span>
+<span id="cb35-6"><a></a>h <span class="ot">&lt;-</span> <span class="dv">28</span>          <span class="co">#number of days ahead</span></span>
+<span id="cb35-7"><a></a></span>
+<span id="cb35-8"><a></a><span class="co"># forecast once a week</span></span>
+<span id="cb35-9"><a></a>fc_time_values <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> t0_date, <span class="at">to =</span> <span class="fu">as.Date</span>(<span class="st">"2023-02-09"</span>), <span class="at">by =</span> <span class="st">"1 week"</span>)</span>
+<span id="cb35-10"><a></a></span>
+<span id="cb35-11"><a></a><span class="cf">for</span> (fc_date <span class="cf">in</span> fc_time_values) {</span>
+<span id="cb35-12"><a></a>  <span class="co"># get data version as_of forecast date</span></span>
+<span id="cb35-13"><a></a>  data <span class="ot">&lt;-</span> <span class="fu">epix_as_of</span>(ca_archive, <span class="at">version =</span> <span class="fu">as.Date</span>(fc_date))</span>
+<span id="cb35-14"><a></a>  <span class="co"># create lagged predictors</span></span>
+<span id="cb35-15"><a></a>  data<span class="sc">$</span>lagged_deaths <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(data<span class="sc">$</span>deaths, h)</span>
+<span id="cb35-16"><a></a>  data<span class="sc">$</span>lagged_cases <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(data<span class="sc">$</span>cases, h)</span>
+<span id="cb35-17"><a></a>  <span class="co"># perform regression</span></span>
+<span id="cb35-18"><a></a>  lm_weekly <span class="ot">&lt;-</span> <span class="fu">lm</span>(deaths <span class="sc">~</span> lagged_deaths <span class="sc">+</span> lagged_cases,</span>
+<span id="cb35-19"><a></a>                  <span class="co"># only consider window of data</span></span>
+<span id="cb35-20"><a></a>                  <span class="at">data =</span> data <span class="sc">|&gt;</span> <span class="fu">filter</span>(time_value <span class="sc">&gt;</span> (<span class="fu">max</span>(time_value) <span class="sc">-</span> w)))</span>
+<span id="cb35-21"><a></a>  <span class="co"># construct data.frame with the right predictors for the target date</span></span>
+<span id="cb35-22"><a></a>  predictors <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">lagged_deaths =</span> <span class="fu">tail</span>(data<span class="sc">$</span>deaths, <span class="dv">1</span>),</span>
+<span id="cb35-23"><a></a>                           <span class="at">lagged_cases =</span> <span class="fu">tail</span>(data<span class="sc">$</span>cases, <span class="dv">1</span>))</span>
+<span id="cb35-24"><a></a>  <span class="co"># make predictions for target date and add them to dataframe of predictions</span></span>
+<span id="cb35-25"><a></a>  pred_aware <span class="ot">&lt;-</span> <span class="fu">rbind</span>(pred_aware,</span>
+<span id="cb35-26"><a></a>                      <span class="fu">data.frame</span>(<span class="st">'forecast_date'</span> <span class="ot">=</span> <span class="fu">max</span>(data<span class="sc">$</span>time_value),</span>
+<span id="cb35-27"><a></a>                                 <span class="st">'target_date'</span> <span class="ot">=</span> <span class="fu">max</span>(data<span class="sc">$</span>time_value) <span class="sc">+</span> h,</span>
+<span id="cb35-28"><a></a>                                 <span class="fu">t</span>(<span class="fu">pmax</span>(<span class="dv">0</span>, <span class="fu">predict</span>(lm_weekly, <span class="at">newdata =</span> predictors,</span>
+<span id="cb35-29"><a></a>                                                   <span class="at">interval =</span> <span class="st">"prediction"</span>, <span class="at">level =</span> <span class="fl">0.8</span>)))))</span>
+<span id="cb35-30"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="version-aware-predictions-cv-trailing" class="slide level2">
+<h2>Version-aware predictions (CV, trailing)</h2>
+
+<img data-src="day2-morning_files/figure-revealjs/plot-versioned-cv-trailing-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>                     MAE     MASE
+version-aware 0.08001814 224.2782</code></pre>
+</div>
+</div>
+</section>
+<section id="version-unaware-predictions-cv-trailing" class="slide level2">
+<h2>Version-unaware predictions (CV, trailing)</h2>
+
+<img data-src="day2-morning_files/figure-revealjs/plot-version-unaware-cv-trailing-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>                       MAE     MASE
+version-unaware 0.07934554 200.4657</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="traditional-approaches-to-time-series" class="title-slide slide level1 center" data-number="8">
+<h1><span class="header-section-number">8</span> Traditional Approaches to Time Series</h1>
+
+</section>
+<section id="popular-forecasting-frameworks" class="slide level2">
+<h2>Popular forecasting frameworks</h2>
+<ul>
+<li>Autoregressive integrated model average (ARIMA) models</li>
+<li>Exponential smoothing with trend and seasonality (ETS)</li>
+<li>Prophet forecaster</li>
+<li>DeepAR (neural network)</li>
+</ul>
+<p>First two here are classic and standard, second two are more recent. None are particularly well-suited for epi forecasting out-of-the-box, ask us about them if you’re curious. We’ll discuss ARIMA as it’s closest to what we’ve seen.</p>
+</section>
+<section id="dissecting-arima" class="slide level2">
+<h2>Dissecting ARIMA</h2>
+<ul>
+<li>AR = autoregressive, include lags of response itself as features</li>
+<li>MA = moving average, include lags of noise terms (correlated noise model)</li>
+<li>I = integrated, we model and forecast differences between observations</li>
+</ul>
+</section>
+<section id="discussion" class="slide level2">
+<h2>Discussion</h2>
+<p>Worth comparing and discussing ARIMA versus the kind of autoregressive models you’ve just seen:</p>
+<ul>
+<li>The way lags are handled:
+<ul>
+<li>In what you’ve seen, we can include arbitrary lags (and regularize)</li>
+<li>Traditional AR models require lags to be contiguous (e.g., all of 0-17, instead of 0, 7, 14)</li>
+</ul></li>
+<li>The way multi-step forecasts are made:
+<ul>
+<li>In what you’ve seen, we model h-step ahead directly</li>
+<li>Traditional AR models only do 1-step ahead prediction, and iterate this to get forecasts at longer horizons</li>
+</ul></li>
+</ul>
+</section>
+<section id="discussion-1" class="slide level2">
+<h2>Discussion</h2>
+<ul>
+<li>The way nonstationarity is handled:
+<ul>
+<li>In what you’ve seen, we address nonstationarity via trailing training windows (or observation weights more generally)</li>
+<li>Traditional ARIMA models use the I component for this: remove linear or quadratic trends by differences, add them back in at prediction time</li>
+</ul></li>
+<li>The way exogenous features are included:
+<ul>
+<li>In what you’ve seen, they appear directly as an exogenous predictor</li>
+<li>Traditional ARIMA models (software, such as <code>fable()</code>) includes them in a different manner; they are effectively subject to the same lags as the AR and MA terms</li>
+</ul></li>
+</ul>
+</section>
+<section id="supplementary-resources" class="slide level2">
+<h2>Supplementary resources</h2>
+<ul>
+<li>Hyndman and Athanasopoulos, <a href="https://otexts.com/fpp3/">Forecasting: Principles and Practice</a></li>
+<li>Ryan’s course notes, <a href="https://stat153.berkeley.edu/fall-2024/">Introduction to Time Series</a></li>
+</ul>
+<!--
+## ETS
+
+### Simple Exponential Smoothing (SES)
+
+* The $h$-step ahead prediction is a weighted average of the current
+observation $y_t$ and the forecast $\hat y_{t|t-1}$:
+
+$$\hat y_{t+h|t} = \alpha y_t + (1- \alpha) \hat y_{t|t-1}$$
+
+where $\alpha \in [0,1]$
+
+* [Forecasts are flat]{.primary}, i.e. do not depend on $h$
+
+* If $\alpha = 1$, we retrieve the [naive flatline]{.primary} forecaster
+
+$$ y_{t+h|t} = y_t$$
+
+
+## ETS
+
+### Simple Exponential Smoothing (SES)
+
+* The SES forecast can be re-expressed as
+
+$$\hat y_{t+h|t} = \alpha y_t + \alpha (1- \alpha) y_{t-1}  + \alpha (1- \alpha)^2 y_{t-2} + \dots$$
+
+i.e. observations [$y_{t-k}$]{.primary}  that are $k$ steps into the past are [exponentially
+down-weighted]{.primary}, with weight $(1- \alpha)^2$. Hence the name exponential smoothing.
+
+* [Component form]{.primary} of the SES forecast
+
+\begin{align*}
+\hat y_{t+h | t} & = l_t \\
+l_t & = \alpha y_t + (1- \alpha) l_{t-1}
+\end{align*}
+
+## ETS
+
+### Holt's linear trend method
+
+* Expands SES component form by introducing a [trend]{.primary} $b_t$
+
+\begin{align*}
+\hat y_{t+h | t} &= l_t + b_t h\\
+l_t &= \alpha y_t + (1- \alpha) (l_{t-1} + b_{t-1}) \\
+b_t & = \beta (l_{t} - l_{t-1}) + (1-\beta) b_{t-1}
+\end{align*}
+
+where $\alpha, \beta \in [0,1]$.
+
+* [Forecasts are linear]{.primary} in $h$, with slope $b_t$.
+
+::: {.callout-important icon="false"}
+## Note
+
+Linear trend forecasts can be erratic for large $h$!
+:::
+
+
+## ETS
+
+### Damped Holt's method
+
+* Introduces a parameter $\phi$ to [dampen the forecast trajectory]{.primary}
+
+\begin{align*}
+\hat y_{t+h | t} &= l_t + b_t (\phi +\phi^2 + \dots + \phi^h)\\
+l_t &= \alpha y_t + (1- \alpha) (l_{t-1} + b_{t-1}\phi) \\
+b_t & = \beta (l_{t} - l_{t-1}) + (1-\beta) b_{t-1}\phi
+\end{align*}
+
+where $\alpha, \beta, \phi \in [0,1]$
+
+* Contribution of slope $b_t$ to a forecast diminishes at each step into the
+future, by a multiplicative factor $\phi$
+
+* As $h\to \infty$, forecasts approach a constant level
+
+$$ y_{t+h | t} \to l_t + b_t \sum_{j=1}^\infty \phi^j = l_t + b_t \frac{\phi}{1-\phi}$$
+
+## ARIMA
+
+### AR(p)
+
+Auto-regressive model of order $p$
+
+$$y_t = \sum_{j=1}^p \phi_j y_{t-j} + w_t$$
+
+### MA(q)
+
+Moving average model of order $q$
+
+$$y_t = w_t + \sum_{j=1}^q \theta_j w_{t-j} $$
+
+where $w_t$ is a white noise sequence, i.e.
+$\mathbb{E}(w_t)=0$ and $\text{Var}(w_t)=\sigma^2$ for all $t$, and
+$\text{Cov}(w_s, w_t)=0$ for all $s \neq t$
+
+
+## ARIMA
+
+### ARMA(p, q)
+
+$$y_t = \sum_{j=1}^p \phi_j y_{t-j} + \sum_{j=0}^q \theta_j w_{t-j} $$
+
+with $\theta_0 = 1$
+
+### ARIMA(p, d, q)
+
+Assumes an $ARMA(p, q)$ model on the
+$d^{th}$-order differences of $y_t$
+-->
+
+
+</section></section>
+
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="gfx/delphi.jpg" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>Time Series — <a href="https://github.com/cmu-delphi/micom-tooling-workshop-2025">cmu-delphi/micom-tooling-workshop-2025</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp("https:\/\/cmu-delphi\.github\.io\/micom-tooling-workshop-2025\/");
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+              // target, if specified
+              link.setAttribute("target", "_blank");
+              if (link.getAttribute("rel") === null) {
+                link.setAttribute("rel", "noopener");
+              }
+              // default icon
+              link.classList.add("external");
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
