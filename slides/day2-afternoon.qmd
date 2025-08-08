@@ -126,11 +126,11 @@ We should be able to postprocess the predictions
 ```{r install, eval=FALSE}
 #| echo: true
 # Stable version
+# We're using this.
 pak::pkg_install("cmu-delphi/epipredict@main")
 
 
 # Development version
-# We're using this.
 pak::pkg_install("cmu-delphi/epipredict@dev")
 ```
 
@@ -146,19 +146,12 @@ Basic and easy to use ["canned" forecasters]{.primary}:
 
   * CDC FluSight flatline forecaster
 
+
+:::{.notes}
 These are supposed to work easily
-
-<br>
-
 Handle lots of cases we've already seen
-
-<br>
-
-[We'll start here]{.base}
-
-
-
-
+We'll start here
+:::
 
 ## What `{epipredict}` provides (ii)
 
@@ -186,7 +179,7 @@ Handle lots of cases we've already seen
 
 ::: {.fragment .fade-in-then-semi-out}
 
-### EDA type stuff
+### Exploratory Data Analysis (EDA) type stuff
 
 1. Making locations/signals commensurate (scaling)
 1. Dealing with revisions
@@ -279,7 +272,7 @@ cases_deaths |>
   xlab("Reference date")
 ```
 
-## Pre-processing: smoothing
+## Pre-processing: smoothing 
 
 Smooth the data by computing 7-day averages of cases and deaths for each state
 
@@ -357,38 +350,80 @@ cases_deaths$cases <- cases_outlr$replacement
 * Back to the [ARX(1)]{.primary} model for COVID deaths:
 $\quad \hat y_{t+28} = \hat\phi + \hat\phi_0 y_{t} + \hat\beta_0 x_{t}$
 
-* Only focus on California (for now)
-
 * Using `{epipredict}`
 
 ```{r epipredict-arx}
 #| echo: true
 #| code-line-numbers: "|7-13"
 # split into train and test
-ca <- cases_deaths |> filter(geo_value == "ca")
 t0_date <- as.Date('2021-04-01')
-train <- ca |> filter(time_value <= t0_date)
-test <- ca |> filter(time_value > t0_date)
+train <- cases_deaths |> filter(time_value <= t0_date)
+test <- cases_deaths |> filter(time_value > t0_date)
 
 # fit ARX
 epi_arx <- arx_forecaster(
   epi_data = train |> as_epi_df(),
   outcome = "deaths",
   predictors = c("cases", "deaths"),
-  trainer = linear_reg(),
-  args_list = arx_args_list(lags = 0, ahead = 28, quantile_levels = c(0.1, 0.9))
+  trainer = quantile_reg(),
+  args_list = arx_args_list(lags = 0, ahead = 28, quantile_levels = c(0.1, 0.5, 0.9))
 )
 ```
 
-## `arx_forecaster` output
+## `arx_forecaster` output{.smaller}
 
-* A [workflow]{.primary} object which can be used any time in the future to create forecasts (`$epi_workflow`).
-    * All necessary preprocessing; both the sequence of steps, and any necessary statistics
-    * The fitted model object
-    * The sequence of steps for postprocessing
+* A [forecast]{.primary} (point prediction + quantiles) for 28 days after the
+last available time value in the data (`$predictions`).
 
-* A [forecast]{.primary} (point prediction + interval)
-for 28 days after the last available time value in the data (`$predictions`).
+```{r epi-pred-arx-output}
+#| echo: true
+epi_arx$predictions
+```
+
+* A [workflow]{.primary} object which could be used to create forecasts using
+  the same training data on new observations (`$epi_workflow`).
+
+<div class="scrollable-output">
+
+```{r epi-workflow-ex, message=TRUE}
+#| echo: true
+
+epi_arx$epi_workflow
+```
+
+</div>
+
+
+:::{.notes}
+* All necessary preprocessing; both the sequence of steps, and any necessary
+  statistics
+* The fitted model object
+* The sequence of steps for postprocessing
+* typically, if you're making a forecast at a later date, you'd want to
+  retrain using the newly released data however!
+
+:::
+
+## Extract predictions
+
+`.pred_distin` is a distribution, which we can extract the distribution into a “long” `epi_df`:
+
+```{r epi-pred-quantile-longer}
+#| echo: true
+epi_arx$predictions |>
+  pivot_quantiles_longer(.pred_distn) |>
+  select(-.pred) |>
+  filter(geo_value == "ca")
+```
+
+or into a "wide" `epi_df`
+
+```{r epi-pred-quantile-wider}
+#| echo: true
+epi_arx$predictions |>
+  pivot_quantiles_wider(.pred_distn) |>
+  filter(geo_value == "ca")
+```
 
 
 ## `arx_forecaster` output
@@ -398,78 +433,11 @@ for 28 days after the last available time value in the data (`$predictions`).
 epi_arx
 ```
 
-
-## Extract fitted object
-
-<div class="scrollable-output">
-
-```{r epi-workflow-arx, message=TRUE}
-#| echo: true
-epi_arx$epi_workflow
-```
-
-</div>
-
-## `$epi_workflow`
-
-Contains information on
-
-* [Pre-processing]{.primary} steps automatically performed by `arx_forecaster` (e.g. compute lags of the predictors)
-
-* [Fitted model]{.primary}
-
-* [Post-processing]{.primary} steps automatically performed by `arx_forecaster` (e.g. compute quantiles)
-
-## Extract predictions
-
-```{r epi-pred-arx}
-#| echo: true
-epi_arx$predictions
-```
-
-::: {.callout-important icon="false"}
-## Note
-
-* `.pred_distn` is actually a “distribution”, parameterized by its quantiles
-
-* `arx_forecaster` estimates the quantiles in a different way than `lm`
-:::
-
-
-## Extract predictions
-
-We can extract the distribution into a “long” `epi_df`
-
-```{r epi-pred-quantile-longer}
-#| echo: true
-epi_arx$predictions |>
-  pivot_quantiles_longer(.pred_distn)
-```
-
-or into a "wide" `epi_df`
-
-```{r epi-pred-quantile-wider}
-#| echo: true
-epi_arx$predictions |>
-  pivot_quantiles_wider(.pred_distn)
-```
-
-
-## Predict with fitted ARX (split-sample)
-
-* `arx_forecaster` fits a model to the training set, and outputs only one prediction (for time $t_0+h$).
-
-* To get [predictions]{.primary} for the [test]{.primary} set:
-
-```{r arx-test-predict}
-#| echo: true
-predict(epi_arx$epi_workflow, test)
-```
-
 ## Predict with ARX (when re-fitting)
 
-* In practice, if we want to [re-train]{.primary} the forecasters as [new data]{.primary} arrive,
-we fit and predict combining `arx_forecaster` with `epix_slide`
+* Could use `predict(epi_arx$epi_workflow, new_data)` but better to retrain on latest data
+
+* We fit and predict combining `arx_forecaster` with `epix_slide`
 
 * From now on, we will only used [versioned data]{.primary}, and make predictions once a week
 
@@ -479,69 +447,21 @@ we fit and predict combining `arx_forecaster` with `epix_slide`
 source(here::here("_code/versioned_data.R"))
 ```
 
-```{r ca-archive, warning=FALSE}
-ca_archive <- covid_archive$DT |>
-  filter(geo_value == "ca") |>
-  as_epi_archive()
-```
-
 ```{r epipredict-cv-trailing}
-#| code-line-numbers: "9-14|"
+#| code-line-numbers: "8-13|"
 #| echo: true
 h <- 28         # horizon
-w <- 120 + h    # trailing window length
 
 # Specify the forecast dates
 fc_time_values <- seq(from = t0_date, to = as.Date("2023-02-09"), by = "1 week")
 
 # Slide the arx_forecaster over the epi_archive
-pred_arx <- ca_archive |> epix_slide(
+pred_arx <- covid_archive |> epix_slide(
   ~ arx_forecaster(epi_data = .x,
                    outcome = "deaths",
                    predictors = c("cases", "deaths"),
-                   trainer = linear_reg(),
-                   args_list = arx_args_list(lags = 0, ahead = h, quantile_levels = c(0.1, 0.9))
-  )$predictions |>
-    pivot_quantiles_wider(.pred_distn),
-  .before = w,
-  .versions = fc_time_values
-)
-```
-
-## Predict with ARX
-
-::: {.callout-important icon="false"}
-## Note (window length)
-
-We set $w = 120 + h$ to match the window size of the ARX model we fitted manually.
-
-When considering a window from $t-w$ to $t$,
-we had access to all outcomes in that window, and to all predictors between
-$t-w-h$ and $t-h$.
-
-(That's because we lagged $x$ before applying the window.)
-
-So we were "cheating" by saying that
-the trailing window had length $w=120$, as its actual size was $120+h$!
-:::
-
-::: {.callout-important icon="false"}
-## Note (all past)
-
-The method [fitting on all past data]{.primary} up to the forecasting date can be
-implemented by setting:
-
-`.before = Inf` in `epix_slide()`.
-:::
-
-```{r epipredict-cv, eval=FALSE}
-# slide an arx_forecaster with appropriate outcome, predictions and lags
-pred_arx <- ca_archive |> epix_slide(
-  ~ arx_forecaster(epi_data = .x,
-                   outcome = "deaths",
-                   predictors = c("cases", "deaths"),
-                   trainer = linear_reg() |> set_engine("lm"),
-                   args_list = arx_args_list(lags = 0, ahead = h, quantile_levels = c(0.1, 0.9))
+                   trainer = quantile_reg(),
+                   args_list = arx_args_list(lags = 0, ahead = h, quantile_levels = c(0.1, 0.5, 0.9))
   )$predictions |>
     pivot_quantiles_wider(.pred_distn),
   .before = Inf,
@@ -550,13 +470,14 @@ pred_arx <- ca_archive |> epix_slide(
 ```
 
 
+
 ## Predict with ARX (re-fitting on trailing window)
 
 <div class="large-output">
 
 ```{r epipredict-cv-trailing-head}
 #| echo: true
-pred_arx
+pred_arx |> filter(geo_value == "ca")
 ```
 
 </div>
@@ -565,7 +486,9 @@ pred_arx
 
 ```{r arx-plot-cv-predictions}
 #| fig-align: left
+ca <- cases_deaths |> filter(geo_value == "ca")
 pred_arx |>
+  filter(geo_value == "ca") |>
   ggplot(aes(target_date, .pred)) +
   geom_line(data = ca, aes(x = time_value, y = deaths), inherit.aes = FALSE, col = base) +
   geom_line(col = primary) +
@@ -577,41 +500,14 @@ pred_arx |>
   theme(legend.title = element_blank())
 ```
 
-```{r function errors}
-MSE <- function(truth, prediction) {
-  mean((truth - prediction)^2)}
+Aligned with the `target_date`, forecasted 4 weeks earlier on the `forecast_date`.
 
-MAE <- function(truth, prediction) {
-  mean(abs(truth - prediction))}
 
-MAPE <- function(truth, prediction) {
-  100 * mean(abs(truth - prediction) / truth)}
-
-MASE <- function(truth, prediction) {
-  100 * MAE(truth, prediction) / mean(abs(diff(truth)))}
-
-getErrors <- function(truth, prediction, type) {
-  return(data.frame(#"MSE" = MSE(truth, prediction),
-                    "MAE"= MAE(truth, prediction),
-                    #"MAPE" = MAPE(truth, prediction),
-                    "MASE" = MASE(truth, prediction),
-                    row.names = type))
-}
-
-getAccuracy = function(finalized, predictions, row_name = "") {
-  observed = (finalized |>
-                filter(time_value %in% predictions$target_date))$deaths
-  return(cbind(
-    getErrors(observed, predictions$.pred, ""),
-    "Coverage" = mean(observed >= predictions$`0.1` & observed <= predictions$`0.9`),
-    row.names = row_name))
-}
-```
-
-```{r error-arx}
-getAccuracy(ca, pred_arx)
-```
-
+:::{.notes}
+- First date gives the distance between `forecast_date` and `target_date`.
+- Bands are the 10-90 quantile interval.
+- Does reasonably well outside of early 2022, where it was overly pessimistic; also training on data from other states.
+:::
 
 ## Customizing `arx_forecaster()`
 
@@ -631,8 +527,8 @@ arx_forecaster(
 ::: {.fragment .fade-in}
 * Modify `predictors` to add/drop predictors
 
-  * <span class="inner-list">e.g. drop `deaths` for regression with a
-  lagged predictor, or drop `cases` to get AR model</span>
+  * <span class="inner-list">e.g. drop `cases` to get AR model, or drop `deaths`
+  for regression with a lagged predictor</span>
 
   * <span class="inner-list">default: `predictors = outcome`</span>
 

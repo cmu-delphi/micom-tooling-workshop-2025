@@ -78,9 +78,8 @@ In RStudio:
 
 ```{r}
 #| eval: false
-install.packages("pak") # good for installing from non-CRAN sources
-pak::pkg_install("cmu-delphi/InsightNetFcast24", dependencies = TRUE)
-InsightNetFcast24::verify_setup()
+install.packages("renv")
+renv::restore()
 ```
 
 Hopefully, you see:
