@@ -438,7 +438,7 @@ The `state_census` dataset from `epidatasets` contains state populations from th
 #| echo: true
 # State census dataset from epidatasets
 library(epidatasets)
-state_census = state_census |> select(abbr, pop) |> filter(abbr != "us")
+state_census <- state_census |> select(abbr, pop) |> filter(abbr != "us")
 
 state_census |> head()
 ```
@@ -772,7 +772,7 @@ The strongest correlation occurs at a lag of about 23 days, indicating that case
 #| echo: true
 edfg <- filter(edf, geo_value %in% c("ut", "ca")) |>
   group_by(geo_value) |>
-  mutate(gr_cases = growth_rate(time_value, case_rate, method = "trend_filter")) |>
+  mutate(gr_cases = growth_rate(case_rate, time_value, method = "trend_filter")) |>
   ungroup()
 ```
 
@@ -1028,26 +1028,21 @@ This functionality is very helpful in version aware forecasting. We will return 
 
 ## Features -- summarize revision behavior
 
-* `revision_summary()` is a helper function that summarizes revision behavior of an `epix_archive`.
+* `revision_analysis()` is a helper function that summarizes revision behavior of an `epix_archive`.
 
 ```{r epiprocess-revision-summary-demo}
 #| echo: true
 #| eval: true
 
-revision_data <- revision_summary(
+revision_data <- revision_analysis(
   archive_cases_dv_subset,
   case_rate_7d_av,
   drop_nas = TRUE,
-  print_inform = FALSE, # NOT the default, to save space
   min_waiting_period = as.difftime(60, units = "days"),
   within_latest = 0.2,
-  quick_revision = as.difftime(3, units = "days"),
-  few_revisions = 3,
-  abs_spread_threshold = NULL,
-  rel_spread_threshold = 0.1,
-  compactify_tol = .Machine$double.eps^0.5,
-  should_compactify = TRUE
+  compactify_abs_tol = .Machine$double.eps^0.5,
 )
+revision_data
 ```
 
 ## Features -- summarize revision behavior
@@ -1055,7 +1050,7 @@ revision_data <- revision_summary(
 ```{r epiprocess-revision-summary-results}
 #| echo: true
 
-head(revision_data)
+head(revision_data$revision_behavior)
 ```
 
 
@@ -1199,11 +1194,11 @@ Recall, we need to watch out for:
 * [**Latency**]{.primary} the time difference between date of reference and date of the initial report
 * [**Backfill**]{.primary} how data for a given date is updated after initial report.
 
-`revision_summary()` provides a summary of both aspects.
+`revision_analysis()` provides a summary of both aspects.
 
-```{r inspect-revision_summary}
+```{r inspect-revision_analysis}
 #| echo: true
-revision_data = revision_summary(nchs_archive, mortality, print_inform = FALSE)
+revision_data <- revision_analysis(nchs_archive, mortality)
 ```
 
 
@@ -1214,7 +1209,7 @@ revision_data = revision_summary(nchs_archive, mortality, print_inform = FALSE)
 ```{r nchs-latency-via-revision-summary}
 #| echo: true
 
-revision_data |> select(geo_value, time_value, min_lag) |> slice_sample(n = 10)
+revision_data$revision_behavior |> select(geo_value, time_value, min_lag) |> slice_sample(n = 10)
 ```
 
 * We randomly sampled some dates to check if there is a consistent latency pattern.
@@ -1226,10 +1221,10 @@ revision_data |> select(geo_value, time_value, min_lag) |> slice_sample(n = 10)
 
 ```{r revision-summary-time-near-latest-demo}
 #| echo: true
-revision_data |> select(geo_value, time_value, time_near_latest) |> slice_sample(n = 10)
+revision_data$revision_behavior |> select(geo_value, time_value, lag_near_latest) |> slice_sample(n = 10)
 ```
-* It generally takes at least 4 weeks for reported value to be within 20\% (default in `revision_summary()`) of the finalized value.
-* We can change the threshold of percentage difference by specifying the `within_latest` argument of `revision_summary()`.
+* It generally takes at least 4 weeks for reported value to be within 20\% (default in `revision_analysis()`) of the finalized value.
+* We can change the threshold of percentage difference by specifying the `within_latest` argument of `revision_analysis()`.
 
 ## Versioning analysis - backfill
 
@@ -1418,15 +1413,15 @@ nchs_archive <- pub_covidcast(
   + [**Finalized value**]{.primary} as the (potentially unobserved) finalized value of $Y_{s_0}.$
     - We only know in *hindsight* when reported value of $Y_{s_0}$ is finalized -- need an approximation.
 
-## Revisiting `revision_summary()`
+## Revisiting `revision_analysis()`
 
-Recall, `revision_summary()` reports the number of days to be within 20\% (default value) of finalized value
+Recall, `revision_analysis()` reports the number of days to be within 20\% (default value) of finalized value
 
 ```{r revision-summary-time-near-latest-show-again}
 #| echo: false
 #| eval: true
 
-revision_data |> select(geo_value, time_value, time_near_latest) |> slice_sample(n = 5)
+revision_data$revision_behavior |> select(geo_value, time_value, lag_near_latest) |> slice_sample(n = 5)
 (lag_quantiles = quantile(revision_data$time_near_latest))
 approx_final_lag = lag_quantiles["75%"]
 ```
