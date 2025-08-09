@@ -14,7 +14,6 @@ library(tidyverse)
 library(epidatr)
 library(epipredict)
 library(epidatasets)
-library(trendfilter)
 theme_set(theme_bw())
 ```
 
@@ -778,7 +777,7 @@ The strongest correlation occurs at a lag of about 23 days, indicating that case
 #| echo: true
 edfg <- filter(edf, geo_value %in% c("ut", "ca")) |>
   group_by(geo_value) |>
-  mutate(gr_cases = growth_rate(case_rate, time_value, method = "trend_filter")) |>
+  mutate(gr_cases = growth_rate(case_rate, time_value, method = "smooth_spline")) |>
   ungroup()
 ```
 
