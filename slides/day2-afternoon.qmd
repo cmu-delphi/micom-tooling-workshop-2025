@@ -30,7 +30,7 @@ ggplot2::theme_set(ggplot2::theme_bw())
 
 # Fundamentals of Forecasting
 
-## Care with your data
+## Care with your data{visibility="hidden"}
 
 1. Data splitting
     * Some data you see. You can use it to create your model: [Training data]{.primary}.
@@ -48,7 +48,7 @@ We've emphasized most of this already.
 
 But that point about transformations is [VERY]{.primary} important. And often overlooked.
 
-## Preprocessing correctly
+## Preprocessing correctly{visibility="hidden"}
 
 * A standard proprecessing routine is to `scale()` each of the predictors.
 * This requires calculating the mean and standard deviation on the training data.
@@ -75,7 +75,7 @@ We would also need to invert (postprocess) the predictions.
 [For example:]{.secondary} undoing scaling to predict [deaths]{.primary} not [deaths per 100K population]{.primary}
 
 
-## `{tidymodels}`
+## `{tidymodels}`{visibility="hidden"}
 
 * The `{tidymodels}` suite of packages is intended to handle this situation correctly.
 
@@ -87,7 +87,7 @@ We would also need to invert (postprocess) the predictions.
 
 * We've been working with their team to develop this functionality.
 
-## Anatomy of a forecaster
+## Anatomy of a forecaster{visibility="hidden"}
 
 ::: {.fragment .fade-in-then-semi-out}
 
@@ -354,7 +354,7 @@ $\quad \hat y_{t+28} = \hat\phi + \hat\phi_0 y_{t} + \hat\beta_0 x_{t}$
 
 ```{r epipredict-arx}
 #| echo: true
-#| code-line-numbers: "|7-13"
+#| code-line-numbers: "|7-14"
 # split into train and test
 t0_date <- as.Date('2021-04-01')
 train <- cases_deaths |> filter(time_value <= t0_date)
@@ -366,7 +366,7 @@ epi_arx <- arx_forecaster(
   outcome = "deaths",
   predictors = c("cases", "deaths"),
   trainer = quantile_reg(),
-  args_list = arx_args_list(lags = 0, ahead = 28, quantile_levels = c(0.1, 0.5, 0.9))
+  args_list = arx_args_list(lags = 0, ahead = 28)
 )
 ```
 
@@ -461,7 +461,7 @@ pred_arx <- covid_archive |> epix_slide(
                    outcome = "deaths",
                    predictors = c("cases", "deaths"),
                    trainer = quantile_reg(),
-                   args_list = arx_args_list(lags = 0, ahead = h, quantile_levels = c(0.1, 0.5, 0.9))
+                   args_list = arx_args_list(lags = 0, ahead = h)
   )$predictions |>
     pivot_quantiles_wider(.pred_distn),
   .before = Inf,
@@ -469,7 +469,9 @@ pred_arx <- covid_archive |> epix_slide(
 )
 ```
 
-
+:::{.notes}
+Not a great way to read the output, but the new column is `version`, which `forecast_date` is always before.
+:::
 
 ## Predict with ARX (re-fitting on trailing window)
 
@@ -519,8 +521,8 @@ arx_forecaster(
   epi_data = train,
   outcome = "deaths",
   predictors = c("cases", "deaths"),
-  trainer = linear_reg() |> set_engine("lm"),
-  args_list = arx_args_list(lags = 0, ahead = 28, quantile_levels = c(0.1, 0.9))
+  trainer = quantile_reg(),
+  args_list = arx_args_list(lags = 0, ahead = 28)
 )
 ```
 
@@ -545,12 +547,12 @@ arx_forecaster(
   epi_data = train,
   outcome = "deaths",
   predictors = c("cases", "deaths"),
-  trainer = linear_reg(),
-  args_list = arx_args_list(lags = 0, ahead = 28, quantile_levels = c(0.1, 0.9))
+  trainer = quantile_reg(),
+  args_list = arx_args_list(lags = 0, ahead = 28)
 )
 ```
 
-* Modify `arx_args_list` to change lags, horizon, quantile levels, ...
+* Modify `arx_args_list` to change lags, horizon, quantile levels, latency adjustment, ...
 
 ::: {.fragment .fade-in}
 ```{r arx_args_list}
@@ -615,15 +617,15 @@ usa_archive <- covid_archive$DT |>
 ```{r arx-with-dv}
 #| echo: true
 #| code-line-numbers: "4"
-pred_arx_hosp <- ca_archive_dv |> epix_slide(
+pred_arx_hosp <- covid_archive_dv |> epix_slide(
   ~ arx_forecaster(epi_data = .x,
                    outcome = "deaths",
                    predictors = c("deaths", "doctor_visits"),
-                   trainer = linear_reg(),
-                   args_list = arx_args_list(lags = 0, ahead = 28, quantile_levels = c(0.1, 0.9))
+                   trainer = quantile_reg(),
+                   args_list = arx_args_list(lags = 0, ahead = 28)
   )$predictions |>
     pivot_quantiles_wider(.pred_distn),
-  .before = w,
+  .before = Inf,
   .versions = fc_time_values
 )
 ```
@@ -633,6 +635,7 @@ pred_arx_hosp <- ca_archive_dv |> epix_slide(
 ```{r arx-with-dv-plot}
 #| fig-align: left
 pred_arx_hosp |>
+  filter(geo_value == "ca") |>
   ggplot(aes(target_date, .pred)) +
   geom_line(data = ca, aes(x = time_value, y = deaths), inherit.aes = FALSE, col = base) +
   geom_line(col = primary) +
@@ -644,10 +647,7 @@ pred_arx_hosp |>
   theme(legend.title = element_blank())
 ```
 
-```{r error-arx-with-dv}
-getAccuracy(ca, pred_arx_hosp)
-```
-
+Quite different predictions!
 
 ## Customizing `arx_forecaster`
 
@@ -656,18 +656,18 @@ getAccuracy(ca, pred_arx_hosp)
 ```{r arx-with-more-lags}
 #| echo: true
 #| code-line-numbers: "7"
-pred_arx_more_lags <- ca_archive_dv |> epix_slide(
+pred_arx_hosp <- covid_archive_dv |> epix_slide(
   ~ arx_forecaster(epi_data = .x,
                    outcome = "deaths",
                    predictors = c("deaths", "doctor_visits"),
-                   trainer = linear_reg(),
+                   trainer = quantile_reg(),
                    args_list = arx_args_list(
                      lags = c(0, 7, 14),
-                     ahead = 28, quantile_levels = c(0.1, 0.9)
+                     ahead = 28
                    )
   )$predictions |>
     pivot_quantiles_wider(.pred_distn),
-  .before = w,
+  .before = Inf,
   .versions = fc_time_values
 )
 ```
@@ -700,26 +700,27 @@ getAccuracy(ca, pred_arx_more_lags)
 
 ```{r arx-multiple-h}
 #| echo: true
-#| code-line-numbers: "1-2,11,18|19-20"
-forecast_times <- seq(from = t0_date, to = as.Date("2023-02-23"), by = "1 month")
+#| code-line-numbers: "1-2,11,20-21"
+forecast_times <- seq(from = t0_date, to = as.Date("2023-02-23"), by = "2 month")
 pred_h_days_ahead <- function(epi_archive, ahead = 7) {
   epi_archive |>
     epix_slide(
       ~ arx_forecaster(epi_data = .x,
                        outcome = "deaths",
                        predictors = c("deaths", "doctor_visits"),
-                       trainer = linear_reg() |> set_engine("lm"),
+                       trainer = quantile_reg(quantile_levels = c(.1, .5, .9)),
                        args_list = arx_args_list(
                          lags = 0,
                          ahead = ahead,
-                         quantile_levels = c(0.1, 0.9))
+                         quantile_levels =  c(.1, .5, .9)
+                       )
       )$predictions |>
         pivot_quantiles_wider(.pred_distn),
-  .before = w,
+  .before = Inf,
   .versions = forecast_times
   )
 }
-h <- c(7, 14, 21, 28)
+h <- 7 * c(0, 1, 2, 3, 4, 5, 6)
 forecasts <- bind_rows(map(h, ~ pred_h_days_ahead(ca_archive_dv, ahead = .x)))
 ```
 
@@ -746,120 +747,9 @@ ggplot(data = forecasts, aes(x = target_date, group = forecast_date)) +
   theme(legend.position = "none")
 ```
 
+Color corresponds to `forecast_date`
 
-# Advanced Customizations
-
-## Changing trainer
-
-```{r print-model-2}
-#| echo: true
-#| eval: false
-#| code-line-numbers: "4"
-arx_forecaster(epi_data = train |> as_epi_df(),
-               outcome = "deaths",
-               predictors = c("cases", "deaths"),
-               trainer = linear_reg() |> set_engine("lm"),
-               args_list = arx_args_list(lags = 0, ahead = 28,
-                                         quantile_levels = c(0.1, 0.9)))
-```
-
-Modify `trainer` to use a model that is not `lm` (default)
-
-* e.g. `trainer = rand_forest()`
-* can use any `{parsnip}` models, see [list](https://www.tidymodels.org/find/parsnip/)
-* `{epipredict}` has a number of custom engines as well
-
-
-## Changing trainer
-
-```{r arx-with-random-forests}
-#| echo: true
-#| code-line-numbers: "6"
-pred_arx_rf <- ca_archive_dv |>
-  epix_slide(
-    ~ arx_forecaster(epi_data = .x,
-                     outcome = "deaths",
-                     predictors = c("deaths", "doctor_visits"),
-                     trainer = parsnip::rand_forest(mode = "regression"), # defaults to ranger
-                     args_list = arx_args_list(
-                       lags = 0,
-                       ahead = 28,
-                       quantile_levels = c(0.1, 0.9))
-                     )$predictions |>
-        pivot_quantiles_wider(.pred_distn),
-  .before = w,
-  .versions = fc_time_values
-)
-```
-
-## Predictions (trained using random forest)
-
-```{r arx-with-random-forests-plot}
-#| fig-align: left
-pred_arx_rf |>
-  ggplot(aes(target_date, .pred)) +
-  geom_line(data = ca, aes(x = time_value, y = deaths), inherit.aes = FALSE, col = base) +
-  geom_line(col = primary) +
-  geom_ribbon(aes(ymin = `0.1`, ymax = `0.9`), alpha = .3, fill = primary) +
-  geom_vline(xintercept = t0_date) +
-  geom_vline(xintercept = t0_date + 28, lty = 2) +
-  labs(x = "", y = "Deaths per 100k people") +
-  scale_y_continuous(expand = expansion(c(0, .05))) +
-  theme(legend.title = element_blank())
-```
-
-
-```{r error-arx-random-forests}
-getAccuracy(ca, pred_arx_rf)
-```
-
-## Warning!
-
-* Random forests has really [poor coverage]{.primary} here.
-
-* The reason is the way intervals are calculated.
-
-* Can [change engine]{.primary} to get better coverage:
-
-specify `engine = "grf_quantiles"` in the `rand_forest` call
-
-## Predictions from a random forest with `grf_quantiles`
-
-```{r arx-with-grf}
-pred_arx_grf <- ca_archive_dv |>
-  epix_slide(
-    ~ arx_forecaster(epi_data = .x,
-                     outcome = "deaths",
-                     predictors = c("deaths", "doctor_visits"),
-                     trainer = parsnip::rand_forest(mode = "regression", engine = "grf_quantiles"),
-                     args_list = arx_args_list(
-                       lags = 0,
-                       ahead = 28,
-                       quantile_levels = c(0.1, 0.9))
-                     )$predictions |>
-        pivot_quantiles_wider(.pred_distn),
-  .before = w,
-  .versions = fc_time_values
-)
-pred_arx_grf |>
-  ggplot(aes(target_date, .pred)) +
-  geom_line(data = ca, aes(x = time_value, y = deaths), inherit.aes = FALSE, col = base) +
-  geom_line(col = primary) +
-  geom_ribbon(aes(ymin = `0.1`, ymax = `0.9`), alpha = .3, fill = primary) +
-  geom_vline(xintercept = t0_date) +
-  geom_vline(xintercept = t0_date + 28, lty = 2) +
-  labs(x = "", y = "Deaths per 100k people") +
-  scale_y_continuous(expand = expansion(c(0, .05))) +
-  theme(legend.title = element_blank())
-```
-
-
-```{r error-arx-grf}
-getAccuracy(ca, pred_arx_grf)
-```
-
-
-## Geo-pooling
+# Geo-pooling
 
 * When we observe data over time from [multiple locations]{.primary}
 (e.g. states or counties).
@@ -1151,7 +1041,7 @@ rbind(getAccuracy(ca,
                   "TX"))
 ```
 
-## What are these ARX intervals?
+## What are these ARX intervals?{visibility="hidden"}
 
 * `{epipredict}` takes quantiles of training residuals to form its prediction intervals
 * In comparison to traditional (parametric) intervals from `lm()`, this is more flexible
@@ -1167,7 +1057,7 @@ Quantile regression provides an alternative, wherein we estimate these quantiles
 
 Technically, `grf_quantiles` was using Quantile Loss with Random Forests
 
-## Quantile regression
+## Quantile regression{visibility="hidden"}
 
 Now we directly target conditional quantiles of the outcome over time.
 
@@ -1199,7 +1089,7 @@ pred_qr_geo_pool <- usa_archive_dv |>
 )
 ```
 
-## Predictions (geo-pooling + quantile regression, $h=28$)
+## Predictions (geo-pooling + quantile regression, $h=28$){visibility="hidden"}
 
 ```{r qr-geo-pooling-plot}
 #| fig-width: 7
@@ -1238,7 +1128,7 @@ rbind(getAccuracy(ca,
                   "TX"))
 ```
 
-## Predictions (geo-pooling + linear regression, $h=28$)
+## Predictions (geo-pooling + linear regression, $h=28$){visibility="hidden"}
 
 ```{r arx-geo-pooling-plot-lm}
 #| fig-width: 7
@@ -1278,9 +1168,9 @@ rbind(getAccuracy(ca,
 ```
 
 
-# Build a forecaster from scratch
+# Build a forecaster from scratch{visibility="hidden"}
 
-## Build a forecaster from scratch
+## Build a forecaster from scratch{visibility="hidden"}
 
 * So far, we performed [manual pre-processing]{.primary},
 
@@ -1290,11 +1180,11 @@ rbind(getAccuracy(ca,
 
 
 ::: {.callout-important icon="false"}
-## What if we want more direct control on each single step?
+## What if we want more direct control on each single step?{visibility="hidden"}
 
 :::
 
-## Under the hood of `arx_forecaster()`
+## Under the hood of `arx_forecaster()`{visibility="hidden"}
 
 ```{r forecaster-from-scratch}
 #| echo: true
@@ -1329,7 +1219,7 @@ trained_ewf <- fit(ewf, data = ca)
 fcasts <- forecast(trained_ewf)
 ```
 
-## Predicting influenza hospitalizations
+## Predicting influenza hospitalizations{visibility="hidden"}
 
 * Current task: predict influenza hospitalizations for all states + DC + PR.
 * Forecasts submitted to [CDC Flusight Forecast Hub](https://github.com/cdcepi/FluSight-forecast-hub)
@@ -1344,7 +1234,7 @@ Specifically:
 
 From here on, the emphasis is "how" to make these adjustments. Ran out of time to evaluate!
 
-## Aside: data issues
+## Aside: data issues{visibility="hidden"}
 
 * Hospital reporting was down for a period over the summer.
 
@@ -1364,7 +1254,7 @@ hhs_v_nhsn |>
   scale_y_continuous(expand = expansion(c(0, 0.05)))
 ```
 
-## We don't know if we trust the data yet enough
+## We don't know if we trust the data yet enough{visibility="hidden"}
 
 * It may get revised significantly
 
@@ -1378,8 +1268,8 @@ Climatological forecaster
 Think like the weather: "what is the typical weather in February in Georgia, that's our forecast"
 
 
-
-## Climatological forecaster
+  
+## Climatological forecaster{visibility="hidden"}
 
 ```{r}
 `%nin%` <- function(x, y) !(x %in% y)
@@ -1430,7 +1320,7 @@ climatological_model <- function(epi_data, forecast_date, ahead, window_size = 3
 }
 ```
 
-## Climate predictions for this week
+## Climate predictions for this week{visibility="hidden"}
 
 ```{r}
 geos <- c("ca", "ma", "ny", "tx")
