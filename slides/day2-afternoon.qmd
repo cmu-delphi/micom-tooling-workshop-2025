@@ -647,6 +647,41 @@ pred_arx_hosp |>
   theme(legend.title = element_blank())
 ```
 
+```{r function errors}
+MSE <- function(truth, prediction) {
+  mean((truth - prediction)^2)}
+
+MAE <- function(truth, prediction) {
+  mean(abs(truth - prediction))}
+
+MAPE <- function(truth, prediction) {
+  100 * mean(abs(truth - prediction) / truth)}
+
+MASE <- function(truth, prediction) {
+  100 * MAE(truth, prediction) / mean(abs(diff(truth)))}
+
+getErrors <- function(truth, prediction, type) {
+  return(data.frame(#"MSE" = MSE(truth, prediction), 
+                    "MAE"= MAE(truth, prediction), 
+                    #"MAPE" = MAPE(truth, prediction), 
+                    "MASE" = MASE(truth, prediction), 
+                    row.names = type))
+}
+
+getAccuracy = function(finalized, predictions, row_name = "") {
+  observed = (finalized |> 
+                filter(time_value %in% predictions$target_date))$deaths
+  return(cbind(
+    getErrors(observed, predictions$.pred, ""),
+    "Coverage" = mean(observed >= predictions$`0.1` & observed <= predictions$`0.9`), 
+    row.names = row_name))
+}
+```
+
+```{r error-arx}
+getAccuracy(ca, pred_arx)
+```
+
 Quite different predictions!
 
 ## Customizing `arx_forecaster`
@@ -676,7 +711,7 @@ pred_arx_hosp <- covid_archive_dv |> epix_slide(
 
 ```{r arx-with-more-lags-plot}
 #| fig-align: left
-pred_arx_more_lags |>
+pred_arx_hosp |>
   ggplot(aes(target_date, .pred)) +
   geom_line(data = ca, aes(x = time_value, y = deaths), inherit.aes = FALSE, col = base) +
   geom_line(col = primary) +
@@ -689,7 +724,7 @@ pred_arx_more_lags |>
 ```
 
 ```{r error-arx-more-lags}
-getAccuracy(ca, pred_arx_more_lags)
+getAccuracy(ca, pred_arx_hosp)
 ```
 
 
@@ -767,6 +802,12 @@ Color corresponds to `forecast_date`
 * We will now pool data from [all US states]{.primary} to make predictions.
 
 ## Geo-pooling
+
+```{r}
+#| echo: false
+h <- 28         # horizon
+w <- 120 + h    # trailing window length
+```
 
 ```{r arx-geo-pooling}
 #| echo: true
