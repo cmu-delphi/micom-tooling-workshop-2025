@@ -28,7 +28,7 @@ ggplot2::theme_set(ggplot2::theme_bw())
 - Statistical background on nowcasting and forecasting
 - Tools for building nowcasting and forecasting models
 
-## A disclaimer
+## A disclaimer{visibility="hidden"}
 
 - Our backgrounds are primarily in statistics and computer science
 - This obviously influences our way of thinking and our approach to
@@ -70,7 +70,7 @@ TODO
 2. Copy the URL.
 3. Open RStudio, select File > New Project > Version Control. Paste there and proceed.
 
-### Even more expert (wants `github` remote):
+### Even more expert (via `github` remote):
 
 1. Click the Grey Button that says <kbd>⑂ Fork ▾</kbd>
 2. Proceed along the same lines as above.
@@ -393,7 +393,7 @@ weekly_snapshots |>
 
 ## Latency and revision in signals
 
-* [**Revision**]{.primary} data is updated or corrected after initial publication
+* [**Revised**]{.primary} data is updated or corrected after initial publication
 
 **Example**: COVID-19 case reports are revised reporting backlogs are cleared
 
@@ -651,7 +651,7 @@ cowplot::plot_grid(g1, g2, ncol = 2, rel_widths = c(.38, .62))
 
 [**Epidata:**]{.primary} repository of aggregated epi-surveillance time series
 
-Code is open-source. Indicators can be either public or restricted.
+Code is open-source. Most indicators are public.
 
 * To date, it has accumulated over 5 billion records.
 
@@ -690,7 +690,7 @@ Make epi-surveillance more nimble, complete, standardized, robust, and real-time
 
 
 
-## Features of Delphi Epidata
+## Features of Delphi Epidata{visibility="hidden"}
 
 * Built-in support for:
     1. Data revisions ("backfill"), including reporting dates and changes
@@ -866,6 +866,26 @@ pip install epidatpy
 -->
 
 
+## API keys
+
+* Anyone may access the Epidata API anonymously without providing any personal data!!
+
+* Anonymous API access is subject to some restrictions:
+  <small>public datasets only; 60 requests per hour; only two parameters may have multiple selections</small>
+
+* API key grants privileged access; can be obtained by [registering with us](https://api.delphi.cmu.edu/epidata/admin/registration_form)
+
+* Privileges of registration: no rate limit; no limit on multiple selections
+
+* We just want to know which signals people care about and ensure we're providing benefit
+
+<!-- rate limited to 60 requests per hour;  -->
+::: {.callout-tip}
+* The `{epidatr}` client automatically searches for the key in the `DELPHI_EPIDATA_KEY` environment variable.
+* We recommend storing it in your `.Renviron` file, which R reads by default.
+* More on setting your API key [here](https://rdrr.io/cran/epidatr/man/get_api_key.html).
+:::
+
 
 ## Using `{epidatr}`
 
@@ -889,31 +909,17 @@ head(hhs_flu_nc, n = 3)
 head(hhs_flu_nc, n = 3)
 ```
 
+<br>
 
+::: {.callout-important appearance="simple" icon="false"}
 
-## API keys
+The `covidcast` endpoint supports `*` in its time and geo fields.
 
-* Anyone may access the Epidata API anonymously without providing any personal data!!
-
-* Anonymous API access is subject to some restrictions:
-  <small>public datasets only; 60 requests per hour; only two parameters may have multiple selections</small>
-
-* API key grants privileged access; can be obtained by [registering with us](https://api.delphi.cmu.edu/epidata/admin/registration_form)
-
-* Privileges of registration: no rate limit; no limit on multiple selections
-
-* We just want to know which signals people care about and ensure we're providing benefit
-
-<!-- rate limited to 60 requests per hour;  -->
-::: {.callout-tip}
-* The `{epidatr}` client automatically searches for the key in the `DELPHI_EPIDATA_KEY` environment variable.
-* We recommend storing it in your `.Renviron` file, which R reads by default.
-* More on setting your API key [here](https://rdrr.io/cran/epidatr/man/get_api_key.html).
+Signal values for all available counties: replace `geo_values = "06059"` with `geo_values = "*"`.
 :::
 
 
-
-## Fetching data - COVIDcast main endpoint
+## Fetching data - COVIDcast main endpoint{visibility="hidden"}
 
 <br>
 
@@ -929,7 +935,7 @@ Need to specify the following arguments...
 1. `time_values`: times of interest
 
 
-## Fetching data - COVIDcast main endpoint
+## Fetching data - COVIDcast main endpoint{visibility="hidden"}
 
 ```{r us-jhu-pub-covidcast}
 #| echo: true
@@ -977,7 +983,7 @@ Each observation is aggregated by time and by geographic region
 
 [Also reports]{.primary}
 
-* `issue`: The time this observation was published
+* `issue`: The date this observation was published
 
 * `lag`: The period between when the events occurred and when the observation was published
 
@@ -988,7 +994,7 @@ Allows for historical reconstructions of information that was available at a spe
 [**More on this soon!**]{.primary}
 
 <!-- * Meaning that unlike most other sources of COVID data, it tracks the complete revision history of the signal. -->
-## Geographic levels
+## Geographic levels{visibility=hidden}
 
 Signals are available at different geographic levels, depending on the endpoint
 
@@ -1016,7 +1022,7 @@ head(jhu_state_cases) |>
 ```
 
 
-## COVIDcast main endpoint - Example query
+## COVIDcast main endpoint - Example query{visibility=hidden}
 
 County `geo_values` are [FIPS codes](https://en.wikipedia.org/wiki/List_of_United_States_FIPS_codes_by_county): Orange County, California.
 
@@ -1154,7 +1160,6 @@ Requesting Specific Data Versions:
 * `as_of` always fetches one version
 * `issues` can fetch multiple
 * Only one may be used at a time
-* Not all endpoints support both
 
 
 ## Obtaining data "as of" a specific date
@@ -1187,7 +1192,7 @@ head(dv_pa_as_of) |>
 * Initial estimate *issued* on May 7, 2020
 * Due to delay from reporting and ingestion by the API
 
-## Obtaining data "as of" a specific date
+## Obtaining data "as of" a specific date{visibility=hidden}
 
 [Default behaviour:]{.primary} unspecified `as_of`, get the most recent data
 
@@ -1483,7 +1488,7 @@ head(epidata) |> select(geo_value, signal, source, time_value, issue, lag, value
 
 
 
-## Main takeaways
+## Main takeaways{visibility=hidden}
 
 * [**Delphi Epidata:**]{.primary} platform for real-time epidemic data
     * provides (aggregated) signals for tracking and forecasting
