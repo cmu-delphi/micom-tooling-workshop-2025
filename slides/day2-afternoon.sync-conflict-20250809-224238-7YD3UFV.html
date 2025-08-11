@@ -203,7 +203,7 @@
 
 </div>
 <section id="section" class="slide level2 w-80" data-background-image="gfx/cover-art-1.svg" data-background-position="bottom">
-<h2>Forecasting With <code>{epipredict}</code></h2>
+<h2>Forecasting With <code>{epipredict}</code> and Other Advanced Topics</h2>
 <h3 id="section-1">MICOM Tooling Workshop 2025</h3>
 <p><br></p>
 <h4 id="section-2">David Weber, Nat DeFries</h4>
@@ -215,46 +215,61 @@
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
 <ol type="1">
-<li><p>Overview of <code>{epipredict}</code></p></li>
-<li><p>Preprocessing</p></li>
-<li><p>Basic Usage of <code>arx_forecaster()</code></p></li>
-<li><p>Extending <code>arx_forecaster()</code></p></li>
+<li><p>Fundamentals of Forecasting</p></li>
+<li><p><code>{epipredict}</code></p></li>
+<li><p>Customizing <code>arx_forecaster()</code></p></li>
+<li><p>Build a Forecaster from Scratch</p></li>
+<li><p>Advanced Topics</p></li>
 </ol>
 </section>
 <section>
-<section id="overview-of-epipredict" class="title-slide slide level1 center" data-number="1">
-<h1><span class="header-section-number">1</span> Overview of <code>{epipredict}</code></h1>
+<section id="fundamentals-of-forecasting" class="title-slide slide level1 center" data-number="1">
+<h1><span class="header-section-number">1</span> Fundamentals of Forecasting</h1>
 
 </section>
-<section id="epipredict" class="slide level2">
+
+
+<section id="tidymodels" class="slide level2">
+<h2><code data-visibility="hidden">{tidymodels}</code></h2>
+<ul>
+<li><p>The <code>{tidymodels}</code> suite of packages is intended to handle this situation correctly.</p></li>
+<li><p>It’s written by programmers at Posit (the people behind <code>{tidyverse}</code>)</p></li>
+<li><p>It doesn’t work for panel data.</p></li>
+<li><p>That’s what we need for Epidemiological Time Series</p></li>
+<li><p>We’ve been working with their team to develop this functionality.</p></li>
+</ul>
+</section>
+</section>
+<section>
+<section id="epipredict" class="title-slide slide level1 center" data-number="2">
+<h1><span class="header-section-number">2</span> <code>{epipredict}</code></h1>
+
+</section>
+<section id="epipredict-1" class="slide level2">
 <h2><code>{epipredict}</code></h2>
 <p><a href="https://cmu-delphi.github.io/epipredict" class="uri">https://cmu-delphi.github.io/epipredict</a></p>
 <h4 id="installation">Installation</h4>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Stable version</span></span>
-<span id="cb1-2"><a></a><span class="co"># We're using this.</span></span>
-<span id="cb1-3"><a></a>pak<span class="sc">::</span><span class="fu">pkg_install</span>(<span class="st">"cmu-delphi/epipredict@main"</span>)</span>
-<span id="cb1-4"><a></a></span>
-<span id="cb1-5"><a></a></span>
-<span id="cb1-6"><a></a><span class="co"># Development version</span></span>
-<span id="cb1-7"><a></a>pak<span class="sc">::</span><span class="fu">pkg_install</span>(<span class="st">"cmu-delphi/epipredict@dev"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># Stable version</span></span>
+<span id="cb2-2"><a></a><span class="co"># We're using this.</span></span>
+<span id="cb2-3"><a></a>pak<span class="sc">::</span><span class="fu">pkg_install</span>(<span class="st">"cmu-delphi/epipredict@main"</span>)</span>
+<span id="cb2-4"><a></a></span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a><span class="co"># Development version</span></span>
+<span id="cb2-7"><a></a>pak<span class="sc">::</span><span class="fu">pkg_install</span>(<span class="st">"cmu-delphi/epipredict@dev"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="what-epipredict-provides-i" class="slide level2">
 <h2>What <code>{epipredict}</code> provides (i)</h2>
-<p>Basic and easy to use <span class="primary">“canned” forecasters</span>. There are several “basline” forecasters:</p>
+<p>Basic and easy to use <span class="primary">“canned” forecasters</span>:</p>
 <ul>
 <li><p>Baseline flat forecaster</p></li>
-<li><p>CDC FluSight flatline forecaster</p></li>
-<li><p>Climatological model</p></li>
-</ul>
-<p>As well as two flexible autoregressive forecasters:</p>
-<ul>
-<li><p>Autoregressive classifier</p></li>
 <li><p>Autoregressive forecaster (ARX)</p></li>
+<li><p>Autoregressive classifier</p></li>
+<li><p>CDC FluSight flatline forecaster</p></li>
 </ul>
 <aside class="notes">
-<p>Planning on adding more.</p>
+<p>These are supposed to work easily Handle lots of cases we’ve already seen We’ll start here</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -273,7 +288,7 @@
 <li><p>A framework for creating <span class="primary">custom forecasters</span> out of <span class="primary">modular</span> components.</p></li>
 <li><p>This is highly customizable, extends <code>{tidymodels}</code> to panel data</p></li>
 <li><p>Good for building a new forecaster from scratch</p></li>
-<li><p>Used to construct</p></li>
+<li><p>We’ll do an example at the end</p></li>
 <li><p>There are four types of components:</p>
 <ol type="1">
 <li><p><span class="primary">Preprocessor</span>: do things to the data before model training</p></li>
@@ -282,17 +297,11 @@
 <li><p><span class="primary">Postprocessor</span>: do things to the predictions before returning</p></li>
 </ol></li>
 </ul>
-<p>If you want examples of usage, see <a href="https://cmu-delphi.github.io/epipredict/articles/custom_epiworkflows.html" class="uri">https://cmu-delphi.github.io/epipredict/articles/custom_epiworkflows.html</a></p>
-</section></section>
-<section>
-<section id="preprocessing" class="title-slide slide level1 center" data-number="2">
-<h1><span class="header-section-number">2</span> Preprocessing</h1>
-
 </section>
 <section id="examples-of-pre-processing" class="slide level2">
 <h2>Examples of pre-processing</h2>
 <div class="fragment fade-in-then-semi-out">
-<h3 id="exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</h3>
+<h3 id="exploratory-data-analysis-eda-type-stuff">Exploratory Data Analysis (EDA) type stuff</h3>
 <ol type="1">
 <li>Making locations/signals commensurate (scaling)</li>
 <li>Dealing with revisions</li>
@@ -315,46 +324,46 @@
 <section id="get-some-data" class="slide level2">
 <h2>Get some data</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(epidatr)</span>
-<span id="cb2-2"><a></a><span class="fu">library</span>(epiprocess)</span>
-<span id="cb2-3"><a></a><span class="fu">library</span>(epipredict)</span>
-<span id="cb2-4"><a></a></span>
-<span id="cb2-5"><a></a>cases <span class="ot">&lt;-</span> <span class="fu">pub_covidcast</span>(</span>
-<span id="cb2-6"><a></a>  <span class="at">source =</span> <span class="st">"jhu-csse"</span>,</span>
-<span id="cb2-7"><a></a>  <span class="at">signals =</span> <span class="st">"confirmed_incidence_num"</span>,</span>
-<span id="cb2-8"><a></a>  <span class="at">time_type =</span> <span class="st">"day"</span>,</span>
-<span id="cb2-9"><a></a>  <span class="at">geo_type =</span> <span class="st">"state"</span>,</span>
-<span id="cb2-10"><a></a>  <span class="at">time_values =</span> <span class="fu">epirange</span>(<span class="dv">20200401</span>, <span class="dv">20230401</span>),</span>
-<span id="cb2-11"><a></a>  <span class="at">geo_values =</span> <span class="st">"*"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-12"><a></a>  <span class="fu">select</span>(geo_value, time_value, <span class="at">cases =</span> value)</span>
-<span id="cb2-13"><a></a></span>
-<span id="cb2-14"><a></a>deaths <span class="ot">&lt;-</span> <span class="fu">pub_covidcast</span>(</span>
-<span id="cb2-15"><a></a>  <span class="at">source =</span> <span class="st">"jhu-csse"</span>,</span>
-<span id="cb2-16"><a></a>  <span class="at">signals =</span> <span class="st">"deaths_incidence_num"</span>,</span>
-<span id="cb2-17"><a></a>  <span class="at">time_type =</span> <span class="st">"day"</span>,</span>
-<span id="cb2-18"><a></a>  <span class="at">geo_type =</span> <span class="st">"state"</span>,</span>
-<span id="cb2-19"><a></a>  <span class="at">time_values =</span> <span class="fu">epirange</span>(<span class="dv">20200401</span>, <span class="dv">20230401</span>),</span>
-<span id="cb2-20"><a></a>  <span class="at">geo_values =</span> <span class="st">"*"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-21"><a></a>  <span class="fu">select</span>(geo_value, time_value, <span class="at">deaths =</span> value)</span>
-<span id="cb2-22"><a></a></span>
-<span id="cb2-23"><a></a>cases_deaths <span class="ot">&lt;-</span> <span class="fu">full_join</span>(cases, deaths, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"time_value"</span>, <span class="st">"geo_value"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb2-24"><a></a>  <span class="fu">as_epi_df</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(epidatr)</span>
+<span id="cb3-2"><a></a><span class="fu">library</span>(epiprocess)</span>
+<span id="cb3-3"><a></a><span class="fu">library</span>(epipredict)</span>
+<span id="cb3-4"><a></a></span>
+<span id="cb3-5"><a></a>cases <span class="ot">&lt;-</span> <span class="fu">pub_covidcast</span>(</span>
+<span id="cb3-6"><a></a>  <span class="at">source =</span> <span class="st">"jhu-csse"</span>,</span>
+<span id="cb3-7"><a></a>  <span class="at">signals =</span> <span class="st">"confirmed_incidence_num"</span>,</span>
+<span id="cb3-8"><a></a>  <span class="at">time_type =</span> <span class="st">"day"</span>,</span>
+<span id="cb3-9"><a></a>  <span class="at">geo_type =</span> <span class="st">"state"</span>,</span>
+<span id="cb3-10"><a></a>  <span class="at">time_values =</span> <span class="fu">epirange</span>(<span class="dv">20200401</span>, <span class="dv">20230401</span>),</span>
+<span id="cb3-11"><a></a>  <span class="at">geo_values =</span> <span class="st">"*"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-12"><a></a>  <span class="fu">select</span>(geo_value, time_value, <span class="at">cases =</span> value)</span>
+<span id="cb3-13"><a></a></span>
+<span id="cb3-14"><a></a>deaths <span class="ot">&lt;-</span> <span class="fu">pub_covidcast</span>(</span>
+<span id="cb3-15"><a></a>  <span class="at">source =</span> <span class="st">"jhu-csse"</span>,</span>
+<span id="cb3-16"><a></a>  <span class="at">signals =</span> <span class="st">"deaths_incidence_num"</span>,</span>
+<span id="cb3-17"><a></a>  <span class="at">time_type =</span> <span class="st">"day"</span>,</span>
+<span id="cb3-18"><a></a>  <span class="at">geo_type =</span> <span class="st">"state"</span>,</span>
+<span id="cb3-19"><a></a>  <span class="at">time_values =</span> <span class="fu">epirange</span>(<span class="dv">20200401</span>, <span class="dv">20230401</span>),</span>
+<span id="cb3-20"><a></a>  <span class="at">geo_values =</span> <span class="st">"*"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-21"><a></a>  <span class="fu">select</span>(geo_value, time_value, <span class="at">deaths =</span> value)</span>
+<span id="cb3-22"><a></a></span>
+<span id="cb3-23"><a></a>cases_deaths <span class="ot">&lt;-</span> <span class="fu">full_join</span>(cases, deaths, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"time_value"</span>, <span class="st">"geo_value"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb3-24"><a></a>  <span class="fu">as_epi_df</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="pre-processing-data-scaling" class="slide level2">
 <h2>Pre-processing: data scaling</h2>
 <p>Scale cases and deaths by population and multiply by 100K</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>cases_deaths <span class="ot">&lt;-</span> <span class="fu">left_join</span>(</span>
-<span id="cb3-2"><a></a>  <span class="at">x =</span> cases_deaths,</span>
-<span id="cb3-3"><a></a>  <span class="at">y =</span> state_census <span class="sc">|&gt;</span> <span class="fu">select</span>(pop, abbr),   <span class="co"># state_census is available in epipredict</span></span>
-<span id="cb3-4"><a></a>  <span class="at">by =</span> <span class="fu">join_by</span>(geo_value <span class="sc">==</span> abbr)</span>
-<span id="cb3-5"><a></a>) <span class="sc">|&gt;</span></span>
-<span id="cb3-6"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb3-7"><a></a>    <span class="at">cases =</span> cases <span class="sc">/</span> pop <span class="sc">*</span> <span class="fl">1e5</span>,</span>
-<span id="cb3-8"><a></a>    <span class="at">deaths =</span> deaths <span class="sc">/</span> pop <span class="sc">*</span> <span class="fl">1e5</span></span>
-<span id="cb3-9"><a></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb3-10"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>pop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>cases_deaths <span class="ot">&lt;-</span> <span class="fu">left_join</span>(</span>
+<span id="cb4-2"><a></a>  <span class="at">x =</span> cases_deaths,</span>
+<span id="cb4-3"><a></a>  <span class="at">y =</span> state_census <span class="sc">|&gt;</span> <span class="fu">select</span>(pop, abbr),   <span class="co"># state_census is available in epipredict</span></span>
+<span id="cb4-4"><a></a>  <span class="at">by =</span> <span class="fu">join_by</span>(geo_value <span class="sc">==</span> abbr)</span>
+<span id="cb4-5"><a></a>) <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-7"><a></a>    <span class="at">cases =</span> cases <span class="sc">/</span> pop <span class="sc">*</span> <span class="fl">1e5</span>,</span>
+<span id="cb4-8"><a></a>    <span class="at">deaths =</span> deaths <span class="sc">/</span> pop <span class="sc">*</span> <span class="fl">1e5</span></span>
+<span id="cb4-9"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb4-10"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>pop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="scaled-covid-cases-and-deaths" class="slide level2">
@@ -362,11 +371,11 @@
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>cases_deaths <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a></a>  <span class="fu">filter</span>(geo_value <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ca"</span>, <span class="st">"ma"</span>, <span class="st">"ny"</span>, <span class="st">"tx"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb4-3"><a></a>  <span class="fu">autoplot</span>(cases, deaths) <span class="sc">+</span></span>
-<span id="cb4-4"><a></a>  <span class="fu">scale_color_delphi</span>(<span class="at">name =</span> <span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb4-5"><a></a>  <span class="fu">xlab</span>(<span class="st">"Reference date"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>cases_deaths <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a></a>  <span class="fu">filter</span>(geo_value <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ca"</span>, <span class="st">"ma"</span>, <span class="st">"ny"</span>, <span class="st">"tx"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a></a>  <span class="fu">autoplot</span>(cases, deaths) <span class="sc">+</span></span>
+<span id="cb5-4"><a></a>  <span class="fu">scale_color_delphi</span>(<span class="at">name =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a></a>  <span class="fu">xlab</span>(<span class="st">"Reference date"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -375,16 +384,16 @@
 <h2>Pre-processing: smoothing</h2>
 <p>Smooth the data by computing 7-day averages of cases and deaths for each state</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>cases_deaths <span class="ot">&lt;-</span> cases_deaths <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a></a>  <span class="fu">group_by</span>(geo_value) <span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a></a>  <span class="fu">epi_slide</span>(</span>
-<span id="cb5-4"><a></a>    <span class="at">cases_7dav =</span> <span class="fu">mean</span>(cases, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb5-5"><a></a>    <span class="at">deaths_7dav =</span> <span class="fu">mean</span>(deaths, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb5-6"><a></a>    <span class="at">.window_size =</span> <span class="dv">7</span></span>
-<span id="cb5-7"><a></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb5-8"><a></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
-<span id="cb5-9"><a></a>  <span class="fu">mutate</span>(<span class="at">cases =</span> <span class="cn">NULL</span>, <span class="at">deaths =</span> <span class="cn">NULL</span>) <span class="sc">|&gt;</span></span>
-<span id="cb5-10"><a></a>  <span class="fu">rename</span>(<span class="at">cases =</span> cases_7dav, <span class="at">deaths =</span> deaths_7dav)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>cases_deaths <span class="ot">&lt;-</span> cases_deaths <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a></a>  <span class="fu">group_by</span>(geo_value) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a></a>  <span class="fu">epi_slide</span>(</span>
+<span id="cb6-4"><a></a>    <span class="at">cases_7dav =</span> <span class="fu">mean</span>(cases, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-5"><a></a>    <span class="at">deaths_7dav =</span> <span class="fu">mean</span>(deaths, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-6"><a></a>    <span class="at">.window_size =</span> <span class="dv">7</span></span>
+<span id="cb6-7"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-8"><a></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-9"><a></a>  <span class="fu">mutate</span>(<span class="at">cases =</span> <span class="cn">NULL</span>, <span class="at">deaths =</span> <span class="cn">NULL</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-10"><a></a>  <span class="fu">rename</span>(<span class="at">cases =</span> cases_7dav, <span class="at">deaths =</span> deaths_7dav)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="scaled-and-smoothed-covid-cases-deaths" class="slide level2">
@@ -392,11 +401,11 @@
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>cases_deaths <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a></a>  <span class="fu">filter</span>(geo_value <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ca"</span>, <span class="st">"ma"</span>, <span class="st">"ny"</span>, <span class="st">"tx"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a></a>  <span class="fu">autoplot</span>(cases, deaths)  <span class="sc">+</span></span>
-<span id="cb6-4"><a></a>  <span class="fu">scale_color_delphi</span>(<span class="at">name =</span> <span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb6-5"><a></a>  <span class="fu">xlab</span>(<span class="st">"Reference date"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>cases_deaths <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a></a>  <span class="fu">filter</span>(geo_value <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ca"</span>, <span class="st">"ma"</span>, <span class="st">"ny"</span>, <span class="st">"tx"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a></a>  <span class="fu">autoplot</span>(cases, deaths)  <span class="sc">+</span></span>
+<span id="cb7-4"><a></a>  <span class="fu">scale_color_delphi</span>(<span class="at">name =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a></a>  <span class="fu">xlab</span>(<span class="st">"Reference date"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -406,20 +415,15 @@
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>deaths_outlr <span class="ot">&lt;-</span> cases_deaths <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a></a>  <span class="fu">group_by</span>(geo_value) <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a></a>  <span class="fu">mutate</span>(<span class="at">outlr =</span> <span class="fu">detect_outlr_rm</span>(time_value, deaths, <span class="at">detect_negatives =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb7-4"><a></a>  <span class="fu">unnest</span>(outlr) <span class="sc">|&gt;</span></span>
-<span id="cb7-5"><a></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>deaths_outlr <span class="ot">&lt;-</span> cases_deaths <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a></a>  <span class="fu">group_by</span>(geo_value) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a></a>  <span class="fu">mutate</span>(<span class="at">outlr =</span> <span class="fu">detect_outlr_rm</span>(time_value, deaths, <span class="at">detect_negatives =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a></a>  <span class="fu">unnest</span>(outlr) <span class="sc">|&gt;</span></span>
+<span id="cb8-5"><a></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
-<img data-src="day2-afternoon_files/figure-revealjs/outliers-fig-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section></section>
-<section>
-<section id="basic-usage-of-arx_forecaster" class="title-slide slide level1 center" data-number="3">
-<h1><span class="header-section-number">3</span> Basic Usage of <code>arx_forecaster</code></h1>
-
-</section>
+<img data-src="day2-afternoon_files/figure-revealjs/outliers-fig-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="fit-arx_forecaster-on-training-set" class="slide level2">
 <h2>Fit <code>arx_forecaster</code> on training set</h2>
 <ul>
@@ -427,19 +431,19 @@
 <li><p>Using <code>{epipredict}</code></p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="|7-14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># split into train and test</span></span>
-<span id="cb8-2"><a></a>t0_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">'2021-04-01'</span>)</span>
-<span id="cb8-3"><a></a>train <span class="ot">&lt;-</span> cases_deaths <span class="sc">|&gt;</span> <span class="fu">filter</span>(time_value <span class="sc">&lt;=</span> t0_date)</span>
-<span id="cb8-4"><a></a>test <span class="ot">&lt;-</span> cases_deaths <span class="sc">|&gt;</span> <span class="fu">filter</span>(time_value <span class="sc">&gt;</span> t0_date)</span>
-<span id="cb8-5"><a></a></span>
-<span id="cb8-6"><a></a><span class="co"># fit ARX</span></span>
-<span id="cb8-7"><a></a>epi_arx <span class="ot">&lt;-</span> <span class="fu">arx_forecaster</span>(</span>
-<span id="cb8-8"><a></a>  <span class="at">epi_data =</span> train <span class="sc">|&gt;</span> <span class="fu">as_epi_df</span>(),</span>
-<span id="cb8-9"><a></a>  <span class="at">outcome =</span> <span class="st">"deaths"</span>,</span>
-<span id="cb8-10"><a></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"deaths"</span>),</span>
-<span id="cb8-11"><a></a>  <span class="at">trainer =</span> <span class="fu">quantile_reg</span>(),</span>
-<span id="cb8-12"><a></a>  <span class="at">args_list =</span> <span class="fu">arx_args_list</span>(<span class="at">lags =</span> <span class="dv">0</span>, <span class="at">ahead =</span> <span class="dv">28</span>)</span>
-<span id="cb8-13"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="|7-14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># split into train and test</span></span>
+<span id="cb9-2"><a></a>t0_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">'2021-04-01'</span>)</span>
+<span id="cb9-3"><a></a>train <span class="ot">&lt;-</span> cases_deaths <span class="sc">|&gt;</span> <span class="fu">filter</span>(time_value <span class="sc">&lt;=</span> t0_date)</span>
+<span id="cb9-4"><a></a>test <span class="ot">&lt;-</span> cases_deaths <span class="sc">|&gt;</span> <span class="fu">filter</span>(time_value <span class="sc">&gt;</span> t0_date)</span>
+<span id="cb9-5"><a></a></span>
+<span id="cb9-6"><a></a><span class="co"># fit ARX</span></span>
+<span id="cb9-7"><a></a>epi_arx <span class="ot">&lt;-</span> <span class="fu">arx_forecaster</span>(</span>
+<span id="cb9-8"><a></a>  <span class="at">epi_data =</span> train <span class="sc">|&gt;</span> <span class="fu">as_epi_df</span>(),</span>
+<span id="cb9-9"><a></a>  <span class="at">outcome =</span> <span class="st">"deaths"</span>,</span>
+<span id="cb9-10"><a></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"deaths"</span>),</span>
+<span id="cb9-11"><a></a>  <span class="at">trainer =</span> <span class="fu">quantile_reg</span>(),</span>
+<span id="cb9-12"><a></a>  <span class="at">args_list =</span> <span class="fu">arx_args_list</span>(<span class="at">lags =</span> <span class="dv">0</span>, <span class="at">ahead =</span> <span class="dv">28</span>)</span>
+<span id="cb9-13"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="arx_forecaster-output" class="slide level2 smaller">
@@ -448,7 +452,7 @@
 <li>A <span class="primary">forecast</span> (point prediction + quantiles) for 28 days after the last available time value in the data (<code>$predictions</code>).</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>epi_arx<span class="sc">$</span>predictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>epi_arx<span class="sc">$</span>predictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 56 × 5
    geo_value  .pred .pred_distn forecast_date target_date
@@ -471,7 +475,7 @@
 </ul>
 <div class="scrollable-output">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>epi_arx<span class="sc">$</span>epi_workflow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>epi_arx<span class="sc">$</span>epi_workflow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code></code></pre>
 </div>
@@ -597,10 +601,10 @@ Degrees of freedom: 18928 total; 18925 residual</code></pre>
 <h2>Extract predictions</h2>
 <p><code>.pred_distin</code> is a distribution, which we can extract the distribution into a “long” <code>epi_df</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>epi_arx<span class="sc">$</span>predictions <span class="sc">|&gt;</span></span>
-<span id="cb42-2"><a></a>  <span class="fu">pivot_quantiles_longer</span>(.pred_distn) <span class="sc">|&gt;</span></span>
-<span id="cb42-3"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>.pred) <span class="sc">|&gt;</span></span>
-<span id="cb42-4"><a></a>  <span class="fu">filter</span>(geo_value <span class="sc">==</span> <span class="st">"ca"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>epi_arx<span class="sc">$</span>predictions <span class="sc">|&gt;</span></span>
+<span id="cb43-2"><a></a>  <span class="fu">pivot_quantiles_longer</span>(.pred_distn) <span class="sc">|&gt;</span></span>
+<span id="cb43-3"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>.pred) <span class="sc">|&gt;</span></span>
+<span id="cb43-4"><a></a>  <span class="fu">filter</span>(geo_value <span class="sc">==</span> <span class="st">"ca"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
   geo_value forecast_date target_date .pred_distn_value .pred_distn_quantile_l…¹
@@ -613,9 +617,9 @@ Degrees of freedom: 18928 total; 18925 residual</code></pre>
 </div>
 <p>or into a “wide” <code>epi_df</code></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>epi_arx<span class="sc">$</span>predictions <span class="sc">|&gt;</span></span>
-<span id="cb44-2"><a></a>  <span class="fu">pivot_quantiles_wider</span>(.pred_distn) <span class="sc">|&gt;</span></span>
-<span id="cb44-3"><a></a>  <span class="fu">filter</span>(geo_value <span class="sc">==</span> <span class="st">"ca"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>epi_arx<span class="sc">$</span>predictions <span class="sc">|&gt;</span></span>
+<span id="cb45-2"><a></a>  <span class="fu">pivot_quantiles_wider</span>(.pred_distn) <span class="sc">|&gt;</span></span>
+<span id="cb45-3"><a></a>  <span class="fu">filter</span>(geo_value <span class="sc">==</span> <span class="st">"ca"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 7
   geo_value .pred forecast_date target_date  `0.1` `0.5` `0.9`
@@ -627,7 +631,7 @@ Degrees of freedom: 18928 total; 18925 residual</code></pre>
 <section id="arx_forecaster-output-1" class="slide level2">
 <h2><code>arx_forecaster</code> output</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a>epi_arx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>epi_arx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>══ A basic forecaster of type ARX Forecaster ═══════════════════════════════════</code></pre>
 </div>
@@ -692,23 +696,23 @@ Degrees of freedom: 18928 total; 18925 residual</code></pre>
 <section id="predict-with-arx-re-fitting-on-trailing-window" class="slide level2">
 <h2>Predict with ARX (re-fitting on trailing window)</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb64" data-code-line-numbers="8-13|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a></a>h <span class="ot">&lt;-</span> <span class="dv">28</span>         <span class="co"># horizon</span></span>
-<span id="cb64-2"><a></a></span>
-<span id="cb64-3"><a></a><span class="co"># Specify the forecast dates</span></span>
-<span id="cb64-4"><a></a>fc_time_values <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> t0_date, <span class="at">to =</span> <span class="fu">as.Date</span>(<span class="st">"2023-02-09"</span>), <span class="at">by =</span> <span class="st">"1 week"</span>)</span>
-<span id="cb64-5"><a></a></span>
-<span id="cb64-6"><a></a><span class="co"># Slide the arx_forecaster over the epi_archive</span></span>
-<span id="cb64-7"><a></a>pred_arx <span class="ot">&lt;-</span> covid_archive <span class="sc">|&gt;</span> <span class="fu">epix_slide</span>(</span>
-<span id="cb64-8"><a></a>  <span class="sc">~</span> <span class="fu">arx_forecaster</span>(<span class="at">epi_data =</span> .x,</span>
-<span id="cb64-9"><a></a>                   <span class="at">outcome =</span> <span class="st">"deaths"</span>,</span>
-<span id="cb64-10"><a></a>                   <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"deaths"</span>),</span>
-<span id="cb64-11"><a></a>                   <span class="at">trainer =</span> <span class="fu">quantile_reg</span>(),</span>
-<span id="cb64-12"><a></a>                   <span class="at">args_list =</span> <span class="fu">arx_args_list</span>(<span class="at">lags =</span> <span class="dv">0</span>, <span class="at">ahead =</span> h)</span>
-<span id="cb64-13"><a></a>  )<span class="sc">$</span>predictions <span class="sc">|&gt;</span></span>
-<span id="cb64-14"><a></a>    <span class="fu">pivot_quantiles_wider</span>(.pred_distn),</span>
-<span id="cb64-15"><a></a>  <span class="at">.before =</span> <span class="cn">Inf</span>,</span>
-<span id="cb64-16"><a></a>  <span class="at">.versions =</span> fc_time_values</span>
-<span id="cb64-17"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65" data-code-line-numbers="8-13|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a></a>h <span class="ot">&lt;-</span> <span class="dv">28</span>         <span class="co"># horizon</span></span>
+<span id="cb65-2"><a></a></span>
+<span id="cb65-3"><a></a><span class="co"># Specify the forecast dates</span></span>
+<span id="cb65-4"><a></a>fc_time_values <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> t0_date, <span class="at">to =</span> <span class="fu">as.Date</span>(<span class="st">"2023-02-09"</span>), <span class="at">by =</span> <span class="st">"1 week"</span>)</span>
+<span id="cb65-5"><a></a></span>
+<span id="cb65-6"><a></a><span class="co"># Slide the arx_forecaster over the epi_archive</span></span>
+<span id="cb65-7"><a></a>pred_arx <span class="ot">&lt;-</span> covid_archive <span class="sc">|&gt;</span> <span class="fu">epix_slide</span>(</span>
+<span id="cb65-8"><a></a>  <span class="sc">~</span> <span class="fu">arx_forecaster</span>(<span class="at">epi_data =</span> .x,</span>
+<span id="cb65-9"><a></a>                   <span class="at">outcome =</span> <span class="st">"deaths"</span>,</span>
+<span id="cb65-10"><a></a>                   <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"deaths"</span>),</span>
+<span id="cb65-11"><a></a>                   <span class="at">trainer =</span> <span class="fu">quantile_reg</span>(),</span>
+<span id="cb65-12"><a></a>                   <span class="at">args_list =</span> <span class="fu">arx_args_list</span>(<span class="at">lags =</span> <span class="dv">0</span>, <span class="at">ahead =</span> h)</span>
+<span id="cb65-13"><a></a>  )<span class="sc">$</span>predictions <span class="sc">|&gt;</span></span>
+<span id="cb65-14"><a></a>    <span class="fu">pivot_quantiles_wider</span>(.pred_distn),</span>
+<span id="cb65-15"><a></a>  <span class="at">.before =</span> <span class="cn">Inf</span>,</span>
+<span id="cb65-16"><a></a>  <span class="at">.versions =</span> fc_time_values</span>
+<span id="cb65-17"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <p>Not a great way to read the output, but the new column is <code>version</code>, which <code>forecast_date</code> is always before.</p>
@@ -728,7 +732,7 @@ Degrees of freedom: 18928 total; 18925 residual</code></pre>
 <h2>Predict with ARX (re-fitting on trailing window)</h2>
 <div class="large-output">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a></a>pred_arx <span class="sc">|&gt;</span> <span class="fu">filter</span>(geo_value <span class="sc">==</span> <span class="st">"ca"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a>pred_arx <span class="sc">|&gt;</span> <span class="fu">filter</span>(geo_value <span class="sc">==</span> <span class="st">"ca"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 98 × 8
    version    geo_value  .pred forecast_date target_date  `0.1`  `0.5` `0.9`
@@ -773,13 +777,13 @@ Degrees of freedom: 18928 total; 18925 residual</code></pre>
 <section id="customizing-arx_forecaster" class="slide level2">
 <h2>Customizing <code>arx_forecaster()</code></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb67" data-code-line-numbers="|4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a></a><span class="fu">arx_forecaster</span>(</span>
-<span id="cb67-2"><a></a>  <span class="at">epi_data =</span> train,</span>
-<span id="cb67-3"><a></a>  <span class="at">outcome =</span> <span class="st">"deaths"</span>,</span>
-<span id="cb67-4"><a></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"deaths"</span>),</span>
-<span id="cb67-5"><a></a>  <span class="at">trainer =</span> <span class="fu">quantile_reg</span>(),</span>
-<span id="cb67-6"><a></a>  <span class="at">args_list =</span> <span class="fu">arx_args_list</span>(<span class="at">lags =</span> <span class="dv">0</span>, <span class="at">ahead =</span> <span class="dv">28</span>)</span>
-<span id="cb67-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68" data-code-line-numbers="|4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a></a><span class="fu">arx_forecaster</span>(</span>
+<span id="cb68-2"><a></a>  <span class="at">epi_data =</span> train,</span>
+<span id="cb68-3"><a></a>  <span class="at">outcome =</span> <span class="st">"deaths"</span>,</span>
+<span id="cb68-4"><a></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"deaths"</span>),</span>
+<span id="cb68-5"><a></a>  <span class="at">trainer =</span> <span class="fu">quantile_reg</span>(),</span>
+<span id="cb68-6"><a></a>  <span class="at">args_list =</span> <span class="fu">arx_args_list</span>(<span class="at">lags =</span> <span class="dv">0</span>, <span class="at">ahead =</span> <span class="dv">28</span>)</span>
+<span id="cb68-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment fade-in">
 <ul>
@@ -794,35 +798,35 @@ Degrees of freedom: 18928 total; 18925 residual</code></pre>
 <section id="customizing-arx_forecaster-1" class="slide level2">
 <h2>Customizing <code>arx_forecaster()</code></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb68" data-code-line-numbers="6-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a></a><span class="fu">arx_forecaster</span>(</span>
-<span id="cb68-2"><a></a>  <span class="at">epi_data =</span> train,</span>
-<span id="cb68-3"><a></a>  <span class="at">outcome =</span> <span class="st">"deaths"</span>,</span>
-<span id="cb68-4"><a></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"deaths"</span>),</span>
-<span id="cb68-5"><a></a>  <span class="at">trainer =</span> <span class="fu">quantile_reg</span>(),</span>
-<span id="cb68-6"><a></a>  <span class="at">args_list =</span> <span class="fu">arx_args_list</span>(<span class="at">lags =</span> <span class="dv">0</span>, <span class="at">ahead =</span> <span class="dv">28</span>)</span>
-<span id="cb68-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69" data-code-line-numbers="6-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a></a><span class="fu">arx_forecaster</span>(</span>
+<span id="cb69-2"><a></a>  <span class="at">epi_data =</span> train,</span>
+<span id="cb69-3"><a></a>  <span class="at">outcome =</span> <span class="st">"deaths"</span>,</span>
+<span id="cb69-4"><a></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"deaths"</span>),</span>
+<span id="cb69-5"><a></a>  <span class="at">trainer =</span> <span class="fu">quantile_reg</span>(),</span>
+<span id="cb69-6"><a></a>  <span class="at">args_list =</span> <span class="fu">arx_args_list</span>(<span class="at">lags =</span> <span class="dv">0</span>, <span class="at">ahead =</span> <span class="dv">28</span>)</span>
+<span id="cb69-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Modify <code>arx_args_list</code> to change lags, horizon, quantile levels, latency adjustment, …</li>
 </ul>
 <div class="fragment fade-in">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a></a><span class="fu">arx_args_list</span>(</span>
-<span id="cb69-2"><a></a>  <span class="at">lags =</span> <span class="fu">c</span>(<span class="dv">0</span>L, <span class="dv">7</span>L, <span class="dv">14</span>L),</span>
-<span id="cb69-3"><a></a>  <span class="at">ahead =</span> <span class="dv">7</span>L,</span>
-<span id="cb69-4"><a></a>  <span class="at">n_training =</span> <span class="cn">Inf</span>,</span>
-<span id="cb69-5"><a></a>  <span class="at">forecast_date =</span> <span class="cn">NULL</span>,</span>
-<span id="cb69-6"><a></a>  <span class="at">target_date =</span> <span class="cn">NULL</span>,</span>
-<span id="cb69-7"><a></a>  <span class="at">adjust_latency =</span> <span class="fu">c</span>(<span class="st">"none"</span>, <span class="st">"extend_ahead"</span>, <span class="st">"extend_lags"</span>, <span class="st">"locf"</span>),</span>
-<span id="cb69-8"><a></a>  <span class="at">warn_latency =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb69-9"><a></a>  <span class="at">quantile_levels =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>),</span>
-<span id="cb69-10"><a></a>  <span class="at">symmetrize =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb69-11"><a></a>  <span class="at">nonneg =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb69-12"><a></a>  <span class="at">quantile_by_key =</span> <span class="fu">character</span>(<span class="dv">0</span>L),</span>
-<span id="cb69-13"><a></a>  <span class="at">check_enough_data_n =</span> <span class="cn">NULL</span>,</span>
-<span id="cb69-14"><a></a>  <span class="at">check_enough_data_epi_keys =</span> <span class="cn">NULL</span>,</span>
-<span id="cb69-15"><a></a>  ...</span>
-<span id="cb69-16"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a><span class="fu">arx_args_list</span>(</span>
+<span id="cb70-2"><a></a>  <span class="at">lags =</span> <span class="fu">c</span>(<span class="dv">0</span>L, <span class="dv">7</span>L, <span class="dv">14</span>L),</span>
+<span id="cb70-3"><a></a>  <span class="at">ahead =</span> <span class="dv">7</span>L,</span>
+<span id="cb70-4"><a></a>  <span class="at">n_training =</span> <span class="cn">Inf</span>,</span>
+<span id="cb70-5"><a></a>  <span class="at">forecast_date =</span> <span class="cn">NULL</span>,</span>
+<span id="cb70-6"><a></a>  <span class="at">target_date =</span> <span class="cn">NULL</span>,</span>
+<span id="cb70-7"><a></a>  <span class="at">adjust_latency =</span> <span class="fu">c</span>(<span class="st">"none"</span>, <span class="st">"extend_ahead"</span>, <span class="st">"extend_lags"</span>, <span class="st">"locf"</span>),</span>
+<span id="cb70-8"><a></a>  <span class="at">warn_latency =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb70-9"><a></a>  <span class="at">quantile_levels =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>),</span>
+<span id="cb70-10"><a></a>  <span class="at">symmetrize =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb70-11"><a></a>  <span class="at">nonneg =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb70-12"><a></a>  <span class="at">quantile_by_key =</span> <span class="fu">character</span>(<span class="dv">0</span>L),</span>
+<span id="cb70-13"><a></a>  <span class="at">check_enough_data_n =</span> <span class="cn">NULL</span>,</span>
+<span id="cb70-14"><a></a>  <span class="at">check_enough_data_epi_keys =</span> <span class="cn">NULL</span>,</span>
+<span id="cb70-15"><a></a>  ...</span>
+<span id="cb70-16"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -830,46 +834,40 @@ Degrees of freedom: 18928 total; 18925 residual</code></pre>
 <h2>Customizing <code>arx_forecaster</code></h2>
 <h3 id="change-predictors-doctor-visits-instead-of-cases">Change predictors: doctor visits instead of cases</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a>dv_archive <span class="ot">&lt;-</span> <span class="fu">pub_covidcast</span>(</span>
-<span id="cb70-2"><a></a>  <span class="at">source =</span> <span class="st">"doctor-visits"</span>,</span>
-<span id="cb70-3"><a></a>  <span class="at">signals =</span> <span class="st">"smoothed_adj_cli"</span>,</span>
-<span id="cb70-4"><a></a>  <span class="at">time_type =</span> <span class="st">"day"</span>,</span>
-<span id="cb70-5"><a></a>  <span class="at">geo_type =</span> <span class="st">"state"</span>,</span>
-<span id="cb70-6"><a></a>  <span class="at">time_values =</span> <span class="fu">epirange</span>(<span class="dv">20200401</span>, <span class="dv">20230401</span>),</span>
-<span id="cb70-7"><a></a>  <span class="at">geo_values =</span> <span class="st">"*"</span>,</span>
-<span id="cb70-8"><a></a>  <span class="at">issues =</span> <span class="fu">epirange</span>(<span class="dv">20200401</span>, <span class="dv">20230401</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb70-9"><a></a>  <span class="fu">select</span>(geo_value, time_value, <span class="at">version =</span> issue, <span class="at">doctor_visits =</span> value) <span class="sc">|&gt;</span></span>
-<span id="cb70-10"><a></a>  <span class="fu">arrange</span>(geo_value, time_value) <span class="sc">|&gt;</span></span>
-<span id="cb70-11"><a></a>  <span class="fu">as_epi_archive</span>(<span class="at">compactify =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a></a>dv_archive <span class="ot">&lt;-</span> <span class="fu">pub_covidcast</span>(</span>
+<span id="cb71-2"><a></a>  <span class="at">source =</span> <span class="st">"doctor-visits"</span>,</span>
+<span id="cb71-3"><a></a>  <span class="at">signals =</span> <span class="st">"smoothed_adj_cli"</span>,</span>
+<span id="cb71-4"><a></a>  <span class="at">time_type =</span> <span class="st">"day"</span>,</span>
+<span id="cb71-5"><a></a>  <span class="at">geo_type =</span> <span class="st">"state"</span>,</span>
+<span id="cb71-6"><a></a>  <span class="at">time_values =</span> <span class="fu">epirange</span>(<span class="dv">20200401</span>, <span class="dv">20230401</span>),</span>
+<span id="cb71-7"><a></a>  <span class="at">geo_values =</span> <span class="st">"*"</span>,</span>
+<span id="cb71-8"><a></a>  <span class="at">issues =</span> <span class="fu">epirange</span>(<span class="dv">20200401</span>, <span class="dv">20230401</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb71-9"><a></a>  <span class="fu">select</span>(geo_value, time_value, <span class="at">version =</span> issue, <span class="at">doctor_visits =</span> value) <span class="sc">|&gt;</span></span>
+<span id="cb71-10"><a></a>  <span class="fu">arrange</span>(geo_value, time_value) <span class="sc">|&gt;</span></span>
+<span id="cb71-11"><a></a>  <span class="fu">as_epi_archive</span>(<span class="at">compactify =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="customizing-arx_forecaster-3" class="slide level2">
 <h2>Customizing <code>arx_forecaster</code></h2>
 <h3 id="change-predictors-doctor-visits-instead-of-cases-1">Change predictors: doctor visits instead of cases</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb71" data-code-line-numbers="4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a></a>pred_arx_hosp <span class="ot">&lt;-</span> covid_archive_dv <span class="sc">|&gt;</span> <span class="fu">epix_slide</span>(</span>
-<span id="cb71-2"><a></a>  <span class="sc">~</span> <span class="fu">arx_forecaster</span>(<span class="at">epi_data =</span> .x,</span>
-<span id="cb71-3"><a></a>                   <span class="at">outcome =</span> <span class="st">"deaths"</span>,</span>
-<span id="cb71-4"><a></a>                   <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"deaths"</span>, <span class="st">"doctor_visits"</span>),</span>
-<span id="cb71-5"><a></a>                   <span class="at">trainer =</span> <span class="fu">quantile_reg</span>(),</span>
-<span id="cb71-6"><a></a>                   <span class="at">args_list =</span> <span class="fu">arx_args_list</span>(<span class="at">lags =</span> <span class="dv">0</span>, <span class="at">ahead =</span> <span class="dv">28</span>)</span>
-<span id="cb71-7"><a></a>  )<span class="sc">$</span>predictions <span class="sc">|&gt;</span></span>
-<span id="cb71-8"><a></a>    <span class="fu">pivot_quantiles_wider</span>(.pred_distn),</span>
-<span id="cb71-9"><a></a>  <span class="at">.before =</span> <span class="cn">Inf</span>,</span>
-<span id="cb71-10"><a></a>  <span class="at">.versions =</span> fc_time_values</span>
-<span id="cb71-11"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72" data-code-line-numbers="4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a></a>pred_arx_hosp <span class="ot">&lt;-</span> covid_archive_dv <span class="sc">|&gt;</span> <span class="fu">epix_slide</span>(</span>
+<span id="cb72-2"><a></a>  <span class="sc">~</span> <span class="fu">arx_forecaster</span>(<span class="at">epi_data =</span> .x,</span>
+<span id="cb72-3"><a></a>                   <span class="at">outcome =</span> <span class="st">"deaths"</span>,</span>
+<span id="cb72-4"><a></a>                   <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"deaths"</span>, <span class="st">"doctor_visits"</span>),</span>
+<span id="cb72-5"><a></a>                   <span class="at">trainer =</span> <span class="fu">quantile_reg</span>(),</span>
+<span id="cb72-6"><a></a>                   <span class="at">args_list =</span> <span class="fu">arx_args_list</span>(<span class="at">lags =</span> <span class="dv">0</span>, <span class="at">ahead =</span> <span class="dv">28</span>)</span>
+<span id="cb72-7"><a></a>  )<span class="sc">$</span>predictions <span class="sc">|&gt;</span></span>
+<span id="cb72-8"><a></a>    <span class="fu">pivot_quantiles_wider</span>(.pred_distn),</span>
+<span id="cb72-9"><a></a>  <span class="at">.before =</span> <span class="cn">Inf</span>,</span>
+<span id="cb72-10"><a></a>  <span class="at">.versions =</span> fc_time_values</span>
+<span id="cb72-11"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="predictions-doctor-visits-instead-of-cases-in-predictor-set" class="slide level2">
 <h2>Predictions (doctor visits instead of cases in predictor set)</h2>
 
-<img data-src="day2-afternoon_files/figure-revealjs/arx-with-dv-plot-1.svg" class="quarto-figure quarto-figure-left r-stretch"><div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>        MAE     MASE  Coverage
- 0.07889637 264.5207 0.4285714</code></pre>
-</div>
-</div>
-<p>Quite different predictions!</p>
+<img data-src="day2-afternoon_files/figure-revealjs/arx-with-dv-plot-1.svg" class="quarto-figure quarto-figure-left r-stretch"><p>Quite different predictions!</p>
 </section>
 <section id="customizing-arx_forecaster-4" class="slide level2">
 <h2>Customizing <code>arx_forecaster</code></h2>
@@ -896,14 +894,9 @@ Degrees of freedom: 18928 total; 18925 residual</code></pre>
 <h2>Predictions (more lags)</h2>
 
 <img data-src="day2-afternoon_files/figure-revealjs/arx-with-more-lags-plot-1.svg" class="quarto-figure quarto-figure-left r-stretch"><p>More isn’t always better</p>
-</section></section>
-<section>
-<section id="extending-arx_forecaster" class="title-slide slide level1 center" data-number="4">
-<h1><span class="header-section-number">4</span> Extending <code>arx_forecaster</code></h1>
-
 </section>
-<section id="arx_forecaster-for-multiple-horizons" class="slide level2">
-<h2><code>arx_forecaster</code> for multiple horizons</h2>
+<section id="customizing-arx_forecaster-5" class="slide level2">
+<h2>Customizing <code>arx_forecaster</code></h2>
 <h3 id="multiple-horizons">Multiple horizons</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb74" data-code-line-numbers="1-2,11,20-21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a></a>forecast_times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> t0_date, <span class="at">to =</span> <span class="fu">as.Date</span>(<span class="st">"2023-02-23"</span>), <span class="at">by =</span> <span class="st">"2 month"</span>)</span>
@@ -933,9 +926,10 @@ Degrees of freedom: 18928 total; 18925 residual</code></pre>
 <h2>Predictions (multiple horizons)</h2>
 
 <img data-src="day2-afternoon_files/figure-revealjs/arx-multiple-h-plot-1.svg" class="quarto-figure quarto-figure-center r-stretch"><p>Color corresponds to <code>forecast_date</code></p>
-</section>
-<section id="geo-pooling" class="slide level2">
-<h2>Geo-pooling</h2>
+</section></section>
+<section>
+<section id="geo-pooling" class="title-slide slide level1 center" data-number="3">
+<h1><span class="header-section-number">3</span> Geo-pooling</h1>
 <ul>
 <li><p>When we observe data over time from <span class="primary">multiple locations</span> (e.g.&nbsp;states or counties), we could:</p>
 <ul>
@@ -943,11 +937,10 @@ Degrees of freedom: 18928 total; 18925 residual</code></pre>
 <li>Fit one model using all locations together at each time point (<span class="primary">geo-pooling</span>).</li>
 </ul></li>
 </ul>
-<p>Epipredict geo-pools</p>
+<p>Epipredict geo-pools, which gives the results so far</p>
 </section>
 <section id="predictions-with-geo-pooling-reprise" class="slide level2">
 <h2>Predictions with geo-pooling (reprise)</h2>
-<p>We’ve been geo-pooling in the previous examples, here’s the version using doctor’s visits.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a>pred_arx_hosp <span class="ot">&lt;-</span> covid_archive_dv <span class="sc">|&gt;</span> <span class="fu">epix_slide</span>(</span>
 <span id="cb75-2"><a></a>  <span class="sc">~</span> <span class="fu">arx_forecaster</span>(<span class="at">epi_data =</span> .x,</span>
@@ -961,6 +954,7 @@ Degrees of freedom: 18928 total; 18925 residual</code></pre>
 <span id="cb75-10"><a></a>  <span class="at">.versions =</span> fc_time_values</span>
 <span id="cb75-11"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Weren’t just fitting <code>ca</code>, fitting all geographies.</p>
 </section>
 <section id="predictions-geo-pooling-h28" class="slide level2">
 <h2>Predictions (geo-pooling, <span class="math inline">\(h=28\)</span>)</h2>
@@ -978,7 +972,7 @@ TX 0.1601115 343.0498 0.8350515</code></pre>
 <section id="predict-without-geo-pooling" class="slide level2">
 <h2>Predict without geo-pooling</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb77" data-code-line-numbers="4,23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a></a>pred_arx_no_geo_pool <span class="ot">&lt;-</span> <span class="cf">function</span>(archive, <span class="at">ahead =</span> <span class="dv">28</span>, <span class="at">lags =</span> <span class="dv">0</span>){</span>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a></a>pred_arx_no_geo_pool <span class="ot">&lt;-</span> <span class="cf">function</span>(archive, <span class="at">ahead =</span> <span class="dv">28</span>, <span class="at">lags =</span> <span class="dv">0</span>){</span>
 <span id="cb77-2"><a></a>  archive <span class="sc">|&gt;</span></span>
 <span id="cb77-3"><a></a>    <span class="fu">epix_slide</span>(</span>
 <span id="cb77-4"><a></a>      <span class="sc">~</span> <span class="fu">group_by</span>(.x, geo_value) <span class="sc">|&gt;</span></span>
@@ -1029,19 +1023,14 @@ TX 0.14144058 306.2029 0.4285714</code></pre>
 </section>
 <section id="predictions-geo-pooling-h-7" class="slide level2">
 <h2>Predictions (geo-pooling, <span class="math inline">\(h = 7\)</span>)</h2>
-<div class="cell" data-layout-align="center">
 
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
-</div>
-</div>
 <img data-src="day2-afternoon_files/figure-revealjs/arx-geo-pooling-plot-h7-1.svg" class="quarto-figure quarto-figure-center r-stretch"><div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
 <pre><code>          MAE     MASE  Coverage
-CA 0.04890282 162.2161 0.9693878
-MA 0.05944117 150.5289 0.8865979
-NY 0.05871580 144.5808 0.9072165
-TX 0.07368293 155.8373 0.8969072</code></pre>
+CA 0.09676644 320.9851 0.9081633
+MA 0.09278403 234.9664 0.8350515
+NY 0.09029822 222.3488 0.9381443
+TX 0.11307616 239.1528 0.8659794</code></pre>
 </div>
 </div>
 </section>
@@ -1061,17 +1050,159 @@ TX 0.05756194 122.0824 0.7040816</code></pre>
 
 
 
+</section>
+<section>
 
+
+<section id="under-the-hood-of-arx_forecaster" class="slide level2">
+<h2>Under the hood of <code data-visibility="hidden">arx_forecaster()</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb84" data-code-line-numbers="1-6|8-9|11-16|18-20|21-29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a></a><span class="co"># A preprocessing "recipe" that turns raw data into features / response</span></span>
+<span id="cb84-2"><a></a>rec <span class="ot">&lt;-</span> <span class="fu">epi_recipe</span>(ca) <span class="sc">|&gt;</span></span>
+<span id="cb84-3"><a></a>  <span class="fu">step_epi_lag</span>(cases, <span class="at">lag =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">14</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb84-4"><a></a>  <span class="fu">step_epi_lag</span>(deaths, <span class="at">lag =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">14</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb84-5"><a></a>  <span class="fu">step_epi_ahead</span>(deaths, <span class="at">ahead =</span> <span class="dv">28</span>) <span class="sc">|&gt;</span></span>
+<span id="cb84-6"><a></a>  <span class="fu">step_epi_naomit</span>()</span>
+<span id="cb84-7"><a></a></span>
+<span id="cb84-8"><a></a><span class="co"># Training engine</span></span>
+<span id="cb84-9"><a></a>eng <span class="ot">&lt;-</span> <span class="fu">quantile_reg</span>(<span class="at">quantile_levels =</span> <span class="fu">c</span>(.<span class="dv">1</span>, .<span class="dv">5</span>, .<span class="dv">9</span>))</span>
+<span id="cb84-10"><a></a></span>
+<span id="cb84-11"><a></a><span class="co"># A post-processing routine describing what to do to the predictions</span></span>
+<span id="cb84-12"><a></a>frost <span class="ot">&lt;-</span> <span class="fu">frosting</span>() <span class="sc">|&gt;</span></span>
+<span id="cb84-13"><a></a>  <span class="fu">layer_predict</span>() <span class="sc">|&gt;</span></span>
+<span id="cb84-14"><a></a>  <span class="fu">layer_threshold</span>(.pred, <span class="at">lower =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> <span class="co"># predictions / intervals should be non-negative</span></span>
+<span id="cb84-15"><a></a>  <span class="fu">layer_add_target_date</span>() <span class="sc">|&gt;</span></span>
+<span id="cb84-16"><a></a>  <span class="fu">layer_add_forecast_date</span>()</span>
+<span id="cb84-17"><a></a></span>
+<span id="cb84-18"><a></a><span class="co"># Bundle up the preprocessor, training engine, and postprocessor</span></span>
+<span id="cb84-19"><a></a><span class="co"># We use quantile regression</span></span>
+<span id="cb84-20"><a></a>ewf <span class="ot">&lt;-</span> <span class="fu">epi_workflow</span>(rec, eng, frost)</span>
+<span id="cb84-21"><a></a></span>
+<span id="cb84-22"><a></a><span class="co"># Fit it to data (we could fit this to ANY data that has the same format)</span></span>
+<span id="cb84-23"><a></a>trained_ewf <span class="ot">&lt;-</span> <span class="fu">fit</span>(ewf, <span class="at">data =</span> ca)</span>
+<span id="cb84-24"><a></a></span>
+<span id="cb84-25"><a></a><span class="co"># Make predictions from the end of our training data</span></span>
+<span id="cb84-26"><a></a><span class="co"># we could have made predictions using the same model on ANY test data</span></span>
+<span id="cb84-27"><a></a>fcasts <span class="ot">&lt;-</span> <span class="fu">forecast</span>(trained_ewf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+
+
+
+
+
+<section id="almost-our-production-forecaster-helper-functions" class="slide level2">
+<h2>Almost our production forecaster (helper functions)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a></a>roll_modular_multivec <span class="ot">&lt;-</span> <span class="cf">function</span>(col, index, window_size, <span class="at">modulus =</span> <span class="dv">53</span>) {</span>
+<span id="cb86-2"><a></a>  tib <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">col =</span> col, <span class="at">index =</span> index) <span class="sc">|&gt;</span></span>
+<span id="cb86-3"><a></a>    <span class="fu">arrange</span>(index) <span class="sc">|&gt;</span></span>
+<span id="cb86-4"><a></a>    tidyr<span class="sc">::</span><span class="fu">nest</span>(<span class="at">data =</span> col, <span class="at">.by =</span> index)</span>
+<span id="cb86-5"><a></a>  out <span class="ot">&lt;-</span> <span class="fu">double</span>(<span class="fu">nrow</span>(tib))</span>
+<span id="cb86-6"><a></a>  <span class="cf">for</span> (iter <span class="cf">in</span> <span class="fu">seq_along</span>(out)) {</span>
+<span id="cb86-7"><a></a>    entries <span class="ot">&lt;-</span> (iter <span class="sc">-</span> window_size)<span class="sc">:</span>(iter <span class="sc">+</span> window_size) <span class="sc">%%</span> modulus</span>
+<span id="cb86-8"><a></a>    entries[entries <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> modulus</span>
+<span id="cb86-9"><a></a>    out[iter] <span class="ot">&lt;-</span> <span class="fu">with</span>(</span>
+<span id="cb86-10"><a></a>      purrr<span class="sc">::</span><span class="fu">list_rbind</span>(tib<span class="sc">$</span>data[entries]),</span>
+<span id="cb86-11"><a></a>      <span class="fu">median</span>(col, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb86-12"><a></a>    )</span>
+<span id="cb86-13"><a></a>  }</span>
+<span id="cb86-14"><a></a>  <span class="fu">tibble</span>(<span class="at">index =</span> <span class="fu">unique</span>(tib<span class="sc">$</span>index), <span class="at">climate_pred =</span> out)</span>
+<span id="cb86-15"><a></a>}</span>
+<span id="cb86-16"><a></a></span>
+<span id="cb86-17"><a></a>climatological_feature <span class="ot">&lt;-</span> <span class="cf">function</span>(epi_data, <span class="at">window_size =</span> <span class="dv">3</span>) {</span>
+<span id="cb86-18"><a></a>  epi_data <span class="sc">|&gt;</span></span>
+<span id="cb86-19"><a></a>    <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2020/21"</span>, season <span class="sc">!=</span> <span class="st">"2021/22"</span>) <span class="sc">|&gt;</span> <span class="co"># drop weird years)</span></span>
+<span id="cb86-20"><a></a>    <span class="fu">select</span>(nhsn, epiweek, geo_value) <span class="sc">|&gt;</span></span>
+<span id="cb86-21"><a></a>    <span class="fu">reframe</span>(<span class="fu">roll_modular_multivec</span>(nhsn, epiweek, window_size, <span class="dv">53</span>), <span class="at">.by =</span> geo_value) <span class="sc">|&gt;</span></span>
+<span id="cb86-22"><a></a>    <span class="fu">mutate</span>(<span class="at">climate_pred =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, climate_pred)) <span class="sc">|&gt;</span></span>
+<span id="cb86-23"><a></a>    <span class="fu">rename</span>(<span class="at">epiweek =</span> index)</span>
+<span id="cb86-24"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="almost-our-production-forecaster-data-munging" class="slide level2">
+<h2>Almost our production forecaster (data munging)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a></a>climate <span class="ot">&lt;-</span> <span class="fu">climatological_feature</span>(climate_data <span class="sc">|&gt;</span> <span class="fu">select</span>(nhsn, epiweek, season, geo_value))</span>
+<span id="cb87-2"><a></a>nssp <span class="ot">&lt;-</span> <span class="fu">pub_covidcast</span>( <span class="co"># time_value is first day of the epiweek</span></span>
+<span id="cb87-3"><a></a>  <span class="at">source =</span> <span class="st">"nssp"</span>,</span>
+<span id="cb87-4"><a></a>  <span class="at">signal =</span> <span class="st">"pct_ed_visits_influenza"</span>,</span>
+<span id="cb87-5"><a></a>  <span class="at">time_type =</span> <span class="st">"week"</span>,</span>
+<span id="cb87-6"><a></a>  <span class="at">geo_type =</span> <span class="st">"state"</span>,</span>
+<span id="cb87-7"><a></a>  <span class="at">geo_values =</span> <span class="st">"*"</span></span>
+<span id="cb87-8"><a></a>) <span class="sc">|&gt;</span></span>
+<span id="cb87-9"><a></a>  <span class="fu">select</span>(geo_value, time_value, <span class="at">nssp =</span> value)</span>
+<span id="cb87-10"><a></a></span>
+<span id="cb87-11"><a></a>flu_data <span class="ot">&lt;-</span> hhs_v_nhsn <span class="sc">|&gt;</span></span>
+<span id="cb87-12"><a></a>  <span class="fu">select</span>(time_value, geo_value, <span class="at">hhs =</span> new_source) <span class="sc">|&gt;</span></span>
+<span id="cb87-13"><a></a>  <span class="fu">left_join</span>(nssp <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">time_value =</span> time_value <span class="sc">+</span> <span class="dv">6</span>), <span class="at">by =</span> <span class="fu">join_by</span>(geo_value, time_value))</span>
+<span id="cb87-14"><a></a></span>
+<span id="cb87-15"><a></a>n_geos <span class="ot">&lt;-</span> <span class="fu">n_distinct</span>(flu_data<span class="sc">$</span>geo_value)</span>
+<span id="cb87-16"><a></a>max_time_value <span class="ot">&lt;-</span> <span class="fu">max</span>(flu_data<span class="sc">$</span>time_value)</span>
+<span id="cb87-17"><a></a>empty_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb87-18"><a></a>  <span class="at">time_value =</span> <span class="fu">rep</span>(max_time_value <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span> <span class="sc">*</span> <span class="dv">7</span>), <span class="at">each =</span> n_geos),</span>
+<span id="cb87-19"><a></a>  <span class="at">geo_value =</span> <span class="fu">rep</span>(<span class="fu">unique</span>(flu_data<span class="sc">$</span>geo_value), <span class="at">times =</span> <span class="dv">3</span>),</span>
+<span id="cb87-20"><a></a>  <span class="at">nssp =</span> <span class="cn">NA</span>, <span class="at">hhs =</span> <span class="cn">NA</span></span>
+<span id="cb87-21"><a></a>)</span>
+<span id="cb87-22"><a></a></span>
+<span id="cb87-23"><a></a>flu_data <span class="ot">&lt;-</span> flu_data <span class="sc">|&gt;</span></span>
+<span id="cb87-24"><a></a>  <span class="fu">filter</span>(<span class="fu">month</span>(time_value) <span class="sc">%in%</span> <span class="dv">8</span><span class="sc">:</span><span class="dv">12</span>, <span class="fu">year</span>(time_value) <span class="sc">%nin%</span> <span class="fu">c</span>(<span class="dv">2020</span>, <span class="dv">2021</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb87-25"><a></a>  <span class="fu">add_row</span>(empty_data) <span class="sc">|&gt;</span></span>
+<span id="cb87-26"><a></a>  <span class="fu">mutate</span>(<span class="at">epiweek =</span> <span class="fu">epiweek</span>(time_value)) <span class="sc">|&gt;</span></span>
+<span id="cb87-27"><a></a>  <span class="fu">left_join</span>(climate, <span class="at">by =</span> <span class="fu">join_by</span>(geo_value, epiweek)) <span class="sc">|&gt;</span></span>
+<span id="cb87-28"><a></a>  <span class="fu">select</span>(<span class="sc">!</span>epiweek) <span class="sc">|&gt;</span></span>
+<span id="cb87-29"><a></a>  <span class="fu">filter</span>(geo_value <span class="sc">%nin%</span> <span class="fu">c</span>(<span class="st">"as"</span>, <span class="st">"vi"</span>, <span class="st">"gu"</span>, <span class="st">"mp"</span>, <span class="st">"usa"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb87-30"><a></a>  <span class="fu">arrange</span>(geo_value, time_value) <span class="sc">|&gt;</span></span>
+<span id="cb87-31"><a></a>  <span class="fu">as_epi_df</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="almost-our-production-forecaster-workflow" class="slide level2">
+<h2>Almost our production forecaster (workflow)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a></a>r <span class="ot">&lt;-</span> <span class="fu">epi_recipe</span>(flu_data) <span class="sc">|&gt;</span></span>
+<span id="cb88-2"><a></a>  <span class="fu">step_population_scaling</span>(</span>
+<span id="cb88-3"><a></a>    hhs, nssp,</span>
+<span id="cb88-4"><a></a>    <span class="at">df =</span> epidatasets<span class="sc">::</span>state_census,</span>
+<span id="cb88-5"><a></a>    <span class="at">df_pop_col =</span> <span class="st">"pop"</span>,</span>
+<span id="cb88-6"><a></a>    <span class="at">create_new =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb88-7"><a></a>    <span class="at">rate_rescaling =</span> <span class="fl">1e5</span>,</span>
+<span id="cb88-8"><a></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"geo_value"</span> <span class="ot">=</span> <span class="st">"abbr"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb88-9"><a></a>  recipes<span class="sc">::</span><span class="fu">step_mutate</span>(<span class="at">hhs =</span> hhs<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>), <span class="at">nssp =</span> nssp<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>), <span class="at">climate_pred =</span> climate_pred<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb88-10"><a></a>  <span class="fu">step_epi_lag</span>(hhs, <span class="at">lag =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">14</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb88-11"><a></a>  <span class="fu">step_epi_lag</span>(nssp, <span class="at">lag =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">14</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb88-12"><a></a>  <span class="fu">step_epi_ahead</span>(hhs, <span class="at">ahead =</span> <span class="dv">21</span>) <span class="sc">|&gt;</span></span>
+<span id="cb88-13"><a></a>  <span class="fu">step_epi_ahead</span>(climate_pred, <span class="at">ahead =</span> <span class="dv">21</span>, <span class="at">role =</span> <span class="st">"predictor"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb88-14"><a></a>  <span class="fu">step_epi_naomit</span>()</span>
+<span id="cb88-15"><a></a></span>
+<span id="cb88-16"><a></a>e <span class="ot">&lt;-</span> <span class="fu">quantile_reg</span>(<span class="at">quantile_levels =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.9</span>))</span>
+<span id="cb88-17"><a></a></span>
+<span id="cb88-18"><a></a>f <span class="ot">&lt;-</span> <span class="fu">frosting</span>() <span class="sc">|&gt;</span></span>
+<span id="cb88-19"><a></a>  <span class="fu">layer_predict</span>() <span class="sc">|&gt;</span></span>
+<span id="cb88-20"><a></a>  <span class="fu">layer_threshold</span>(.pred, <span class="at">lower =</span> <span class="dv">0</span>)</span>
+<span id="cb88-21"><a></a>ewf <span class="ot">&lt;-</span> <span class="fu">epi_workflow</span>(r, e, f)</span>
+<span id="cb88-22"><a></a>trained_ewf <span class="ot">&lt;-</span> ewf <span class="sc">|&gt;</span> <span class="fu">fit</span>(flu_data)</span>
+<span id="cb88-23"><a></a></span>
+<span id="cb88-24"><a></a>preds <span class="ot">&lt;-</span> <span class="fu">forecast</span>(trained_ewf) <span class="sc">|&gt;</span></span>
+<span id="cb88-25"><a></a>  <span class="fu">left_join</span>(epidatasets<span class="sc">::</span>state_census <span class="sc">|&gt;</span> <span class="fu">select</span>(pop, abbr), <span class="fu">join_by</span>(geo_value <span class="sc">==</span> abbr)) <span class="sc">|&gt;</span></span>
+<span id="cb88-26"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb88-27"><a></a>    <span class="at">.pred =</span> .pred<span class="sc">^</span><span class="dv">4</span> <span class="sc">*</span> pop <span class="sc">/</span> <span class="fl">1e5</span>,</span>
+<span id="cb88-28"><a></a>    <span class="at">forecast_date =</span> time_value <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">7</span>),</span>
+<span id="cb88-29"><a></a>    <span class="at">target_date =</span> forecast_date <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">14</span>),</span>
+<span id="cb88-30"><a></a>    <span class="at">time_value =</span> <span class="cn">NULL</span>,</span>
+<span id="cb88-31"><a></a>    <span class="at">pop =</span> <span class="cn">NULL</span></span>
+<span id="cb88-32"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 <section id="plot-our-forecasts" class="slide level2">
 <h2>Plot our forecasts</h2>
 
 <img data-src="day2-afternoon_files/figure-revealjs/plot-prod-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section></section>
 <section>
-<section id="ensembling" class="title-slide slide level1 center" data-number="5">
-<h1><span class="header-section-number">5</span> Ensembling</h1>
+<section id="advanced-topics" class="title-slide slide level1 center" data-number="5">
+<h1><span class="header-section-number">5</span> Advanced Topics</h1>
 
 </section>
-<section id="ensembling-1" class="slide level2">
+<section id="ensembling" class="slide level2">
 <h2>Ensembling</h2>
 <p>Instead of choosing one model, we can <span class="primary">combine</span> the predictions from multiple base models. Ensemble types:</p>
 <ul>
@@ -1098,6 +1229,63 @@ TX 0.05756194 122.0824 0.7040816</code></pre>
 <li><span class="primary">Robustness-over-all</span>: ensemble should have greater robustness than any individual constituent model</li>
 </ol>
 <p>Typically these are hard to accomplish simultaneously, and untrained methods excel at point 2, whereas trained methods can achieve point 1</p>
+</section>
+<section id="linear-stacking" class="slide level2">
+<h2>Linear stacking</h2>
+<p>One of the simplest trained ensemble methods is to directly fit a weighted combination of base forecasts to optimize accuracy (MSE, MAE, etc.), often called linear stacking: e.g., to form the forecast at time <span class="math inline">\(t\)</span>, we solve</p>
+<p><span class="math display">\[\begin{alignat*}{2}
+&amp;\min_{w \in \R^p} &amp;&amp; \hspace{-6pt} \sum_{s=t_0+1}^t \bigg( y_s - \sum_{j=1}^p
+w_j \cdot \hat{y}^j_{s|s-h} \bigg)^2 \\
+&amp;\st \quad &amp;&amp; \sum_{j=1}^p w_j = 1, \;\;\text{and} \;\; w_j \geq 0, \;
+j=1,\dots,p
+\end{alignat*}\]</span></p>
+<p>then use</p>
+<p><span class="math display">\[
+\hat{y}^{\text{stack}}_{t+h|t} = \sum_{j=1}^p \hat{w}^t_j \cdot
+\hat{y}^j_{t+h|t}
+\]</span></p>
+<p>Note that the stacking optimization problem uses forward-looking predictions (as in time series cross-validation)</p>
+</section>
+<section id="recalibration" class="slide level2">
+<h2>Recalibration</h2>
+<ul>
+<li><p>We have seen that prediction intervals often have <span class="primary">empirical coverage &lt;&lt; nominal coverage</span>, e.g., our 80% predictive intervals in practice cover <span class="math inline">\(\approx\)</span> 60% of the time</p></li>
+<li><p>Recalibration methods aim at adjusting the intervals so that nominal coverage <span class="math inline">\(\approx\)</span> empirical coverage</p></li>
+</ul>
+</section>
+<section id="quantile-tracking" class="slide level2">
+<h2>Quantile tracking</h2>
+<p>Quantile tracking is a method for producing calibrated prediction intervals from base forecasts and scores. In the simplest case, we can take the score to be absolute error of point forecasts:</p>
+<p><span class="math display">\[e_t = |y_t - \hat y_{t|t-1}|\]</span></p>
+<ul>
+<li><p>Let <span class="math inline">\(\hat q_{t}^{1-\alpha}\)</span> be a predicted level <span class="math inline">\(1-\alpha\)</span> quantile of the distribution of <span class="math inline">\(e_t\)</span></p></li>
+<li><p>Define <span class="math inline">\(I_{t|t-1}^{1-\alpha} = [\hat{y}_{t|t-1} - \hat{q}_t^{1-\alpha}, \;     \hat{y}_{t|t-1} + \hat{q}_t^{1-\alpha}]\)</span>. Note that</p>
+<p><span class="math display">\[
+  e_t \leq \hat{q}_t^{1-\alpha} \iff y_t \in I_{t|t-1}^{1-\alpha}
+  \]</span></p></li>
+<li><p>Therefore we the reduced the problem of producing prediction intervals <span class="math inline">\(I_{t|t-1}^{1-\alpha}\)</span> to one of tracking a quantile of <span class="math inline">\(e_t\)</span></p></li>
+</ul>
+</section>
+<section id="quantile-updates" class="slide level2">
+<h2>Quantile updates</h2>
+<p>We begin with some estimate <span class="math inline">\(\hat{q}_{t_0+1}^{1-\alpha}\)</span> based on a burn-in set. Then repeat the following updates as <span class="math inline">\(t\)</span> increases, for a step size <span class="math inline">\(\eta &gt; 0\)</span>:</p>
+<p><span class="math display">\[\hat q_{t+1}^{1-\alpha} = \begin{cases}
+\hat q_{t}^{1-\alpha} + \eta(1-\alpha) \quad \text{if } y_t\notin I_{t|t-1}^{1-\alpha} \\
+\hat q_{t}^{1-\alpha} - \eta\alpha \quad \quad \quad \,\,\, \text{if } y_t\in I_{t|t-1}^{1-\alpha}
+\end{cases}\]</span></p>
+<p>In words:</p>
+<ul>
+<li>if the latest interval does not cover, then we increase the quantile (make the next interval wider),</li>
+<li>otherwise we decrease the quantile by (make the next interval narrower).</li>
+</ul>
+<p>This method has the following guarantee:</p>
+<p><span class="math display">\[
+\Bigg| \frac{1}{T} \sum_{t=t_0+1}^{t_0+T} 1 \big\{ y_t \in I_{t|t-1}^{1-\alpha} \big\} - (1-\alpha) \Bigg| \leq \frac{b/\eta + 1}{T}
+\]</span></p>
+<p>where <span class="math inline">\(b\)</span> is a bound on the errors (largest error possible/observable).</p>
+</section>
+<section id="multi-horizon-smoothing" class="slide level2">
+<h2>Multi-horizon smoothing</h2>
 
 
 </section></section>
@@ -1426,7 +1614,7 @@ TX 0.05756194 122.0824 0.7040816</code></pre>
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/cmu-delphi\.github\.io\/micom-tooling-workshop-2025\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
