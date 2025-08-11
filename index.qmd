@@ -33,8 +33,7 @@ few case studies to motivate the entire pipeline from signal discovery to the
 production of nowcasts and forecasts.
 
 1. [Understanding Data](slides/day1-morning.qmd)
-1. [Nowcasting](slides/day1-afternoon.qmd)
-1. [Time Series](slides/day2-morning.qmd)
+1. [Data Handling and Nowcasting](slides/day1-afternoon.qmd)
 1. [Forecasting](slides/day2-afternoon.qmd)
 1. [Appendix: Background on `tidyverse`](slides/appendix-tidyverse.qmd)
 
