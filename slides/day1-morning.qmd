@@ -14,14 +14,15 @@ library(tidymodels)
 library(epidatasets)
 library(epipredict)
 library(epidatr)
+library(epiprocess)
 load(here::here("_data", "day1m_queries.rda"))
 ggplot2::theme_set(ggplot2::theme_bw())
 ```
 
 
-# Workshop Overview and System Setup
+# System Setup
 
-## What we will cover
+## What we will cover{visibility="hidden"}
 
 - Characteristics of panel data in epidemiology
 - Tools for processing and plotting panel data
@@ -54,39 +55,11 @@ ggplot2::theme_set(ggplot2::theme_bw())
 
 ## System setup -- Downloading the materials
 
-<!--
-TODO
--->
-
 ### Easy way:
 
 1. Click the [Big Green Button]{.fourth-colour} that says <kbd>< > Code ▾</kbd>
 2. Choose [Download Zip]{.primary}
-3. Open the Zip directory and then Open `micom-tooling-workshop-2025.Rproj`
-
-### More expert (local `git` user):
-
-1. Click the [Big Green Button]{.fourth-colour} that says <kbd>< > Code ▾</kbd>
-2. Copy the URL.
-3. Open RStudio, select File > New Project > Version Control. Paste there and proceed.
-
-### Even more expert (via `github` remote):
-
-1. Click the Grey Button that says <kbd>⑂ Fork ▾</kbd>
-2. Proceed along the same lines as above.
-
-## System setup -- Installing required packages
-
-<!--
-TODO
--->
-
-We will use a [lot]{.tertiary} of packages.
-
-### We've tried to make it so you can get them all at once (with the right versions)
-
-🤞 We hope this works... 🤞
-[Note that you can "Copy to Clipboard"]{.fourth-colour}
+3. Open the Zip directory.
 
 <br>
 
@@ -94,76 +67,24 @@ In RStudio:
 
 ``` r
 install.packages("renv")
+install.packages("rspm")
+rspm::enable()
 renv::restore()
 ```
 
-<br>
 
-Hopefully, you see:
-```{r}
-#| message: true
-cli::cli_alert_success("You should be good to go!")
-```
+# Our tools are meant for panel data
 
-Ask for help if you see something like:
-```{r}
-#| error: true
-verify_setup <- function() {
-  cli::cli_abort(c(
-    "The following packages do not have the correct version:",
-    "i" = "Installed: {.pkg epipredict 0.2.0}.",
-    "i" = "Required: {.pkg epipredict == 0.1.5}."
-  ))
-}
-verify_setup()
-```
+## [**Panel data**](https://en.wikipedia.org/wiki/Panel_data), or longitudinal data, contains measurements of subjects over time
 
-# Panel Data
-
-## Panel data
-
-* [**Panel data**](https://en.wikipedia.org/wiki/Panel_data) or longitudinal data, contain cross-sectional measurements of subjects over time.
-
-* Since we're working with aggregated data, the subjects are geographic units (e.g. counties, states).
+When working with aggregated data, the subjects are geographic units (e.g. counties, states).
 
 <!-- and not individuals.-->
 
-* In table form, panel data is a time index + one or more locations/keys.
-
 * **Ex**: The % of outpatient doctor visits that are COVID-related in CA from June 2020 to Dec. 2021 ([docs](https://cmu-delphi.github.io/delphi-epidata/api/covidcast-signals/doctor-visits.html)):
 ```{r panel-ca-ex}
-dv_versioned_panel_final |> filter(geo_value == "ca") |> select(-version)
+dv_versioned_panel_final |> filter(geo_value == "ca") |> select(-version) %>% as_epi_df()
 ```
-
-## Examples of panel data - COVID-19 cases
-
-[[**JHU CSSE COVID cases per 100k **]{.primary}](https://cmu-delphi.github.io/delphi-epidata/api/covidcast-signals/jhu-csse.html) estimates the daily number of new confirmed COVID-19 cases per 100,000 population, averaged over the past 7 days.
-
-```{r examples-panel-covid2}
-#| echo: false
-#| fig-width: 7
-names <- c("COVID-19 cases", "CHNG-CLI", "CHNG-COVID", "COVID-19 hospital admissions")
-units <- c("Reported cases per 100k people",
-           "% doctor's visits due to CLI",
-           "% doctor's visits due to COVID-19",
-           "Hospital admissions per 100k people")
-
-as_epi_df(panel_data[[1]]) %>%
-  autoplot("value") +
-  scale_color_delphi() +
-  theme(legend.title = element_blank()) +
-  xlab("Date") + ylab(units[1]) +
-  scale_y_continuous(expand = expansion(c(0, 0.05)))
-```
-
-::: {.notes}
-
-* WA switch to weekly reporting in 2022
-* FL reports "whenever" (weekly, biweekly, three days in a row, then 4 zeros, etc.)
-* API calculates change from cumulative, so no-report becomes a 0.
-* If state decreases total, then we see a negative.
-
-:::
 
 <!--
 
@@ -321,77 +242,94 @@ ggplot(ca |>
 
 
 
-# Versioned Data
+# Our tools are specifically designed to handle versioned data
 
-## Intro to versioned data
-
-* Many epidemic aggregates are subject to [reporting delays and revisions]{.primary}
+## Many epidemic aggregates are subject to [reporting delays and revisions]{.primary}
 
 * This is because individual-level data has delayed availability:
 
 [Person comes to ER → Admitted → Has some tests → Tests come back → Entered into the system → ...]{.fourth-colour}
 
-* So, a "Hospital admission" may not attributable to a particular condition
+* So, a "Hospital admission" may not be attributable to a particular condition
 until a few days have passed (the patient may even have been released)
 
-* Aggregated data have a longer pipeline from the incident to the report.
 
-* So we have to track both: [when the event occurred]{.primary} and
-[when it was reported]{.primary}
+## This means there can be [many different values]{.primary} for the same date
 
-* Additionally, various mistakes lead to revisions
+```{r create-snapshots-of-data}
+#| echo: false
+#| eval: true
 
-* This means there can be [many different values]{.primary} for the same date
+versions <- seq(as.Date("2020-07-01"), as.Date("2021-11-30"), by = "1 month")
+max_version <- max(versions)
 
-## Versioned data
+snapshots <- map(versions, \(v) {
+  epix_as_of(archive_cases_dv_subset_all_states, v) |>
+    mutate(version = v) |>
+    filter(geo_value %in% c("ca", "ut"))
+  }) |>
+  bind_rows() |>
+  mutate(latest = version == max_version)
 
-* The event time is indicated by `time_value` (aka `reference_date`)
+```
 
-* Now, we add a second time index to indicate the data `version` (aka `reporting_date`)
 
-* `version` = the time at which we saw a particular `value` associated to a `time_value`
+
+```{r plot-revision-patterns}
+#| fig-width: 7
+ ggplot(snapshots |> filter(!latest),
+        aes(x = time_value, y = percent_cli)) +
+   geom_line(aes(color = factor(version))) +
+   geom_vline(aes(color = factor(version), xintercept = version), lty = 3) +
+   facet_wrap(~ geo_value, scales = "free_y", nrow = 1) +
+   scale_x_date(minor_breaks = "month", date_labels = "%b %Y") +
+   labs(x = "", y = "% of doctor's visits with\n Covid-like illness") +
+   scale_color_viridis_d(option = "B", end = .8) +
+   theme(legend.position = "none") +
+   geom_line(data = snapshots |> filter(latest),
+             aes(x = time_value, y = percent_cli),
+             inherit.aes = FALSE, color = "black")
+```
+
+
+## Many data sources are subject to revisions
+
+* Case and death counts are frequently corrected or adjusted by authorities
+
+* Medical claims can take weeks to be submitted and processed
+
+<!--* In the previous slide's example because doctor's visits may be reported to the health system partners several days after they occur, these signals are typically available with several days of lag. This means that estimates for a specific day are only available several days later. -->
+
+* Lab tests and medical records can be backlogged
+
+* Surveys are not completed promptly
+
+[An accurate revision log is crucial for researchers building forecasts]{.primary}
+
+::: {.callout-important}
+## Obvious but crucial
+
+A forecast that is made today can only use data we have access to today
+:::
+
+
+
+## So we have to track both [when the event occurred]{.primary} and [when it was reported]{.primary}
+
+* The event time is indicated by `time_value`
+
+* And we add a second time index to indicate the data `version`
+
 ```{r versioned-ca-ex}
 #| echo: false
 dv_archive <- dv_versioned_panel |>
   as_epi_archive(compactify = TRUE)
-dv_ca <- dv_archive$DT |> filter(geo_value == "ca")
-head(dv_ca) |> as_tibble()
+dv_archive |> filter(geo_value == "ca")
 ```
 
-* Note that this feature can be indicated in different ways (ex. `version`, `issue`, `release`, `as_of`).
-
-## Versioned panel data
-Estimated percentage of outpatient visits due to CLI across multiple versions.
-
-<!--
-with updates and revisions to past data as new issue dates are released:
--->
 
 
-```{r versioned-panel-multi-states-ex-2}
-#| fig-width: 7
-dv_final <- dv_versioned_panel_final
-max_version <- max(dv_archive$DT$version)
-versions <- seq(as.Date("2020-06-01"), max_version - 1, by = "1 week")
-weekly_snapshots <- map(versions, function(v) {
-  epix_as_of(dv_archive, v) %>% mutate(version = v)
-}) |> list_rbind()
-weekly_snapshots |>
-  filter(geo_value %in% c("ca", "fl")) |>
-  ggplot(aes(x = time_value, y = percent_cli)) +
-  facet_wrap(~geo_value) +
-  geom_line(aes(color = version, group = factor(version))) +
-  # geom_vline(aes(color = factor(version), xintercept = version), lty = 3) +
-  geom_line(data = dv_final |> filter(geo_value %in% c("fl", "ca")), color = "black") +
-  labs(x = "Reference date", y = "% doctor's visits with CLI") +
-  expand_limits(y = 0) +
-  scale_x_date(date_labels = "%m/%Y", expand = expansion(0)) +
-  scale_y_continuous(expand = expansion(c(0, 0.05))) +
-  theme_bw() +
-  scale_color_viridis_c(trans = "date", labels = label_date(format = "%m/%Y"), name = "Version")
-```
-
-## Latency and revision in signals
+## Latency and revision in signals{visibility=hidden}
 
 * [**Revised**]{.primary} data is updated or corrected after initial publication
 
@@ -455,26 +393,6 @@ cowplot::plot_grid(p1, p2)
 ```
 -->
 
-## Revisions
-Many data sources are subject to revisions:
-
-* Case and death counts are frequently corrected or adjusted by authorities
-
-* Medical claims can take weeks to be submitted and processed
-
-<!--* In the previous slide's example because doctor's visits may be reported to the health system partners several days after they occur, these signals are typically available with several days of lag. This means that estimates for a specific day are only available several days later. -->
-
-* Lab tests and medical records can be backlogged
-
-* Surveys are not completed promptly
-
-[An accurate revision log is crucial for researchers building forecasts]{.primary}
-
-::: {.callout-important}
-## Obvious but crucial
-
-A forecast that is made today can only use data we have access to today
-:::
 
 ## Three types of revisions
 
@@ -482,14 +400,14 @@ A forecast that is made today can only use data we have access to today
 
 Google symptoms
 
-2. [**Predictable revisions**]{.secondary}
+2. [**Predictable revisions**]{.primary}
 
 Claims data (CHNG) and public health reports aligned by test, hospitalization,
 or death date
 
 Almost always revised upward as additional claims enter the pipeline
 
-3. [**Revisions that are large and erratic to predict**]{.tertiary}
+3. [**Revisions that are large and erratic**]{.primary}
 
 COVID cases and deaths
 
@@ -497,14 +415,13 @@ These are aligned by report date
 
 <!-- (which can be highly variable & less predictable compared to test data). -->
 
-## Types of revisions - Comparison between 2. and 3.
-
-* Revision behavior for two indicators in the HRR containing Charlotte, NC.
+## Comparison between "predictable" and "erratic" revisions
+<small>For the HRR containing Charlotte, NC</small>
 
 <!-- Each colored line corresponds to the data as reported on a particular date (as of dates varying from 28 September through 19 October). -->
-* [**DV-CLI signal (left)**]{.secondary}: regularly revised, but effects fade
+* [**DV-CLI signal (left)**]{.primary}: regularly revised, but effects fade
 
-* [**JHU CSSE cases (right)**]{.tertiary} remain "as first reported" until a major correction is made on Oct. 19
+* [**JHU CSSE cases (right)**]{.primary} remain "as first reported" until a major correction is made on Oct. 19
 
 
 ```{r fig1-McDonald}
@@ -548,7 +465,7 @@ cowplot::plot_grid(
 <small>[Figure 1 from McDonald et al. (2021)](https://www.pnas.org/doi/pdf/10.1073/pnas.2111453118)</small>
 </div>
 -->
-## Key takeaways
+## Key takeaways{visibility="hidden"}
 
 Medical claims revisions
 : More systematic and predictable
@@ -645,11 +562,9 @@ cowplot::plot_grid(g1, g2, ncol = 2, rel_widths = c(.38, .62))
 * [Cross-checking data with external sources from different reporting systems]{.primary}
 -->
 
-# Epidata Repository and API
+# Access Epidata data with `epidatr`
 
-## What is the Epidata repository
-
-[**Epidata:**]{.primary} repository of aggregated epi-surveillance time series
+## [**Epidata:**]{.primary} is a repository of aggregated epi-surveillance time series
 
 Code is open-source. Most indicators are public.
 
@@ -667,8 +582,8 @@ Data from
 Added value
 : revision tracking, anomaly detection, trend detection, smoothing, imputation, geo-temporal-demographic disaggregation.
 
-<!--
-## Goals of Delphi Epidata platform and repository
+
+## Goals of Delphi Epidata platform and repository{visibility=hidden}
 
 1. **Provide many aggregated epi-surveillance time-series ("epi-signals")**
     + Mirror signals from other sources, especially if revisions are not tracked
@@ -685,9 +600,6 @@ Hence: include also signals available elsewhere, especially if they don't keep d
 ::: {.callout-important appearance="simple"}
 Make epi-surveillance more nimble, complete, standardized, robust, and real-time
 :::
-
--->
-
 
 
 ## Features of Delphi Epidata{visibility="hidden"}
@@ -707,8 +619,8 @@ Make epi-surveillance more nimble, complete, standardized, robust, and real-time
 
 * Signals are as accessible (w/ API, SDK) as allowed by DUAs
 
-<!--
-## Epidata Documentation
+
+## Epidata Documentation{visibility=hidden}
 
 <br>
 
@@ -721,7 +633,7 @@ The [main endpoint](https://cmu-delphi.github.io/delphi-epidata/api/covidcast.ht
 <br>
 
 A [variety of other endpoints](https://cmu-delphi.github.io/delphi-epidata/api/README.html) international historical data for COVID-19, influenza, dengue, norovirus
--->
+
 
 <!--
 ## Some of our data sources
@@ -814,9 +726,6 @@ Docs are great for a deep dive into the data, while the apps & tools are useful 
 
 
 
-# `{epidatr}`
-
-
 ## Installing `{epidatr}`
 
 (you already did this, but just for posterity...)
@@ -866,18 +775,12 @@ pip install epidatpy
 -->
 
 
-## API keys
+## API key grants privileged access and can be obtained by [registering with us](https://api.delphi.cmu.edu/epidata/admin/registration_form)
 
 * Anyone may access the Epidata API anonymously without providing any personal data!!
 
 * Anonymous API access is subject to some restrictions:
   <small>public datasets only; 60 requests per hour; only two parameters may have multiple selections</small>
-
-* API key grants privileged access; can be obtained by [registering with us](https://api.delphi.cmu.edu/epidata/admin/registration_form)
-
-* Privileges of registration: no rate limit; no limit on multiple selections
-
-* We just want to know which signals people care about and ensure we're providing benefit
 
 <!-- rate limited to 60 requests per hour;  -->
 ::: {.callout-tip}
@@ -899,9 +802,9 @@ hhs_flu_nc <- pub_covidcast(
   geo_type = 'state',
   time_type = 'day',
   geo_values = 'nc',
-  time_values = c(20240401, 20240405:20240414)
+  time_values = epirange("2025-05-01", "2024-04-14")
 )
-head(hhs_flu_nc, n = 3)
+head(hhs_flu_nc)
 ```
 
 ```{r hhs-influenza-pub-covidcast-2}
@@ -965,7 +868,7 @@ head(jhu_us_cases, n = 3) |>
 * from January to April 2021 <!-- (and standard error if it is applicable to the metric). -->
 
 
-## Returned data - COVIDcast main endpoint
+## Returned data - COVIDcast main endpoint{visibility=hidden}
 
 `pub_covidcast()` outputs a tibble, where each row represents one observation
 
@@ -979,7 +882,7 @@ Each observation is aggregated by time and by geographic region
 
 <!--For example, a number of COVID-19 antigen tests were performed in the state of New York on August 1. The `time_value` would be August 1, with `geo_value` indicating the state of New York, while the remaining fields would give the estimated test positivity rate (the percentage of tests that were positive for COVID-19), its standard error, and the number of tests used to calculate the estimate.-->
 
-## Returned data - COVIDcast main endpoint
+## `pub_covidcast()` outputs a tibble, where each row represents one observation
 
 [Also reports]{.primary}
 
@@ -987,11 +890,7 @@ Each observation is aggregated by time and by geographic region
 
 * `lag`: The period between when the events occurred and when the observation was published
 
-Tracks the complete revision history of the signal
-
-Allows for historical reconstructions of information that was available at a specific times
-
-[**More on this soon!**]{.primary}
+Allows for historical reconstructions of information that was available at specific times
 
 <!-- * Meaning that unlike most other sources of COVID data, it tracks the complete revision history of the signal. -->
 ## Geographic levels{visibility=hidden}
@@ -1150,24 +1049,18 @@ Metadata accessors
 
 # Versioning in `{epidatr}`
 
-## Versioned data in `{epidatr}`
+## Use `as_of` or `issues` to request versioned data
 
-Epidata API contains each signal's estimate, location, date, and update timeline
-
-Requesting Specific Data Versions:
-
-* Use `as_of` or `issues` to specify data availability
 * `as_of` always fetches one version
 * `issues` can fetch multiple
 * Only one may be used at a time
 
 
-## Obtaining data "as of" a specific date
+## Example
 
 [Doctor Visits](https://cmu-delphi.github.io/delphi-epidata/api/covidcast-signals/doctor-visits.html) (from the `covidcast` endpoint)
 
-* The percentage of outpatient visits w/ Covid-like illness
-* Pennsylvania on May 1, 2020:
+* The percentage of outpatient visits w/ Covid-like illness for Pennsylvania on May 1, 2020:
 
 ```{r pa-may-1st-as-of}
 #| echo: true
@@ -1179,7 +1072,7 @@ dv_pa_as_of <- pub_covidcast(
   time_values = "2020-05-01",
   geo_type = "state",
   geo_values = "pa",
-  as_of = "2020-05-07"
+  issues = "*"
 )
 ```
 
@@ -1189,8 +1082,6 @@ head(dv_pa_as_of) |>
   select(geo_value, signal, source, time_value, issue, lag, value)
 ```
 
-* Initial estimate *issued* on May 7, 2020
-* Due to delay from reporting and ingestion by the API
 
 ## Obtaining data "as of" a specific date{visibility=hidden}
 
@@ -1219,7 +1110,7 @@ head(dv_pa_final) |>
 
 * Increased to ~6% from <3%
 
-## Versioning is important for forecasting
+## Versioning is important for forecasting{visibility="hidden"}
 
 <br>
 
