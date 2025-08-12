@@ -6,7 +6,7 @@ project:
     - slides/*.qmd
 
 execute:
-  freeze: auto
+  freeze: false
 
 editor: source
 
@@ -24,7 +24,6 @@ website:
       - text: GitHub
         url: https://github.com/cmu-delphi/micom-tooling-workshop-2025
         icon: github
-
 
 format:
   html:

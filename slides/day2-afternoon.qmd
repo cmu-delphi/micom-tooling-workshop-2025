@@ -15,37 +15,6 @@ format: revealjs
 ggplot2::theme_set(ggplot2::theme_bw())
 ```
 
-```{r function errors}
-MSE <- function(truth, prediction) {
-  mean((truth - prediction)^2)}
-
-MAE <- function(truth, prediction) {
-  mean(abs(truth - prediction))}
-
-MAPE <- function(truth, prediction) {
-  100 * mean(abs(truth - prediction) / truth)}
-
-MASE <- function(truth, prediction) {
-  100 * MAE(truth, prediction) / mean(abs(diff(truth)))}
-
-getErrors <- function(truth, prediction, type) {
-  return(data.frame(#"MSE" = MSE(truth, prediction),
-                    "MAE"= MAE(truth, prediction),
-                    #"MAPE" = MAPE(truth, prediction),
-                    "MASE" = MASE(truth, prediction),
-                    row.names = type))
-}
-
-getAccuracy = function(finalized, predictions, row_name = "") {
-  observed = (finalized |>
-                filter(time_value %in% predictions$target_date))$deaths
-  return(cbind(
-    getErrors(observed, predictions$.pred, ""),
-    "Coverage" = mean(observed >= predictions$`0.1` & observed <= predictions$`0.9`),
-    row.names = row_name))
-}
-```
-
 ## Outline
 
 1. Overview of `{epipredict}`
