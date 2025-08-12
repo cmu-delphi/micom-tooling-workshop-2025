@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="en-CA"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.33">
+
+  <meta name="author" content="David Weber, Nat DeFries">
+  <title>MICOM EpiData Workshop 2025 – day1-afternoon</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-c10c794533db35eace88283ed89861b0.css">
+  <link rel="stylesheet" href="tachyons-minimal.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section class="slide level2">
+
+<div class="flex">
+<div class="w-20">
+
+</div>
+<section id="section" class="slide level2 w-80" data-background-image="gfx/cover-art-1.svg" data-background-position="bottom">
+<h2>Data Cleaning, Versioning, Nowcasting With <code>{epiprocess}</code></h2>
+<h3 id="section-1">MICOM Tooling Workshop 2025</h3>
+<p><br></p>
+<h4 id="section-2">David Weber, Nat DeFries</h4>
+<p><span class="fstyle">Adapted from slides by Alice Cima, Rachel Lobay, Daniel McDonald, Ryan Tibshirani, with huge thanks to Logan Brooks, Xueda Shen, and Dmitry Shemetov</span></p>
+<p>12 August 2025</p>
+</section>
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="the-epiverse-ecosystem" class="slide level2">
+<h2>The epiverse ecosystem</h2>
+<p>Interworking, community-driven, packages for epi tracking &amp; forecasting.</p>
+
+<!-- 1. Fetch data: epidatr, epidatpy, and other sources, 2. Explore, clean, transform & backtest 3. Pre-built forecasters, modular forecasting framework: epipredict -->
+<img data-src="gfx/epiverse_packages_flow.jpg" style="width: 60%; display: block; margin-left: auto; margin-right: auto;" class="r-stretch"></section>
+<section>
+<section id="versioned-panel-data-processing-functions" class="title-slide slide level1 center" data-number="1">
+<h1><span class="header-section-number">1</span> (Versioned) Panel Data Processing Functions</h1>
+
+</section>
+<section id="features---correlations-at-different-lags" class="slide level2">
+<h2>Features - Correlations at different lags</h2>
+<ul>
+<li><p>The below plot addresses the question: “For each state, are case and death rates linearly associated across all days?”</p></li>
+<li><p>To explore <strong>lagged correlations</strong> and how case rates associate with future death rates, we can use the <code>dt1</code> parameter in <code>epi_cor()</code> to shift case rates by a specified number of days.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>edf <span class="ot">&lt;-</span> covid_case_death_rates <span class="sc">%&gt;%</span> <span class="fu">filter</span>(geo_value <span class="sc">%in%</span> <span class="fu">tolower</span>(state.abb))</span>
+<span id="cb43-2"><a></a>cor0 <span class="ot">&lt;-</span> <span class="fu">epi_cor</span>(edf, case_rate, death_rate, <span class="at">cor_by =</span> geo_value)</span>
+<span id="cb43-3"><a></a>cor14 <span class="ot">&lt;-</span> <span class="fu">epi_cor</span>(edf, case_rate, death_rate, <span class="at">cor_by =</span> geo_value, <span class="at">dt1 =</span> <span class="sc">-</span><span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<img data-src="day1-afternoon_files/figure-revealjs/plot-corr-lags-ex-1.svg" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>We can see that, in general, lagging the case rates back by 14 days improves the correlations.</li>
+</ul>
+</section>
+
+<section id="features---systematic-lag-analysis-1" class="slide level2">
+<h2>Features - Systematic lag analysis</h2>
+
+<img data-src="day1-afternoon_files/figure-revealjs/plot-sys-lag-ex-1.svg" class="quarto-figure quarto-figure-center r-stretch"><p>The strongest correlation occurs at a lag of about 23 days, indicating that case rates are best correlated with death rates 23 days from now.</p>
+</section>
+<section id="features---compute-growth-rates" class="slide level2">
+<h2>Features - Compute growth rates</h2>
+<aside class="notes">
+<p>Growth rate measures the relative change in a signal over time. Indicating how quickly a quantity (like case rates) is increasing or decreasing.</p>
+<p>Getting the color like this is a bit messy</p>
+<p>As expected, the peak growth rates for both states occurred during the January 2022 Omicron wave, reflecting the sharp rise in cases over that period.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<ul>
+<li>We can compute time-varying growth rates for two states:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a>edfg <span class="ot">&lt;-</span> <span class="fu">filter</span>(edf, geo_value <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ut"</span>, <span class="st">"ca"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a></a>  <span class="fu">group_by</span>(geo_value) <span class="sc">|&gt;</span></span>
+<span id="cb46-3"><a></a>  <span class="fu">mutate</span>(<span class="at">gr_cases =</span> <span class="fu">growth_rate</span>(case_rate, time_value, <span class="at">method =</span> <span class="st">"smooth_spline"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb46-4"><a></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<img data-src="day1-afternoon_files/figure-revealjs/plot-growth-rates-ex-1.svg" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>Try on your favorite dataset so far, and plot using:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>edfg <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(case_rate, gr_cases)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Also see rtestim for estimating RT values instead of the growth rate. <a href="https://dajmcdon.github.io/rtestim/" class="uri">https://dajmcdon.github.io/rtestim/</a> Similar usage</li>
+</ul>
+</section>
+<section id="features---outlier-detection" class="slide level2">
+<h2>Features - Outlier detection</h2>
+<ul>
+<li><p>The <code>detect_outlr()</code> function offers multiple outlier detection methods on a signal.</p></li>
+<li><p>The simplest is <code>detect_outlr_rm()</code>, which works by calculating an outlier threshold using the rolling median and the rolling Interquartile Range (IQR) for each time point:</p></li>
+</ul>
+<p><strong>Threshold = Rolling Median ± (Detection Multiplier × Rolling IQR)</strong></p>
+<ul>
+<li>Note that the default number of time steps to use in the rolling window by default is 21 and is centrally aligned.</li>
+<li>The detection multiplier default is 2 and controls how far away a data point must be from the median to be considered an outlier.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a>edfo <span class="ot">&lt;-</span> <span class="fu">filter</span>(edf, geo_value <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ca"</span>, <span class="st">"ut"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb48-2"><a></a>  <span class="fu">select</span>(geo_value, time_value, case_rate) <span class="sc">|&gt;</span></span>
+<span id="cb48-3"><a></a>  <span class="fu">as_epi_df</span>() <span class="sc">|&gt;</span></span>
+<span id="cb48-4"><a></a>  <span class="fu">group_by</span>(geo_value) <span class="sc">|&gt;</span></span>
+<span id="cb48-5"><a></a>  <span class="fu">mutate</span>(<span class="at">outlier_info =</span> <span class="fu">detect_outlr_rm</span>(</span>
+<span id="cb48-6"><a></a>    <span class="at">x =</span> time_value, <span class="at">y =</span> case_rate</span>
+<span id="cb48-7"><a></a>  )) <span class="sc">|&gt;</span></span>
+<span id="cb48-8"><a></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="features---outlier-detection-1" class="slide level2">
+<h2>Features - Outlier detection</h2>
+
+<img data-src="day1-afternoon_files/figure-revealjs/plot-outlier-ex-1.svg" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>Same idea as the previous slide; you can plot using <code>autoplot</code></li>
+</ul>
+</section>
+<section id="features-sliding-a-computation-on-an-epi_df" class="slide level2">
+<h2>Features – sliding a computation on an <code>epi_df</code></h2>
+<ul>
+<li><p>The simplest way to use <code>epi_slide</code> is tidy evaluation.</p></li>
+<li><p>For a grouped <code>epi_df</code>, <code>epi_slide()</code> applies the computation to groups <span class="primary">separately</span>.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>cases_7dav <span class="ot">&lt;-</span> <span class="fu">epi_slide</span>(</span>
+<span id="cb49-2"><a></a>  <span class="at">.x =</span> cases_edf,</span>
+<span id="cb49-3"><a></a>  <span class="at">cases_7dav =</span> <span class="fu">mean</span>(raw_cases, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb49-4"><a></a>  <span class="at">.window_size =</span> <span class="dv">7</span>,</span>
+<span id="cb49-5"><a></a>  <span class="at">.align =</span> <span class="st">"right"</span></span>
+<span id="cb49-6"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  geo_value time_value raw_cases cases_7dav
+  &lt;chr&gt;     &lt;date&gt;         &lt;dbl&gt;      &lt;dbl&gt;
+1 ca        2022-03-01      4310       4310
+2 ca        2022-03-02      7044       5677
+3 nc        2022-03-01      1231       1231
+4 nc        2022-03-02      2243       1737
+5 ny        2022-03-01      1487       1487
+6 ny        2022-03-02      1889       1688</code></pre>
+</div>
+</div>
+</section>
+<section id="epi_archive-collection-of-epi_dfs" class="slide level2">
+<h2><code>epi_archive</code>: Collection of <code>epi_df</code>s</h2>
+<ul>
+<li>full version history of a data set</li>
+<li>acts like a bunch of <code>epi_df</code>s — but stored <span class="primary">compactly</span></li>
+<li>allows similar functionality as <code>epi_df</code> but using only <span class="primary">data that would have been available at the time</span></li>
+</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Revisions</strong></p>
+</div>
+<div class="callout-content">
+<p>Epidemiology data gets revised frequently.</p>
+<ul>
+<li>We may want to use the data <span class="primary">as it looked in the past</span>.</li>
+<li>or we may want to examine <span class="primary">the history of revisions</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="epi_archive-collection-of-epi_dfs-1" class="slide level2">
+<h2><code>epi_archive</code>: Collection of <code>epi_df</code>s</h2>
+<p>Subset of daily COVID-19 doctor visits (Optum) and cases (JHU CSSE) from all U.S. states in <code>archive</code> format:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>archive_cases_dv_subset_all_states </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>→ An `epi_archive` object, with metadata:
+ℹ Min/max time values: 2020-06-01 / 2021-11-30
+ℹ First/last version with update: 2020-06-02 / 2021-12-01
+ℹ Versions end: 2021-12-01
+ℹ A preview of the table (1514489 rows x 5 columns):
+Key: &lt;geo_value, time_value, version&gt;
+         geo_value time_value    version percent_cli case_rate_7d_av
+            &lt;char&gt;     &lt;Date&gt;     &lt;Date&gt;       &lt;num&gt;           &lt;num&gt;
+      1:        ak 2020-06-01 2020-06-02          NA        1.145652
+      2:        ak 2020-06-01 2020-06-06    0.136815        1.145652
+      3:        ak 2020-06-01 2020-06-08    0.136249        1.145652
+      4:        ak 2020-06-01 2020-06-09    0.106744        1.145652
+      5:        ak 2020-06-01 2020-06-10    0.106676        1.145652
+     ---                                                            
+1514485:        wy 2021-11-26 2021-11-29    3.739819       23.207343
+1514486:        wy 2021-11-27 2021-11-28          NA       23.207343
+1514487:        wy 2021-11-28 2021-11-29          NA       23.207343
+1514488:        wy 2021-11-29 2021-11-30          NA       25.071781
+1514489:        wy 2021-11-30 2021-12-01          NA       25.464294</code></pre>
+</div>
+</div>
+</section>
+<section id="features-sliding-computation-over-epi_archives" class="slide level2">
+<h2>Features – sliding computation over <code>epi_archive</code>s</h2>
+<ul>
+<li>We can apply a computation over different snapshots in an <code>epi_archive</code>.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">epix_slide</span>(</span>
+<span id="cb53-2"><a></a>  .x,</span>
+<span id="cb53-3"><a></a>  .f,</span>
+<span id="cb53-4"><a></a>  ...,</span>
+<span id="cb53-5"><a></a>  <span class="at">.before =</span> <span class="cn">Inf</span>,</span>
+<span id="cb53-6"><a></a>  <span class="at">.versions =</span> <span class="cn">NULL</span>,</span>
+<span id="cb53-7"><a></a>  <span class="at">.new_col_name =</span> <span class="cn">NULL</span>,</span>
+<span id="cb53-8"><a></a>  <span class="at">.all_versions =</span> <span class="cn">FALSE</span></span>
+<span id="cb53-9"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This functionality is very helpful in version aware forecasting. We will return with a concrete example.</p>
+</section>
+<section id="features-summarize-revision-behavior" class="slide level2">
+<h2>Features – summarize revision behavior</h2>
+<ul>
+<li><code>revision_analysis()</code> is a helper function that summarizes revision behavior of an <code>epix_archive</code>.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>revision_data <span class="ot">&lt;-</span> <span class="fu">revision_analysis</span>(</span>
+<span id="cb54-2"><a></a>  archive_cases_dv_subset,</span>
+<span id="cb54-3"><a></a>  case_rate_7d_av,</span>
+<span id="cb54-4"><a></a>  <span class="at">drop_nas =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb54-5"><a></a>  <span class="at">min_waiting_period =</span> <span class="fu">as.difftime</span>(<span class="dv">60</span>, <span class="at">units =</span> <span class="st">"days"</span>),</span>
+<span id="cb54-6"><a></a>  <span class="at">within_latest =</span> <span class="fl">0.2</span>,</span>
+<span id="cb54-7"><a></a>  <span class="at">compactify_abs_tol =</span> .Machine<span class="sc">$</span>double.eps<span class="sc">^</span><span class="fl">0.5</span>,</span>
+<span id="cb54-8"><a></a>)</span>
+<span id="cb54-9"><a></a><span class="fu">head</span>(revision_data<span class="sc">$</span>revision_behavior)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 11
+  time_value geo_value n_revisions min_lag max_lag  lag_near_latest spread
+  &lt;date&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;drtn&gt;  &lt;drtn&gt;   &lt;drtn&gt;           &lt;dbl&gt;
+1 2020-06-01 ca                 12 1 days  546 days 1 days          0.248 
+2 2020-06-02 ca                 12 1 days  545 days 1 days          0.416 
+3 2020-06-03 ca                 11 1 days  544 days 1 days          0.115 
+4 2020-06-04 ca                 11 1 days  543 days 1 days          0.342 
+5 2020-06-05 ca                  7 1 days  520 days 1 days          0.0982
+6 2020-06-06 ca                  8 1 days  519 days 1 days          0.188 
+# ℹ 4 more variables: rel_spread &lt;dbl&gt;, min_value &lt;dbl&gt;, max_value &lt;dbl&gt;,
+#   median_value &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="features-summarize-revision-behavior-1" class="slide level2">
+<h2>Features – summarize revision behavior</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a>revision_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── An epi_archive spanning 2020-06-01 to 2021-11-30. ──</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Min lag (time to first version): </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     min median   mean    max
+  1 days 1 days 1 days 2 days</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Fraction of epi_key + time_values with </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No revisions:
+• 523 out of 1,956 (26.74%)
+
+Quick revisions (last revision within 3 days of the `time_value`):
+• 531 out of 1,956 (27.15%)
+
+Few revisions (At most 3 revisions for that `time_value`):
+• 1,199 out of 1,956 (61.3%)
+
+
+
+── Fraction of revised epi_key + time_values which have: 
+
+Less than 0.1 spread in relative value:
+• 1,312 out of 1,433 (91.56%)
+
+Spread of more than 6.351 in actual value (when revised):
+• 39 out of 1,433 (2.72%)
+
+
+
+── Days until within 20% of the latest value: </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     min median     mean     max
+  1 days 1 days 1.7 days 84 days</code></pre>
+</div>
+</div>
+<p>Try on your favorite archive so far</p>
+</section>
+<section id="visualize-revision-patterns-autoplots-roll-out" class="slide level2">
+<h2>Visualize revision patterns: Autoplots roll out!</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a>archive_cases_dv_subset_all_states <span class="sc">%&gt;%</span></span>
+<span id="cb66-2"><a></a>  <span class="fu">autoplot</span>(</span>
+<span id="cb66-3"><a></a>    <span class="at">.facet_filter =</span> geo_value <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ca"</span>, <span class="st">"ut"</span>),</span>
+<span id="cb66-4"><a></a>    <span class="at">.versions =</span> <span class="st">"1 month"</span>,</span>
+<span id="cb66-5"><a></a>    <span class="at">.mark_versions =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<img data-src="day1-afternoon_files/figure-revealjs/plot-revision-patterns-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section></section>
+<section>
+<section id="basic-nowcasting-in-the-epiverse" class="title-slide slide level1 center" data-number="2">
+<h1><span class="header-section-number">2</span> Basic Nowcasting in the Epiverse</h1>
+
+</section>
+<section id="case-study-nchs-mortality" class="slide level2">
+<h2>Case study: NCHS mortality</h2>
+<ul>
+<li>In this example, we’ll demonstrate the concept of nowcasting using <span class="primary"><strong>NHCS mortality data</strong></span>. (the number of weekly new deaths with confirmed or presumed COVID-19, per 100,000 population).</li>
+<li>We will work with <span class="primary"><strong>provisional</strong></span> data (real-time reports) and compare them to <strong>finalized</strong> data (final reports).</li>
+<li>The goal is to estimate or <span class="primary"><strong>nowcast the mortality rate</strong></span> for weeks when only provisional data is available.</li>
+</ul>
+</section>
+<section id="fetch-versioned-data" class="slide level2">
+<h2>Fetch versioned data</h2>
+<p>Let’s fetch versioned mortality data from the API (<code>pub_covidcast</code>) for CA (<code>geo_values = "ca"</code>) and the signal of interest (<code>deaths_covid_incidence_num</code>) over early 2024.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a></a><span class="co"># Fetch the versioned NCHS mortality data (weekly)</span></span>
+<span id="cb67-2"><a></a>nchs_archive <span class="ot">&lt;-</span> <span class="fu">pub_covidcast</span>(</span>
+<span id="cb67-3"><a></a>  <span class="at">source =</span> <span class="st">"nchs-mortality"</span>,</span>
+<span id="cb67-4"><a></a>  <span class="at">signals =</span> <span class="st">"deaths_covid_incidence_num"</span>,</span>
+<span id="cb67-5"><a></a>  <span class="at">geo_type =</span> <span class="st">"state"</span>,</span>
+<span id="cb67-6"><a></a>  <span class="at">time_type =</span> <span class="st">"week"</span>,</span>
+<span id="cb67-7"><a></a>  <span class="at">geo_values =</span> <span class="fu">c</span>(<span class="st">"ca"</span>, <span class="st">"ia"</span>),</span>
+<span id="cb67-8"><a></a>  <span class="at">time_values =</span> <span class="fu">epirange</span>(<span class="dv">202001</span>, <span class="dv">202440</span>),</span>
+<span id="cb67-9"><a></a>  <span class="at">issues =</span> <span class="st">"*"</span></span>
+<span id="cb67-10"><a></a>) <span class="sc">|&gt;</span></span>
+<span id="cb67-11"><a></a>  <span class="fu">select</span>(geo_value, time_value, <span class="at">version =</span> issue, <span class="at">mortality =</span> value) <span class="sc">|&gt;</span></span>
+<span id="cb67-12"><a></a>  <span class="fu">as_epi_archive</span>(<span class="at">compactify =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb67-13"><a></a><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>You’ll need an API key to actually run this, unfortunately</p>
+</section>
+<section id="versioning-analysis-latency" class="slide level2">
+<h2>Versioning analysis – latency</h2>
+<ul>
+<li><span class="primary"><strong>Question:</strong></span> What is the latency of NCHS data?</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a></a>revision_data<span class="sc">$</span>revision_behavior <span class="sc">|&gt;</span> <span class="fu">select</span>(geo_value, time_value, min_lag) <span class="sc">|&gt;</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   geo_value time_value min_lag 
+   &lt;chr&gt;     &lt;date&gt;     &lt;drtn&gt;  
+ 1 ca        2024-04-07  1 weeks
+ 2 ut        2021-09-12  1 weeks
+ 3 ca        2022-03-27  2 weeks
+ 4 ca        2021-02-28  1 weeks
+ 5 ca        2020-08-02 18 weeks
+ 6 ut        2021-11-07  1 weeks
+ 7 ut        2022-04-24  1 weeks
+ 8 ut        2022-06-19  2 weeks
+ 9 ut        2023-02-19  1 weeks
+10 ca        2022-05-15  2 weeks</code></pre>
+</div>
+</div>
+<ul>
+<li>We randomly sampled some dates to check if there is a consistent latency pattern.</li>
+<li>Understanding latency prevents us from using data that we shouldn’t have access to.</li>
+</ul>
+</section>
+<section id="versioning-analysis-backfill" class="slide level2">
+<h2>Versioning analysis – backfill</h2>
+<ul>
+<li><span class="primary"><strong>Question:</strong></span> How long does it take for the reported value to be close to the finalized value?</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a></a>revision_data<span class="sc">$</span>revision_behavior <span class="sc">|&gt;</span> <span class="fu">select</span>(geo_value, time_value, lag_near_latest) <span class="sc">|&gt;</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   geo_value time_value lag_near_latest
+   &lt;chr&gt;     &lt;date&gt;     &lt;drtn&gt;         
+ 1 ut        2020-05-31 27 weeks       
+ 2 ca        2021-04-04  5 weeks       
+ 3 ut        2022-08-07  2 weeks       
+ 4 ca        2022-08-21  3 weeks       
+ 5 ca        2023-07-23  3 weeks       
+ 6 ut        2020-03-29 36 weeks       
+ 7 ca        2020-11-01  5 weeks       
+ 8 ca        2024-03-31  4 weeks       
+ 9 ca        2024-07-14  3 weeks       
+10 ca        2024-08-18  3 weeks       </code></pre>
+</div>
+</div>
+<ul>
+<li>It generally takes at least 4 weeks for reported value to be within 20% (default in <code>revision_analysis()</code>) of the finalized value.</li>
+<li>We can change the threshold of percentage difference by specifying the <code>within_latest</code> argument of <code>revision_analysis()</code>.</li>
+</ul>
+</section>
+<section id="revision-pattern-visualization" class="slide level2">
+<h2>Revision pattern visualization</h2>
+<p>This shows the finalized rates in comparison to <span class="primary"><strong>multiple revisions</strong></span> to see how the data changes over time:</p>
+
+<img data-src="day1-afternoon_files/figure-revealjs/final-vs-revisions-plot-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="ratio-nowcaster-jumping-from-provisional-to-finalized-value" class="slide level2">
+<h2>Ratio nowcaster: jumping from provisional to finalized value</h2>
+<ul>
+<li>Recall, the goal of nowcast at date <span class="math inline">\(t\)</span> is to use project the <span class="primary"><em>finalized value</em></span> of <span class="math inline">\(y_t,\)</span> given the information available on date <span class="math inline">\(t\)</span>.</li>
+<li>A very simple nowcaster is the ratio between finalized and provisional value.</li>
+</ul>
+<p>How can we sensibly estimate this quantity?</p>
+</section>
+<section id="ratio-nowcaster-building-training-samples" class="slide level2">
+<h2>Ratio nowcaster: building training samples</h2>
+<ul>
+<li>At nowcast date <span class="math inline">\(t,\)</span> would have received reports with versions up to and including <span class="math inline">\(t.\)</span></li>
+<li>We need to build training samples, which
+<ul>
+<li>correctly aligns finalized value against provisional value</li>
+<li>uses features that would have been available at test time</li>
+<li>have enough samples to ensure sensible estimation results</li>
+</ul></li>
+</ul>
+<div class="fragment fade-in">
+<ul>
+<li>Build training samples by treating dates prior to date <span class="math inline">\(t\)</span> as actual nowcast dates.
+<ul>
+<li>What is the provisional data on that date?</li>
+<li>Have we received finalized value for that date?</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="ratio-nowcaster-building-training-samples-1" class="slide level2">
+<h2>Ratio nowcaster: building training samples</h2>
+<ul>
+<li>At an earlier nowcast date <span class="math inline">\(t_0,\)</span> we define
+<ul>
+<li><span class="primary"><strong>Provisional value</strong></span> as the reported value of <span class="math inline">\(Y_{s_0}\)</span> with version <span class="math inline">\(t_0.\)</span> Here <span class="math inline">\(s_0\)</span> is the largest occurence date among all values reported up until <span class="math inline">\(t_0.\)</span></li>
+<li><span class="primary"><strong>Finalized value</strong></span> as the (potentially unobserved) finalized value of <span class="math inline">\(Y_{s_0}.\)</span>
+<ul>
+<li>We only know in <em>hindsight</em> when reported value of <span class="math inline">\(Y_{s_0}\)</span> is finalized – need an approximation.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="revisiting-revision_analysis" class="slide level2">
+<h2>Revisiting <code>revision_analysis()</code></h2>
+<p>Recall, <code>revision_analysis()</code> reports the number of days to be within 20% (default value) of finalized value</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  geo_value time_value lag_near_latest
+  &lt;chr&gt;     &lt;date&gt;     &lt;drtn&gt;         
+1 ca        2024-02-18 4 weeks        
+2 ut        2023-12-03 3 weeks        
+3 ut        2022-10-16 3 weeks        
+4 ca        2020-12-20 8 weeks        
+5 ut        2022-09-11 3 weeks        </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  0%  25%  50%  75% 100% 
+  NA   NA   NA   NA   NA </code></pre>
+</div>
+</div>
+<div class="fragment fade-in">
+<p>Let’s say data reported NA days after reference date is good enough to be considered finalized.</p>
+</div>
+</section>
+<section id="ratio-nowcaster-test-time-feature" class="slide level2">
+<h2>Ratio nowcaster: test time feature</h2>
+<ul>
+<li>Due to latency, provisional values may not be available at lag 0</li>
+<li>We use last-observation-carried-forward (LOCF) to impute missing values at test time</li>
+<li>Precisely, at test time <span class="math inline">\(t,\)</span> we use last observed data point (among all those reported up through time <span class="math inline">\(t\)</span>)</li>
+</ul>
+</section>
+<section id="nowcasting-at-a-single-date-building-training-samples" class="slide level2">
+<h2>Nowcasting at a single date: building training samples</h2>
+<div class="fragment fade-in">
+<ul>
+<li>Searching for provisional values, at previous hypothetical nowcast dates.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a>nowcast_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2022-01-02"</span>); window_length <span class="ot">=</span> <span class="dv">180</span></span>
+<span id="cb75-2"><a></a></span>
+<span id="cb75-3"><a></a>initial_data <span class="ot">&lt;-</span> nchs_archive<span class="sc">$</span>DT <span class="sc">|&gt;</span></span>
+<span id="cb75-4"><a></a>  <span class="fu">group_by</span>(geo_value, time_value) <span class="sc">|&gt;</span></span>
+<span id="cb75-5"><a></a>  <span class="fu">filter</span>(version <span class="sc">==</span> <span class="fu">min</span>(version)) <span class="sc">|&gt;</span></span>
+<span id="cb75-6"><a></a>  <span class="fu">rename</span>(<span class="at">initial_val =</span> mortality) <span class="sc">|&gt;</span></span>
+<span id="cb75-7"><a></a>  <span class="fu">select</span>(geo_value, time_value, initial_val)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="fragment fade-in">
+<ul>
+<li>Searching for finalized values, at previous hypothetical nowcast dates.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a></a><span class="co">#|</span></span>
+<span id="cb76-2"><a></a>finalized_data <span class="ot">&lt;-</span> <span class="fu">epix_as_of</span>(nchs_archive, nowcast_date) <span class="sc">|&gt;</span></span>
+<span id="cb76-3"><a></a>  <span class="fu">filter</span>(time_value <span class="sc">&gt;=</span> nowcast_date <span class="sc">-</span> approx_final_lag <span class="sc">-</span> window_length <span class="sc">&amp;</span> time_value <span class="sc">&lt;=</span> nowcast_date <span class="sc">-</span> approx_final_lag) <span class="sc">|&gt;</span></span>
+<span id="cb76-4"><a></a>  <span class="fu">rename</span>(<span class="at">finalized_val =</span> mortality) <span class="sc">|&gt;</span></span>
+<span id="cb76-5"><a></a>  <span class="fu">select</span>(geo_value, time_value, finalized_val)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="nowcasting-at-a-single-date-estimating-ratio-model" class="slide level2">
+<h2>Nowcasting at a single date: estimating ratio model</h2>
+<ul>
+<li>After searching for both provisional and finalized values, we merge them together and estimate the ratio. ::: {.cell layout-align=“center”}</li>
+</ul>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a></a>ratio <span class="ot">&lt;-</span> finalized_data <span class="sc">|&gt;</span></span>
+<span id="cb77-2"><a></a>  <span class="fu">inner_join</span>(initial_data, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"geo_value"</span>, <span class="st">"time_value"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb77-3"><a></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> finalized_val <span class="sc">/</span> initial_val) <span class="sc">|&gt;</span></span>
+<span id="cb77-4"><a></a>  <span class="fu">pull</span>(ratio) <span class="sc">|&gt;</span></span>
+<span id="cb77-5"><a></a>  <span class="fu">median</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>:::</p>
+</section>
+<section id="nowcasting-at-a-single-date-test-feature-construction" class="slide level2">
+<h2>Nowcasting at a single date: test feature construction</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a></a>last_avail <span class="ot">&lt;-</span> <span class="fu">epix_as_of</span>(nchs_archive, nowcast_date) <span class="sc">|&gt;</span></span>
+<span id="cb78-2"><a></a>  <span class="fu">slice_max</span>(time_value) <span class="sc">|&gt;</span></span>
+<span id="cb78-3"><a></a>  <span class="fu">pull</span>(mortality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="nowcasting-at-a-single-date-producing-the-nowcast" class="slide level2">
+<h2>Nowcasting at a single date: producing the nowcast</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a></a>nowcast <span class="ot">&lt;-</span> last_avail <span class="sc">*</span> ratio</span>
+<span id="cb79-2"><a></a>finalized_val <span class="ot">&lt;-</span> <span class="fu">epix_as_of</span>(nchs_archive, nchs_archive<span class="sc">$</span>versions_end) <span class="sc">|&gt;</span></span>
+<span id="cb79-3"><a></a>  <span class="fu">filter</span>(time_value <span class="sc">==</span> nowcast_date) <span class="sc">|&gt;</span></span>
+<span id="cb79-4"><a></a><span class="fu">pull</span>(mortality)</span>
+<span id="cb79-5"><a></a></span>
+<span id="cb79-6"><a></a>nowcast_final <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Nowcast =</span> nowcast, <span class="st">`</span><span class="at">Finalized value</span><span class="st">`</span> <span class="ot">=</span> finalized_val, <span class="at">check.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb79-7"><a></a>knitr<span class="sc">::</span><span class="fu">kable</span>(nowcast_final)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Nowcast</th>
+<th style="text-align: right;">Finalized value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">948</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="nowcasting-for-multiple-dates" class="slide level2">
+<h2>Nowcasting for multiple dates</h2>
+<ul>
+<li>All previous manipulations should really be seen as a template for all nowcast dates.</li>
+<li>The template computation sould be applied over all nowcast dates, <span class="primary"><strong>but we must respect data versioning</strong></span>!</li>
+<li><code>epix_slide()</code> is designed just for this! It behaves similarly to <code>epi_slide</code>.</li>
+<li>Key exception: <code>epix_slide()</code> is version aware: the sliding computation at any reference time <span class="math inline">\(t\)</span> is performed on <span class="primary"><strong>data that would have been available as of t</strong></span>.</li>
+</ul>
+</section>
+<section id="nowcasting-for-multiple-dates-via-epix_slide" class="slide level2">
+<h2>Nowcasting for multiple dates via <code>epix_slide()</code></h2>
+<p>We begin by templatizing our previous operations.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a></a>nowcaster <span class="ot">&lt;-</span> <span class="cf">function</span>(x, g, t, <span class="at">wl=</span><span class="dv">180</span>, <span class="at">appx=</span>approx_final_lag) {</span>
+<span id="cb80-2"><a></a>  initial_data <span class="ot">&lt;-</span> x<span class="sc">$</span>DT <span class="sc">|&gt;</span></span>
+<span id="cb80-3"><a></a>    <span class="fu">group_by</span>(geo_value, time_value) <span class="sc">|&gt;</span></span>
+<span id="cb80-4"><a></a>    <span class="fu">filter</span>(version <span class="sc">==</span>  <span class="fu">min</span>(version)) <span class="sc">|&gt;</span></span>
+<span id="cb80-5"><a></a>    <span class="fu">filter</span>(time_value <span class="sc">&gt;=</span> t <span class="sc">-</span> wl <span class="sc">-</span> appx <span class="sc">&amp;</span> time_value <span class="sc">&lt;=</span> t <span class="sc">-</span> appx) <span class="sc">|&gt;</span></span>
+<span id="cb80-6"><a></a>    <span class="fu">rename</span>(<span class="at">initial_val =</span> mortality) <span class="sc">|&gt;</span></span>
+<span id="cb80-7"><a></a>    <span class="fu">select</span>(geo_value, time_value, initial_val)</span>
+<span id="cb80-8"><a></a>  finalized_data <span class="ot">&lt;-</span> x<span class="sc">$</span>DT <span class="sc">|&gt;</span></span>
+<span id="cb80-9"><a></a>    <span class="fu">group_by</span>(geo_value, time_value) <span class="sc">|&gt;</span></span>
+<span id="cb80-10"><a></a>    <span class="fu">filter</span>(version <span class="sc">==</span>  <span class="fu">max</span>(version)) <span class="sc">|&gt;</span></span>
+<span id="cb80-11"><a></a>    <span class="fu">filter</span>(time_value <span class="sc">&gt;=</span> t <span class="sc">-</span> wl <span class="sc">-</span> appx <span class="sc">&amp;</span> time_value <span class="sc">&lt;=</span> t <span class="sc">-</span> appx) <span class="sc">|&gt;</span></span>
+<span id="cb80-12"><a></a>    <span class="fu">rename</span>(<span class="at">finalized_val =</span> mortality) <span class="sc">|&gt;</span></span>
+<span id="cb80-13"><a></a>    <span class="fu">select</span>(geo_value, time_value, finalized_val)</span>
+<span id="cb80-14"><a></a>  ratio <span class="ot">&lt;-</span> finalized_data <span class="sc">|&gt;</span></span>
+<span id="cb80-15"><a></a>    <span class="fu">inner_join</span>(initial_data, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"geo_value"</span>, <span class="st">"time_value"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb80-16"><a></a>    <span class="fu">mutate</span>(<span class="at">ratio =</span> finalized_val <span class="sc">/</span> initial_val) <span class="sc">|&gt;</span></span>
+<span id="cb80-17"><a></a>    <span class="fu">pull</span>(ratio) <span class="sc">|&gt;</span></span>
+<span id="cb80-18"><a></a>    <span class="fu">median</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb80-19"><a></a>  last_avail <span class="ot">&lt;-</span>  <span class="fu">epix_as_of</span>(x, t) <span class="sc">|&gt;</span></span>
+<span id="cb80-20"><a></a>    <span class="fu">slice_max</span>(time_value) <span class="sc">|&gt;</span></span>
+<span id="cb80-21"><a></a>    <span class="fu">pull</span>(mortality)</span>
+<span id="cb80-22"><a></a>  <span class="fu">tibble</span>(<span class="at">geo_value =</span> x<span class="sc">$</span>geo_value, <span class="at">target_date =</span> t, <span class="at">nowcast =</span> last_avail <span class="sc">*</span> ratio)</span>
+<span id="cb80-23"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sanity-check-of-epix_slide" class="slide level2">
+<h2>Sanity check of <code>epix_slide()</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a></a>slided_nowcast_1d <span class="ot">=</span> <span class="fu">epix_slide</span>(</span>
+<span id="cb81-2"><a></a>  <span class="at">.x =</span> nchs_archive,</span>
+<span id="cb81-3"><a></a>  <span class="at">.f =</span> nowcaster,</span>
+<span id="cb81-4"><a></a>  <span class="at">.before =</span> <span class="cn">Inf</span>,</span>
+<span id="cb81-5"><a></a>  <span class="at">.versions =</span> nowcast_date,</span>
+<span id="cb81-6"><a></a>  <span class="at">.all_versions =</span> <span class="cn">TRUE</span></span>
+<span id="cb81-7"><a></a>)</span>
+<span id="cb81-8"><a></a></span>
+<span id="cb81-9"><a></a>nowcast_check <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="st">`</span><span class="at">Manual nowcast</span><span class="st">`</span> <span class="ot">=</span> nowcast, <span class="st">`</span><span class="at">Slided nowcast</span><span class="st">`</span> <span class="ot">=</span> slided_nowcast_1d<span class="sc">$</span>nowcast, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb81-10"><a></a>knitr<span class="sc">::</span><span class="fu">kable</span>(nowcast_check)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Manual nowcast</th>
+<th style="text-align: right;">Slided nowcast</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="nowcasting-for-multiple-dates-via-epix_slide-1" class="slide level2">
+<h2>Nowcasting for multiple dates via <code>epix_slide()</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a></a>nowcasts <span class="ot">=</span> nchs_archive <span class="sc">|&gt;</span></span>
+<span id="cb82-2"><a></a>  <span class="fu">group_by</span>(geo_value) <span class="sc">|&gt;</span></span>
+<span id="cb82-3"><a></a>  <span class="fu">epix_slide</span>(</span>
+<span id="cb82-4"><a></a>    nowcaster,</span>
+<span id="cb82-5"><a></a>    <span class="at">.before=</span><span class="cn">Inf</span>,</span>
+<span id="cb82-6"><a></a>    <span class="at">.versions =</span> all_nowcast_dates,</span>
+<span id="cb82-7"><a></a>    <span class="at">.all_versions =</span> <span class="cn">TRUE</span></span>
+<span id="cb82-8"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="details-of-epix_slide" class="slide level2">
+<h2>Details of <code>epix_slide()</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a></a><span class="fu">epix_slide</span>(</span>
+<span id="cb83-2"><a></a>  .x,</span>
+<span id="cb83-3"><a></a>  .f,</span>
+<span id="cb83-4"><a></a>  ...,</span>
+<span id="cb83-5"><a></a>  <span class="at">.before =</span> <span class="cn">Inf</span>,</span>
+<span id="cb83-6"><a></a>  <span class="at">.versions =</span> <span class="cn">NULL</span>,</span>
+<span id="cb83-7"><a></a>  <span class="at">.new_col_name =</span> <span class="cn">NULL</span>,</span>
+<span id="cb83-8"><a></a>  <span class="at">.all_versions =</span> <span class="cn">FALSE</span></span>
+<span id="cb83-9"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>.f</code> in <code>epix_slide()</code> can be specified with the same form of custom function as <code>epi_slide()</code>.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a></a><span class="cf">function</span>(x, g, t) {</span>
+<span id="cb84-2"><a></a>  <span class="co"># function body</span></span>
+<span id="cb84-3"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Mandatory variables of <code>.f</code> would have different forms depending on the value of <code>.all_versions</code>.</li>
+</ul>
+</section>
+<section id="details-of-epix_slide-1" class="slide level2">
+<h2>Details of <code>epix_slide()</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb85" data-code-line-numbers="|8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a></a><span class="fu">epix_slide</span>(</span>
+<span id="cb85-2"><a></a>  .x,</span>
+<span id="cb85-3"><a></a>  .f,</span>
+<span id="cb85-4"><a></a>  ...,</span>
+<span id="cb85-5"><a></a>  <span class="at">.before =</span> <span class="cn">Inf</span>,</span>
+<span id="cb85-6"><a></a>  <span class="at">.versions =</span> <span class="cn">NULL</span>,</span>
+<span id="cb85-7"><a></a>  <span class="at">.new_col_name =</span> <span class="cn">NULL</span>,</span>
+<span id="cb85-8"><a></a>  <span class="at">.all_versions =</span> <span class="cn">FALSE</span></span>
+<span id="cb85-9"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment fade-in">
+<ul>
+<li>When <code>.all_versions = FALSE</code>, <code>epix_slide()</code> essentially iterates the templatized computation over snapshots.</li>
+<li>Said differently, when <code>.all_versions = FALSE</code>, data accessed at any sliding iteration <span class="primary"><strong>only involves a single version</strong></span>.</li>
+</ul>
+</div>
+<div class="fragment fade-in">
+<ul>
+<li>Hence:
+<ul>
+<li><code>x</code>: an <code>epi_df</code> with same column names as archive’s <code>DT</code>, minus the <code>version</code> column.</li>
+<li><code>g</code>: a one-row tibble containing the values of groupping variables of the associated group.</li>
+<li><code>t</code>: the <code>ref_time_value</code> of the current window.</li>
+<li><code>...</code>: additional arguments.</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="details-of-epix_slide-2" class="slide level2">
+<h2>Details of <code>epix_slide()</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb86" data-code-line-numbers="|8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a></a><span class="fu">epix_slide</span>(</span>
+<span id="cb86-2"><a></a>  .x,</span>
+<span id="cb86-3"><a></a>  .f,</span>
+<span id="cb86-4"><a></a>  ...,</span>
+<span id="cb86-5"><a></a>  <span class="at">.before =</span> <span class="cn">Inf</span>,</span>
+<span id="cb86-6"><a></a>  <span class="at">.versions =</span> <span class="cn">NULL</span>,</span>
+<span id="cb86-7"><a></a>  <span class="at">.new_col_name =</span> <span class="cn">NULL</span>,</span>
+<span id="cb86-8"><a></a>  <span class="at">.all_versions =</span> <span class="cn">TRUE</span></span>
+<span id="cb86-9"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment fade-in">
+<ul>
+<li>When <code>.all_versions = FALSE</code>, data accessed at any sliding iteration involves versions <span class="primary"><strong>up to and including .version</strong></span>.</li>
+</ul>
+</div>
+<div class="fragment fade-in">
+<ul>
+<li>Hence:
+<ul>
+<li><code>x</code>: an <code>epi_archive</code>, with version up to and including <code>.version</code>.</li>
+<li><code>g</code>: a one-row tibble containing the values of groupping variables of the associated group.</li>
+<li><code>t</code>: the <code>.version</code> of the current window.</li>
+<li><code>...</code>: additional arguments.</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="details-of-epix_slide-3" class="slide level2">
+<h2>Details of <code>epix_slide()</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb87" data-code-line-numbers="|7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a></a>nowcasts <span class="ot">&lt;-</span> nchs_archive <span class="sc">|&gt;</span></span>
+<span id="cb87-2"><a></a>  <span class="fu">group_by</span>(geo_value) <span class="sc">|&gt;</span></span>
+<span id="cb87-3"><a></a>  <span class="fu">epix_slide</span>(</span>
+<span id="cb87-4"><a></a>    nowcaster,</span>
+<span id="cb87-5"><a></a>    <span class="at">.before=</span><span class="cn">Inf</span>,</span>
+<span id="cb87-6"><a></a>    <span class="at">.versions =</span> all_nowcast_dates,</span>
+<span id="cb87-7"><a></a>    <span class="at">.all_versions =</span> <span class="cn">TRUE</span></span>
+<span id="cb87-8"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="details-of-epix_slide-4" class="slide level2">
+<h2>Details of <code>epix_slide()</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb88" data-code-line-numbers="|3,9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a></a>nowcaster <span class="ot">&lt;-</span> <span class="cf">function</span>(x, g, t, <span class="at">wl=</span><span class="dv">180</span>, <span class="at">appx=</span>approx_final_lag) {</span>
+<span id="cb88-2"><a></a>  initial_data <span class="ot">&lt;-</span> x<span class="sc">$</span>DT <span class="sc">|&gt;</span></span>
+<span id="cb88-3"><a></a>    <span class="fu">group_by</span>(geo_value, time_value) <span class="sc">|&gt;</span></span>
+<span id="cb88-4"><a></a>    <span class="fu">filter</span>(version <span class="sc">==</span>  <span class="fu">min</span>(version)) <span class="sc">|&gt;</span></span>
+<span id="cb88-5"><a></a>    <span class="fu">filter</span>(time_value <span class="sc">&gt;=</span> t <span class="sc">-</span> wl <span class="sc">-</span> appx <span class="sc">&amp;</span> time_value <span class="sc">&lt;=</span> t <span class="sc">-</span> appx) <span class="sc">|&gt;</span></span>
+<span id="cb88-6"><a></a>    <span class="fu">rename</span>(<span class="at">initial_val =</span> mortality) <span class="sc">|&gt;</span></span>
+<span id="cb88-7"><a></a>    <span class="fu">select</span>(geo_value, time_value, initial_val)</span>
+<span id="cb88-8"><a></a>  finalized_data <span class="ot">&lt;-</span> x<span class="sc">$</span>DT <span class="sc">|&gt;</span></span>
+<span id="cb88-9"><a></a>    <span class="fu">group_by</span>(geo_value, time_value) <span class="sc">|&gt;</span></span>
+<span id="cb88-10"><a></a>    <span class="fu">filter</span>(version <span class="sc">==</span>  <span class="fu">max</span>(version)) <span class="sc">|&gt;</span></span>
+<span id="cb88-11"><a></a>    <span class="fu">filter</span>(time_value <span class="sc">&gt;=</span> t <span class="sc">-</span> wl <span class="sc">-</span> appx <span class="sc">&amp;</span> time_value <span class="sc">&lt;=</span> t <span class="sc">-</span> appx) <span class="sc">|&gt;</span></span>
+<span id="cb88-12"><a></a>    <span class="fu">rename</span>(<span class="at">finalized_val =</span> mortality) <span class="sc">|&gt;</span></span>
+<span id="cb88-13"><a></a>    <span class="fu">select</span>(geo_value, time_value, finalized_val)</span>
+<span id="cb88-14"><a></a>  ratio <span class="ot">&lt;-</span> finalized_data <span class="sc">|&gt;</span></span>
+<span id="cb88-15"><a></a>    <span class="fu">inner_join</span>(initial_data, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"geo_value"</span>, <span class="st">"time_value"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb88-16"><a></a>    <span class="fu">mutate</span>(<span class="at">ratio =</span> finalized_val <span class="sc">/</span> initial_val) <span class="sc">|&gt;</span></span>
+<span id="cb88-17"><a></a>    <span class="fu">pull</span>(ratio) <span class="sc">|&gt;</span></span>
+<span id="cb88-18"><a></a>    <span class="fu">median</span>(<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb88-19"><a></a>  last_avail <span class="ot">&lt;-</span> <span class="fu">epix_as_of</span>(x, t) <span class="sc">|&gt;</span></span>
+<span id="cb88-20"><a></a>    <span class="fu">slice_max</span>(time_value) <span class="sc">|&gt;</span></span>
+<span id="cb88-21"><a></a>    <span class="fu">pull</span>(mortality)</span>
+<span id="cb88-22"><a></a>  <span class="fu">tibble</span>(<span class="at">geo_value =</span> x<span class="sc">$</span>geo_value, <span class="at">target_date =</span> t, <span class="at">nowcast =</span> last_avail <span class="sc">*</span> ratio)</span>
+<span id="cb88-23"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="visualize-nowcasts" class="slide level2">
+<h2>Visualize nowcasts</h2>
+<p>We are now finally able to compare nowcasts against first available reports:</p>
+
+<img data-src="day1-afternoon_files/figure-revealjs/nowcast-fun-plot-results-1.svg" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>The real-time counts tend to be biased below the finalized counts. Nowcasted values tend to provide a much better approximation of the truth (at least for these dates).</li>
+</ul>
+</section>
+<section id="smoothing-nowcasts" class="slide level2">
+<h2>Smoothing nowcasts</h2>
+<ul>
+<li>Nowcasts are quite volatile, reflecting the provisional counts are far from complete.</li>
+<li>We can use a trailing average to smooth them.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a></a>smoothed_nowcasts <span class="ot">&lt;-</span> <span class="fu">epi_slide</span>(</span>
+<span id="cb89-2"><a></a>  nowcasts <span class="sc">|&gt;</span> <span class="fu">as_epi_df</span>(),</span>
+<span id="cb89-3"><a></a>  <span class="at">smoothed_nowcasts =</span> <span class="fu">mean</span>(nowcast, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb89-4"><a></a>  <span class="at">.window_size =</span> <span class="fu">as.difftime</span>(<span class="dv">3</span>, <span class="at">units =</span> <span class="st">"weeks"</span>)</span>
+<span id="cb89-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<img data-src="day1-afternoon_files/figure-revealjs/nowcast-smoothed-vis-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="evaluation-using-mae" class="slide level2">
+<h2>Evaluation using MAE</h2>
+<ul>
+<li><p>Assume we have prediction <span class="math inline">\(\hat y_{t}\)</span> for the provisional value at time <span class="math inline">\(t\)</span>.</p></li>
+<li><p>Then for <span class="math inline">\(y_{t}\)</span> over times <span class="math inline">\(t = 1, \dots, N\)</span>, then we may compute error metrics like mean absolute error (MAE).</p></li>
+<li><p>MAE measures the average absolute difference between the nowcast and finalized values.</p></li>
+</ul>
+<p><span class="math display">\[MAE = \frac{1}{N} \sum_{t=1}^N |y_{t}- \hat y_{t}|\]</span></p>
+<ul>
+<li>Note that it’s scale-dependent, meaning it can vary depending on the units of the data (e.g., cases, deaths, etc.).</li>
+</ul>
+</section>
+<section id="evaluation-using-mae-1" class="slide level2">
+<h2>Evaluation using MAE</h2>
+<p>Let’s numerically evaluate our point nowcasts for the provisional values of a time series (e.g., COVID-19 mortality) using MAE.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Smoothed MAE</th>
+<th style="text-align: right;">Unsmoothed nowcast MAE</th>
+<th style="text-align: right;">Provisional value MAE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">201.0909</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>&lt;!– # Nowcasting with Regression</p>
+</section>
+<section id="nowcasting-moving-from-one-predictor-to-multiple" class="slide level2">
+<h2>Nowcasting: Moving from one predictor to multiple</h2>
+<ul>
+<li>The ratio model predicts the finalized value of <span class="math inline">\(Y_t\)</span> from <span class="math inline">\(Y_{s}\)</span>, the last value included in the version <span class="math inline">\(t\)</span> report.</li>
+<li><span class="math inline">\(Y_s\)</span> is the closest in time we can get to <span class="math inline">\(Y_t\)</span>, but we also expect it to be the least reliable value in version <span class="math inline">\(t\)</span>.</li>
+<li>Can we add <span class="math inline">\(Y_{s - 1}\)</span>, <span class="math inline">\(Y_{s - 2}\)</span>, and even other data sources to the model to try to find a good mix of relevant and reliable signals?</li>
+<li>Regressions models will let us do that.</li>
+<li>Let’s start “simple”: predicting <span class="math inline">\(Y_t\)</span> with whichever of <span class="math inline">\(Y_{t - 1}\)</span> and <span class="math inline">\(Y_{t -
+2}\)</span> are available in version <span class="math inline">\(t\)</span>.</li>
+</ul>
+</section>
+<section id="start-with-a-single-nowcast-date" class="slide level2">
+<h2>Start with a single nowcast date</h2>
+<p>We’re only looking at California in this example: ::: {.cell layout-align=“center”}</p>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a></a>nchs_ca_archive <span class="ot">&lt;-</span> nchs_archive<span class="sc">$</span>DT[geo_value <span class="sc">==</span> <span class="st">"ca"</span>,] <span class="sc">|&gt;</span></span>
+<span id="cb90-2"><a></a>  <span class="fu">as_epi_archive</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>:::</p>
+<p>We’ll start experimenting with just a single nowcast date:</p>
+<aside class="notes">
+<p>Earlier nowcast dates often encounter extra difficulties regarding data availability, so let’s make sure we work on the first one.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a></a>trial_nowcast_date <span class="ot">&lt;-</span> all_nowcast_dates[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What data would we have had available then? ::: {.cell layout-align=“center”}</p>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a></a><span class="co"># This is the version history we'd have seen at that point:</span></span>
+<span id="cb92-2"><a></a>nchs_ca_past_archive <span class="ot">&lt;-</span> nchs_ca_archive <span class="sc">|&gt;</span></span>
+<span id="cb92-3"><a></a>  <span class="fu">epix_as_of</span>(trial_nowcast_date, <span class="at">all_versions =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb92-4"><a></a></span>
+<span id="cb92-5"><a></a><span class="co"># And this is what the latest version was at that point:</span></span>
+<span id="cb92-6"><a></a>nchs_ca_past_latest <span class="ot">&lt;-</span> nchs_ca_past_archive <span class="sc">|&gt;</span></span>
+<span id="cb92-7"><a></a>  <span class="fu">epix_as_of</span>(trial_nowcast_date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>:::</p>
+</section>
+<section id="what-predictors-were-available-at-test-time" class="slide level2">
+<h2>What predictors were available at test time?</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a></a><span class="co"># At version t, our target is finalized Y_t:</span></span>
+<span id="cb93-2"><a></a>target_time_value <span class="ot">&lt;-</span> trial_nowcast_date</span>
+<span id="cb93-3"><a></a></span>
+<span id="cb93-4"><a></a><span class="co"># Check which of Y_{t-1} and Y_{t-2} are available, assign distinct names:</span></span>
+<span id="cb93-5"><a></a>predictor_descriptions <span class="ot">&lt;-</span> nchs_ca_past_latest <span class="sc">|&gt;</span></span>
+<span id="cb93-6"><a></a>  <span class="fu">filter</span>(<span class="fu">as.integer</span>(target_time_value <span class="sc">-</span> time_value) <span class="sc">&lt;=</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">7</span>) <span class="sc">|&gt;</span></span>
+<span id="cb93-7"><a></a>  <span class="fu">drop_na</span>(mortality) <span class="sc">|&gt;</span></span>
+<span id="cb93-8"><a></a>  <span class="fu">transmute</span>(</span>
+<span id="cb93-9"><a></a>    <span class="at">varname =</span> <span class="st">"mortality"</span>,</span>
+<span id="cb93-10"><a></a>    <span class="at">lag_days =</span> <span class="fu">as.integer</span>(trial_nowcast_date <span class="sc">-</span> time_value),</span>
+<span id="cb93-11"><a></a>    <span class="at">predictor_name =</span> <span class="fu">paste0</span>(varname, <span class="st">"_lag"</span>, lag_days, <span class="st">"_realtime"</span>)</span>
+<span id="cb93-12"><a></a>  )</span>
+<span id="cb93-13"><a></a>predictor_descriptions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  varname   lag_days predictor_name          
+  &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;                   
+1 mortality       14 mortality_lag14_realtime
+2 mortality        7 mortality_lag7_realtime </code></pre>
+</div>
+</div>
+</section>
+<section id="line-up-with-training-data" class="slide level2">
+<h2>Line up with training data</h2>
+<p>We need to make sure to line up our predictors in <code>nchs_ca_past_latest</code> with training data that is analogous (e.g., “equally unreliable”).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a></a><span class="fu">library</span>(data.table)</span>
+<span id="cb95-2"><a></a>get_predictor_training_data <span class="ot">&lt;-</span> <span class="cf">function</span>(archive, varname, lag_days, predictor_name) {</span>
+<span id="cb95-3"><a></a>  ...</span>
+<span id="cb95-4"><a></a>  ...</span>
+<span id="cb95-5"><a></a>  ...</span>
+<span id="cb95-6"><a></a>  <span class="fu">return</span> (training_data_edf_for_this_predictor)</span>
+<span id="cb95-7"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Actual implementation: ::: {.cell layout-align=“center”}</p>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a></a><span class="fu">library</span>(data.table)</span>
+<span id="cb96-2"><a></a>get_predictor_training_data <span class="ot">&lt;-</span> <span class="cf">function</span>(archive, varname, lag_days, predictor_name) {</span>
+<span id="cb96-3"><a></a>  epikeytime_names <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">key</span>(archive<span class="sc">$</span>DT), <span class="st">"version"</span>)</span>
+<span id="cb96-4"><a></a>  requests <span class="ot">&lt;-</span> <span class="fu">unique</span>(archive<span class="sc">$</span>DT, <span class="at">by =</span> epikeytime_names, <span class="at">cols =</span> <span class="fu">character</span>())[</span>
+<span id="cb96-5"><a></a>  , version <span class="sc">:</span><span class="er">=</span> time_value <span class="sc">+</span> ..lag_days</span>
+<span id="cb96-6"><a></a>  ]</span>
+<span id="cb96-7"><a></a>  <span class="fu">setkeyv</span>(requests, <span class="fu">c</span>(epikeytime_names, <span class="st">"version"</span>))</span>
+<span id="cb96-8"><a></a>  result <span class="ot">&lt;-</span> archive<span class="sc">$</span>DT[</span>
+<span id="cb96-9"><a></a>    requests, <span class="fu">c</span>(<span class="fu">key</span>(archive<span class="sc">$</span>DT), varname), roll <span class="ot">=</span> <span class="cn">TRUE</span>, nomatch <span class="ot">=</span> <span class="cn">NULL</span>, allow.cartesian <span class="ot">=</span> <span class="cn">TRUE</span>, with <span class="ot">=</span> <span class="cn">FALSE</span></span>
+<span id="cb96-10"><a></a>  ][</span>
+<span id="cb96-11"><a></a>  , time_value <span class="sc">:</span><span class="er">=</span> version</span>
+<span id="cb96-12"><a></a>  ][</span>
+<span id="cb96-13"><a></a>  , version <span class="sc">:</span><span class="er">=</span> <span class="cn">NULL</span></span>
+<span id="cb96-14"><a></a>  ]</span>
+<span id="cb96-15"><a></a>  nms <span class="ot">&lt;-</span> <span class="fu">names</span>(result)</span>
+<span id="cb96-16"><a></a>  nms[[<span class="fu">match</span>(varname, nms)]] <span class="ot">&lt;-</span> predictor_name</span>
+<span id="cb96-17"><a></a>  <span class="fu">setnames</span>(result, nms)</span>
+<span id="cb96-18"><a></a>  <span class="fu">setDF</span>(result)</span>
+<span id="cb96-19"><a></a>  <span class="fu">as_tibble</span>(result)</span>
+<span id="cb96-20"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>:::</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a></a><span class="fu">get_predictor_training_data</span>(nchs_ca_past_archive, <span class="st">"mortality"</span>, <span class="dv">7</span>, <span class="st">"mortality_lag7_realtime"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 36 × 3
+   geo_value time_value mortality_lag7_realtime
+   &lt;chr&gt;     &lt;date&gt;                       &lt;dbl&gt;
+ 1 ca        2020-12-06                      13
+ 2 ca        2021-02-28                      78
+ 3 ca        2021-03-07                      54
+ 4 ca        2021-03-14                      43
+ 5 ca        2021-03-21                      19
+ 6 ca        2021-03-28                      21
+ 7 ca        2021-04-04                      23
+ 8 ca        2021-04-11                      20
+ 9 ca        2021-04-18                      18
+10 ca        2021-04-25                      20
+# ℹ 26 more rows</code></pre>
+</div>
+</div>
+<p>The first value here is a version of <span class="math inline">\(Y_{\text{2020-11-30}}\)</span> as it was reported in version 2020-12-06. We expect it to have similar characteristics as <span class="math inline">\(Y_{t - 7\text{ days}}\)</span> as reported in version <span class="math inline">\(t\)</span> for other values of <span class="math inline">\(t\)</span>.</p>
+</section>
+<section id="get-multiple-predictors" class="slide level2">
+<h2>Get multiple predictors</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a></a>predictors <span class="ot">&lt;-</span> predictor_descriptions <span class="sc">|&gt;</span></span>
+<span id="cb99-2"><a></a>  <span class="fu">pmap</span>(<span class="cf">function</span>(varname, lag_days, predictor_name) {</span>
+<span id="cb99-3"><a></a>    <span class="fu">get_predictor_training_data</span>(nchs_ca_past_archive, varname, lag_days, predictor_name)</span>
+<span id="cb99-4"><a></a>  }) <span class="sc">|&gt;</span></span>
+<span id="cb99-5"><a></a>  <span class="fu">reduce</span>(full_join, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"geo_value"</span>, <span class="st">"time_value"</span>))</span>
+<span id="cb99-6"><a></a>predictors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 50 × 4
+   geo_value time_value mortality_lag14_realtime mortality_lag7_realtime
+   &lt;chr&gt;     &lt;date&gt;                        &lt;dbl&gt;                   &lt;dbl&gt;
+ 1 ca        2020-12-06                       66                      13
+ 2 ca        2020-12-13                       13                      NA
+ 3 ca        2021-02-14                      557                      NA
+ 4 ca        2021-02-21                      474                      NA
+ 5 ca        2021-02-28                      478                      78
+ 6 ca        2021-03-07                      415                      54
+ 7 ca        2021-03-14                      282                      43
+ 8 ca        2021-03-21                      176                      19
+ 9 ca        2021-03-28                      164                      21
+10 ca        2021-04-04                      117                      23
+# ℹ 40 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li>A full join is nice to show differences in missingness</li>
+<li>But before training we’re going to <code>drop_na()</code> and end up with something more like an inner join</li>
+</ul>
+</section>
+<section id="combine-with-target-data" class="slide level2">
+<h2>Combine with target data</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a></a>target <span class="ot">&lt;-</span> nchs_ca_past_latest <span class="sc">|&gt;</span></span>
+<span id="cb101-2"><a></a>  <span class="fu">filter</span>(time_value <span class="sc">&lt;=</span> <span class="fu">max</span>(time_value) <span class="sc">-</span> <span class="dv">49</span>) <span class="sc">|&gt;</span></span>
+<span id="cb101-3"><a></a>  <span class="fu">rename</span>(<span class="at">mortality_semistable =</span> mortality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For each training time <span class="math inline">\(t'\)</span>, approximate finalized <span class="math inline">\(Y_{t'}\)</span> with <span class="math inline">\(Y_{t'}\)</span> as reported at our trial nowcast date <span class="math inline">\(t\)</span>. * Based on earlier analysis, we shouldn’t really trust this for <span class="math inline">\(t'\)</span> within 49 days of <span class="math inline">\(t\)</span>, so filter those training times out.</p>
+</section>
+<section id="fit-the-regression-model" class="slide level2">
+<h2>Fit the regression model</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a></a>training_test <span class="ot">&lt;-</span> <span class="fu">full_join</span>(predictors, target, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"geo_value"</span>, <span class="st">"time_value"</span>))</span>
+<span id="cb102-2"><a></a></span>
+<span id="cb102-3"><a></a>training <span class="ot">&lt;-</span> training_test <span class="sc">|&gt;</span> <span class="fu">drop_na</span>()</span>
+<span id="cb102-4"><a></a>test <span class="ot">&lt;-</span> training_test <span class="sc">|&gt;</span> <span class="fu">filter</span>(time_value <span class="sc">==</span> trial_nowcast_date)</span>
+<span id="cb102-5"><a></a></span>
+<span id="cb102-6"><a></a>fit <span class="ot">&lt;-</span> training <span class="sc">|&gt;</span></span>
+<span id="cb102-7"><a></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(predictor_descriptions<span class="sc">$</span>predictor_name), mortality_semistable) <span class="sc">|&gt;</span></span>
+<span id="cb102-8"><a></a>  <span class="fu">lm</span>(<span class="at">formula =</span> mortality_semistable <span class="sc">~</span> .)</span>
+<span id="cb102-9"><a></a></span>
+<span id="cb102-10"><a></a>pred <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb102-11"><a></a>  <span class="at">nowcast_date =</span> trial_nowcast_date,</span>
+<span id="cb102-12"><a></a>  <span class="at">target_date =</span> target_time_value,</span>
+<span id="cb102-13"><a></a>  <span class="at">prediction =</span> <span class="fu">unname</span>(<span class="fu">predict</span>(fit, test))</span>
+<span id="cb102-14"><a></a>)</span>
+<span id="cb102-15"><a></a></span>
+<span id="cb102-16"><a></a>pred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  nowcast_date target_date prediction
+  &lt;date&gt;       &lt;date&gt;           &lt;dbl&gt;
+1 2022-01-02   2022-01-02        483.</code></pre>
+</div>
+</div>
+</section>
+<section id="our-prediction" class="slide level2">
+<h2>Our prediction</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a></a>pred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  nowcast_date target_date prediction
+  &lt;date&gt;       &lt;date&gt;           &lt;dbl&gt;
+1 2022-01-02   2022-01-02        483.</code></pre>
+</div>
+</div>
+</section>
+<section id="backtesting-our-nowcaster" class="slide level2">
+<h2>Backtesting our nowcaster</h2>
+<p>We’ll wrap our nowcasting code in a function and <code>epix_slide()</code> again.</p>
+<ul>
+<li>And get an error — some versions <span class="math inline">\(t\)</span> don’t include a value <span class="math inline">\(Y_{t-1}\)</span> or <span class="math inline">\(Y_{t-2}\)</span> (e.g., version 2022-06-26 doesn’t).
+<ul>
+<li>So let’s try looking farther into the past at <span class="math inline">\(Y_{t-3}\)</span>, etc.</li>
+<li>… but don’t look too far: <span class="math inline">\(Y_{t-5}\)</span> is the limit.</li>
+<li>The same regression approach applies to models with 3 or more features.</li>
+<li>Including more features tends to improve performance, up to a point.</li>
+</ul></li>
+</ul>
+</section>
+<section id="some-other-modifications" class="slide level2">
+<h2>Some other modifications</h2>
+<ul>
+<li>Add some basic checks throughout our nowcasting function.</li>
+<li>Make sure we have “enough” training data to fit a model.</li>
+<li>Add ability to look not just at provisional <span class="math inline">\(Y_{t-k}\)</span>, but also provisional <span class="math inline">\(Z_{t-k}\)</span> for some other signal <span class="math inline">\(Z\)</span>.
+<ul>
+<li><span class="math inline">\(Z\)</span> here is HHS/NHSN COVID-19 hospitalization reporting.
+<ul>
+<li>This was daily-resolution and daily-reporting-cadence for some time; it’s possible but a bit tricky to combine with our weekly-resolution weekly-cadence archive.</li>
+</ul></li>
+<li>Exclude a potential predictor if it doesn’t have much training data available.</li>
+</ul></li>
+<li>Allow for linear regression or quantile regression at the median level (tau = 0.5)</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a></a>regression_nowcaster <span class="ot">&lt;-</span> <span class="cf">function</span>(archive, settings, <span class="at">return_info =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb106-2"><a></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">inherits</span>(archive, <span class="st">"epi_archive"</span>)) {</span>
+<span id="cb106-3"><a></a>    <span class="fu">stop</span>(<span class="st">"`archive` isn't an `epi_archive`"</span>)</span>
+<span id="cb106-4"><a></a>  }</span>
+<span id="cb106-5"><a></a>  <span class="cf">if</span> (<span class="fu">length</span>(<span class="fu">unique</span>(archive<span class="sc">$</span>DT<span class="sc">$</span>geo_value)) <span class="sc">!=</span> <span class="dv">1</span>L) {</span>
+<span id="cb106-6"><a></a>    <span class="fu">stop</span>(<span class="st">"Expected exactly one unique `geo_value`"</span>)</span>
+<span id="cb106-7"><a></a>  }</span>
+<span id="cb106-8"><a></a>  <span class="cf">if</span> (archive<span class="sc">$</span>time_type <span class="sc">==</span> <span class="st">"day"</span>) {</span>
+<span id="cb106-9"><a></a>    archive <span class="ot">&lt;-</span> <span class="fu">thin_daily_to_weekly_archive</span>(archive)</span>
+<span id="cb106-10"><a></a>  }</span>
+<span id="cb106-11"><a></a></span>
+<span id="cb106-12"><a></a>  nowcast_date <span class="ot">&lt;-</span> archive<span class="sc">$</span>versions_end</span>
+<span id="cb106-13"><a></a>  target_time_value <span class="ot">&lt;-</span> nowcast_date</span>
+<span id="cb106-14"><a></a>  latest_edf <span class="ot">&lt;-</span> archive <span class="sc">|&gt;</span> <span class="fu">epix_as_of</span>(nowcast_date)</span>
+<span id="cb106-15"><a></a>  <span class="co"># print(nowcast_date)</span></span>
+<span id="cb106-16"><a></a></span>
+<span id="cb106-17"><a></a>  predictor_descriptions <span class="ot">&lt;-</span></span>
+<span id="cb106-18"><a></a>    latest_edf <span class="sc">|&gt;</span></span>
+<span id="cb106-19"><a></a>    <span class="fu">mutate</span>(<span class="at">lag_days =</span> <span class="fu">as.integer</span>(nowcast_date <span class="sc">-</span> time_value)) <span class="sc">|&gt;</span></span>
+<span id="cb106-20"><a></a>    <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(geo_value, time_value)) <span class="sc">|&gt;</span></span>
+<span id="cb106-21"><a></a>    <span class="fu">pivot_longer</span>(<span class="sc">-</span>lag_days, <span class="at">names_to =</span> <span class="st">"varname"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb106-22"><a></a>    <span class="fu">drop_na</span>(value) <span class="sc">|&gt;</span></span>
+<span id="cb106-23"><a></a>    <span class="fu">inner_join</span>(settings<span class="sc">$</span>predictors, <span class="at">by =</span> <span class="st">"varname"</span>, <span class="at">unmatched =</span> <span class="st">"error"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb106-24"><a></a>    <span class="fu">filter</span>(<span class="fu">abs</span>(lag_days) <span class="sc">&lt;=</span> max_abs_shift_days) <span class="sc">|&gt;</span></span>
+<span id="cb106-25"><a></a>    <span class="fu">arrange</span>(varname, <span class="fu">abs</span>(lag_days)) <span class="sc">|&gt;</span></span>
+<span id="cb106-26"><a></a>    <span class="fu">group_by</span>(varname) <span class="sc">|&gt;</span></span>
+<span id="cb106-27"><a></a>    <span class="fu">filter</span>(<span class="fu">seq_len</span>(<span class="fu">n</span>()) <span class="sc">&lt;=</span> max_n_shifts[[<span class="dv">1</span>]]) <span class="sc">|&gt;</span></span>
+<span id="cb106-28"><a></a>    <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb106-29"><a></a>    <span class="fu">mutate</span>(<span class="at">predictor_name =</span> <span class="fu">paste0</span>(varname, <span class="st">"_lag"</span>, lag_days, <span class="st">"_realtime"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb106-30"><a></a>    <span class="fu">select</span>(varname, lag_days, predictor_name)</span>
+<span id="cb106-31"><a></a></span>
+<span id="cb106-32"><a></a>  predictor_edfs <span class="ot">&lt;-</span> predictor_descriptions <span class="sc">|&gt;</span></span>
+<span id="cb106-33"><a></a>    <span class="fu">pmap</span>(<span class="cf">function</span>(varname, lag_days, predictor_name) {</span>
+<span id="cb106-34"><a></a>      <span class="fu">get_predictor_training_data</span>(archive, varname, lag_days, predictor_name)</span>
+<span id="cb106-35"><a></a>    }) <span class="sc">|&gt;</span></span>
+<span id="cb106-36"><a></a>    <span class="fu">lapply</span>(na.omit) <span class="sc">|&gt;</span></span>
+<span id="cb106-37"><a></a>    <span class="fu">keep</span>(<span class="sc">~</span> <span class="fu">nrow</span>(.x) <span class="sc">&gt;=</span> settings<span class="sc">$</span>min_n_training_per_predictor)</span>
+<span id="cb106-38"><a></a></span>
+<span id="cb106-39"><a></a>  <span class="cf">if</span> (<span class="fu">length</span>(predictor_edfs) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb106-40"><a></a>    <span class="fu">stop</span>(<span class="st">"Couldn't find acceptable predictors in the latest data."</span>)</span>
+<span id="cb106-41"><a></a>  }</span>
+<span id="cb106-42"><a></a></span>
+<span id="cb106-43"><a></a>  predictors <span class="ot">&lt;-</span> predictor_edfs <span class="sc">|&gt;</span></span>
+<span id="cb106-44"><a></a>    <span class="fu">reduce</span>(full_join, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"geo_value"</span>, <span class="st">"time_value"</span>))</span>
+<span id="cb106-45"><a></a></span>
+<span id="cb106-46"><a></a>  target <span class="ot">&lt;-</span> latest_edf <span class="sc">|&gt;</span></span>
+<span id="cb106-47"><a></a>    <span class="fu">filter</span>(time_value <span class="sc">&lt;=</span> <span class="fu">max</span>(time_value) <span class="sc">-</span> settings<span class="sc">$</span>days_until_target_semistable) <span class="sc">|&gt;</span></span>
+<span id="cb106-48"><a></a>    <span class="fu">select</span>(geo_value, time_value, <span class="at">mortality_semistable =</span> mortality)</span>
+<span id="cb106-49"><a></a></span>
+<span id="cb106-50"><a></a>  training_test <span class="ot">&lt;-</span> <span class="fu">full_join</span>(predictors, target, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"geo_value"</span>, <span class="st">"time_value"</span>))</span>
+<span id="cb106-51"><a></a></span>
+<span id="cb106-52"><a></a>  training <span class="ot">&lt;-</span> training_test <span class="sc">|&gt;</span></span>
+<span id="cb106-53"><a></a>    <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
+<span id="cb106-54"><a></a>    <span class="fu">slice_max</span>(time_value, <span class="at">n =</span> settings<span class="sc">$</span>max_n_training_intersection)</span>
+<span id="cb106-55"><a></a></span>
+<span id="cb106-56"><a></a>  test <span class="ot">&lt;-</span> training_test <span class="sc">|&gt;</span></span>
+<span id="cb106-57"><a></a>    <span class="fu">filter</span>(time_value <span class="sc">==</span> nowcast_date)</span>
+<span id="cb106-58"><a></a></span>
+<span id="cb106-59"><a></a>  <span class="cf">if</span> (<span class="fu">isTRUE</span>(settings<span class="sc">$</span>median)) {</span>
+<span id="cb106-60"><a></a>    fit <span class="ot">&lt;-</span> training <span class="sc">|&gt;</span></span>
+<span id="cb106-61"><a></a>      <span class="fu">select</span>(<span class="fu">any_of</span>(predictor_descriptions<span class="sc">$</span>predictor_name), mortality_semistable) <span class="sc">|&gt;</span></span>
+<span id="cb106-62"><a></a>      quantreg<span class="sc">::</span><span class="fu">rq</span>(<span class="at">formula =</span> mortality_semistable <span class="sc">~</span> ., <span class="at">tau =</span> <span class="fl">0.5</span>)</span>
+<span id="cb106-63"><a></a>  } <span class="cf">else</span> {</span>
+<span id="cb106-64"><a></a>    fit <span class="ot">&lt;-</span> training <span class="sc">|&gt;</span></span>
+<span id="cb106-65"><a></a>      <span class="fu">select</span>(<span class="fu">any_of</span>(predictor_descriptions<span class="sc">$</span>predictor_name), mortality_semistable) <span class="sc">|&gt;</span></span>
+<span id="cb106-66"><a></a>      <span class="fu">lm</span>(<span class="at">formula =</span> mortality_semistable <span class="sc">~</span> .)</span>
+<span id="cb106-67"><a></a>  }</span>
+<span id="cb106-68"><a></a></span>
+<span id="cb106-69"><a></a>  pred <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb106-70"><a></a>    <span class="at">geo_value =</span> <span class="st">"ca"</span>,</span>
+<span id="cb106-71"><a></a>    <span class="at">nowcast_date =</span> nowcast_date,</span>
+<span id="cb106-72"><a></a>    <span class="at">target_date =</span> target_time_value,</span>
+<span id="cb106-73"><a></a>    <span class="at">prediction =</span> <span class="fu">unname</span>(<span class="fu">predict</span>(fit, test))</span>
+<span id="cb106-74"><a></a>  )</span>
+<span id="cb106-75"><a></a></span>
+<span id="cb106-76"><a></a>  <span class="cf">if</span> (return_info) {</span>
+<span id="cb106-77"><a></a>    <span class="fu">return</span>(<span class="fu">tibble</span>(</span>
+<span id="cb106-78"><a></a>      <span class="at">coefficients =</span> <span class="fu">list</span>(<span class="fu">coef</span>(fit)),</span>
+<span id="cb106-79"><a></a>      <span class="at">predictions =</span> <span class="fu">list</span>(pred)</span>
+<span id="cb106-80"><a></a>    ))</span>
+<span id="cb106-81"><a></a>  } <span class="cf">else</span> {</span>
+<span id="cb106-82"><a></a>    <span class="fu">return</span>(pred)</span>
+<span id="cb106-83"><a></a>  }</span>
+<span id="cb106-84"><a></a>}</span>
+<span id="cb106-85"><a></a></span>
+<span id="cb106-86"><a></a><span class="co"># We can apply this separately for each nowcast_date to ensure that we consider</span></span>
+<span id="cb106-87"><a></a><span class="co"># the latest possible value for every signal, though whether that is advisable</span></span>
+<span id="cb106-88"><a></a><span class="co"># or not may depend on revision characteristics of the signals.</span></span>
+<span id="cb106-89"><a></a>thin_daily_to_weekly_archive <span class="ot">&lt;-</span> <span class="cf">function</span>(archive) {</span>
+<span id="cb106-90"><a></a>  key_nms <span class="ot">&lt;-</span> <span class="fu">key</span>(archive<span class="sc">$</span>DT)</span>
+<span id="cb106-91"><a></a>  val_nms <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">names</span>(archive<span class="sc">$</span>DT), key_nms)</span>
+<span id="cb106-92"><a></a>  update_tbl <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(archive<span class="sc">$</span>DT)</span>
+<span id="cb106-93"><a></a>  val_nms <span class="sc">|&gt;</span></span>
+<span id="cb106-94"><a></a>    <span class="fu">lapply</span>(<span class="cf">function</span>(val_nm) {</span>
+<span id="cb106-95"><a></a>      update_tbl[<span class="fu">c</span>(key_nms, val_nm)] <span class="sc">|&gt;</span></span>
+<span id="cb106-96"><a></a>        <span class="co"># thin out to weekly, making sure that we keep the max time_value with non-NA value:</span></span>
+<span id="cb106-97"><a></a>        <span class="fu">filter</span>(<span class="fu">as.POSIXlt</span>(time_value)<span class="sc">$</span>wday <span class="sc">==</span> <span class="fu">as.POSIXlt</span>(<span class="fu">max</span>(time_value[<span class="sc">!</span><span class="fu">is.na</span>(.data[[val_nm]])]))<span class="sc">$</span>wday) <span class="sc">|&gt;</span></span>
+<span id="cb106-98"><a></a>        <span class="co"># re-align:</span></span>
+<span id="cb106-99"><a></a>        <span class="fu">mutate</span>(</span>
+<span id="cb106-100"><a></a>          <span class="at">time_value =</span> time_value <span class="sc">-</span> <span class="fu">as.POSIXlt</span>(time_value)<span class="sc">$</span>wday, <span class="co"># Sunday of same epiweek</span></span>
+<span id="cb106-101"><a></a>          <span class="at">old_version =</span> version,</span>
+<span id="cb106-102"><a></a>          <span class="at">version =</span> version <span class="sc">-</span> <span class="fu">as.POSIXlt</span>(version)<span class="sc">$</span>wday <span class="co"># Sunday of same epiweek</span></span>
+<span id="cb106-103"><a></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb106-104"><a></a>        <span class="fu">slice_max</span>(old_version, <span class="at">by =</span> <span class="fu">all_of</span>(key_nms)) <span class="sc">|&gt;</span></span>
+<span id="cb106-105"><a></a>        <span class="fu">select</span>(<span class="sc">-</span>old_version) <span class="sc">|&gt;</span></span>
+<span id="cb106-106"><a></a>        <span class="fu">as_epi_archive</span>(<span class="at">other_keys =</span> <span class="fu">setdiff</span>(key_nms, <span class="fu">c</span>(<span class="st">"geo_value"</span>, <span class="st">"time_value"</span>, <span class="st">"version"</span>)),</span>
+<span id="cb106-107"><a></a>                       <span class="at">compactify =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb106-108"><a></a>    }) <span class="sc">|&gt;</span></span>
+<span id="cb106-109"><a></a>    <span class="fu">reduce</span>(epix_merge, <span class="at">sync =</span> <span class="st">"locf"</span>)</span>
+<span id="cb106-110"><a></a>}</span>
+<span id="cb106-111"><a></a></span>
+<span id="cb106-112"><a></a><span class="co"># Baseline model:</span></span>
+<span id="cb106-113"><a></a>locf_nowcaster <span class="ot">&lt;-</span> <span class="cf">function</span>(archive) {</span>
+<span id="cb106-114"><a></a>  nowcast_date <span class="ot">&lt;-</span> archive<span class="sc">$</span>versions_end</span>
+<span id="cb106-115"><a></a>  target_time_value <span class="ot">&lt;-</span> nowcast_date</span>
+<span id="cb106-116"><a></a>  latest_edf <span class="ot">&lt;-</span> archive <span class="sc">|&gt;</span> <span class="fu">epix_as_of</span>(nowcast_date)</span>
+<span id="cb106-117"><a></a></span>
+<span id="cb106-118"><a></a>  latest_edf <span class="sc">|&gt;</span></span>
+<span id="cb106-119"><a></a>    <span class="fu">complete</span>(geo_value, <span class="at">time_value =</span> target_time_value) <span class="sc">|&gt;</span></span>
+<span id="cb106-120"><a></a>    <span class="fu">arrange</span>(geo_value, time_value) <span class="sc">|&gt;</span></span>
+<span id="cb106-121"><a></a>    <span class="fu">group_by</span>(geo_value) <span class="sc">|&gt;</span></span>
+<span id="cb106-122"><a></a>    <span class="fu">fill</span>(mortality) <span class="sc">|&gt;</span></span>
+<span id="cb106-123"><a></a>    <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb106-124"><a></a>    <span class="fu">filter</span>(time_value <span class="sc">==</span> target_time_value) <span class="sc">|&gt;</span></span>
+<span id="cb106-125"><a></a>    <span class="fu">transmute</span>(</span>
+<span id="cb106-126"><a></a>      geo_value,</span>
+<span id="cb106-127"><a></a>      <span class="at">nowcast_date =</span> nowcast_date,</span>
+<span id="cb106-128"><a></a>      <span class="at">target_date =</span> time_value,</span>
+<span id="cb106-129"><a></a>      <span class="at">prediction =</span> mortality</span>
+<span id="cb106-130"><a></a>    )</span>
+<span id="cb106-131"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="model-settings" class="slide level2">
+<h2>Model settings</h2>
+<p>After fixing, enhancing, and parameterizing our regression nowcaster, we’ll compare two different configurations:</p>
+<ul>
+<li>one with just mortality-based predictions</li>
+<li>one that also uses hospitalizations as a predictor</li>
+<li>and two that use quantile reg instead of linear reg</li>
+</ul>
+</section>
+<section id="model-settings-1" class="slide level2">
+<h2>Model settings</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a></a>reg1_settings <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb107-2"><a></a>  <span class="at">predictors =</span> <span class="fu">tribble</span>(</span>
+<span id="cb107-3"><a></a>    <span class="sc">~</span>varname,    <span class="sc">~</span>max_abs_shift_days, <span class="sc">~</span>max_n_shifts,</span>
+<span id="cb107-4"><a></a>    <span class="st">"mortality"</span>,                  <span class="dv">35</span>,             <span class="dv">3</span>,</span>
+<span id="cb107-5"><a></a>    ),</span>
+<span id="cb107-6"><a></a>  <span class="at">min_n_training_per_predictor =</span> <span class="dv">30</span>, <span class="co"># or else exclude predictor</span></span>
+<span id="cb107-7"><a></a>  <span class="at">days_until_target_semistable =</span> <span class="dv">7</span> <span class="sc">*</span> <span class="dv">7</span>, <span class="co"># filter out unstable when training (and evaluating)</span></span>
+<span id="cb107-8"><a></a>  <span class="at">min_n_training_intersection =</span> <span class="dv">20</span>, <span class="co"># or else raise error</span></span>
+<span id="cb107-9"><a></a>  <span class="at">max_n_training_intersection =</span> <span class="cn">Inf</span> <span class="co"># or else filter down rows</span></span>
+<span id="cb107-10"><a></a>)</span>
+<span id="cb107-11"><a></a></span>
+<span id="cb107-12"><a></a>reg2_settings <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb107-13"><a></a>  <span class="at">predictors =</span> <span class="fu">tribble</span>(</span>
+<span id="cb107-14"><a></a>    <span class="sc">~</span>varname,     <span class="sc">~</span>max_abs_shift_days, <span class="sc">~</span>max_n_shifts,</span>
+<span id="cb107-15"><a></a>    <span class="st">"admissions"</span>,                  <span class="dv">35</span>,             <span class="dv">3</span>,</span>
+<span id="cb107-16"><a></a>    <span class="st">"mortality"</span>,                   <span class="dv">35</span>,             <span class="dv">3</span>,</span>
+<span id="cb107-17"><a></a>    ),</span>
+<span id="cb107-18"><a></a>  <span class="at">min_n_training_per_predictor =</span> <span class="dv">30</span>, <span class="co"># or else exclude predictor</span></span>
+<span id="cb107-19"><a></a>  <span class="at">days_until_target_semistable =</span> <span class="dv">7</span> <span class="sc">*</span> <span class="dv">7</span>, <span class="co"># filter out unstable when training (and evaluating)</span></span>
+<span id="cb107-20"><a></a>  <span class="at">min_n_training_intersection =</span> <span class="dv">20</span>, <span class="co"># or else raise error</span></span>
+<span id="cb107-21"><a></a>  <span class="at">max_n_training_intersection =</span> <span class="cn">Inf</span> <span class="co"># or else filter down rows</span></span>
+<span id="cb107-22"><a></a>)</span>
+<span id="cb107-23"><a></a></span>
+<span id="cb107-24"><a></a>reg3_settings <span class="ot">&lt;-</span> <span class="fu">c</span>(reg1_settings, <span class="at">median =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb107-25"><a></a>reg4_settings <span class="ot">&lt;-</span> <span class="fu">c</span>(reg2_settings, <span class="at">median =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="comparison-linear-regression" class="slide level2">
+<h2>Comparison: linear regression</h2>
+
+<img data-src="day1-afternoon_files/figure-revealjs/regression-nowcast-plot-linreg-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="comparison-quantile-regression" class="slide level2">
+<h2>Comparison: quantile regression</h2>
+
+<img data-src="day1-afternoon_files/figure-revealjs/regression-nowcast-plot-quantreg-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="evaluations" class="slide level2">
+<h2>Evaluations</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a></a>n_models <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(nowcast_comparison<span class="sc">$</span>Nowcaster))</span>
+<span id="cb108-2"><a></a>nowcast_comparison <span class="sc">|&gt;</span></span>
+<span id="cb108-3"><a></a>  <span class="co"># Filter evaluation based on target stability</span></span>
+<span id="cb108-4"><a></a>  <span class="fu">filter</span>(target_date <span class="sc">&lt;=</span> nchs_ca_archive<span class="sc">$</span>versions_end <span class="sc">-</span> <span class="dv">49</span>) <span class="sc">|&gt;</span></span>
+<span id="cb108-5"><a></a>  <span class="co"># Filter evaluated tasks to those with all models available</span></span>
+<span id="cb108-6"><a></a>  <span class="fu">group_by</span>(target_date) <span class="sc">|&gt;</span></span>
+<span id="cb108-7"><a></a>  <span class="fu">filter</span>(<span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(prediction)) <span class="sc">==</span> n_models) <span class="sc">|&gt;</span></span>
+<span id="cb108-8"><a></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb108-9"><a></a>  <span class="fu">summarize</span>(<span class="at">.by =</span> Nowcaster,</span>
+<span id="cb108-10"><a></a>            <span class="at">MAE =</span> <span class="fu">mean</span>(<span class="fu">abs</span>(mortality <span class="sc">-</span> prediction)),</span>
+<span id="cb108-11"><a></a>            <span class="at">MAPE =</span> <span class="dv">100</span><span class="sc">*</span><span class="fu">mean</span>(<span class="fu">abs</span>(mortality <span class="sc">-</span> prediction)<span class="sc">/</span><span class="fu">abs</span>(mortality)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 3
+# ℹ 3 variables: Nowcaster &lt;chr&gt;, MAE &lt;dbl&gt;, MAPE &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="mea-culpa" class="slide level2">
+<h2>Mea culpa</h2>
+<p>This quickly became complicated and we’ve glossed over some core concepts. We’ll explain concepts of regression, lagged features, and evaluation more carefully tomorrow.</p>
+</section>
+<section id="aside-on-nowcasting" class="slide level2">
+<h2>Aside on nowcasting</h2>
+<ul>
+<li><p>To some Epis, “nowcasting” can be equated with “estimate the time-varying instantaneous reproduction number, <span class="math inline">\(R_t\)</span>”</p></li>
+<li><p>Ex. using the number of reported COVID-19 cases in British Columbia between Jan.&nbsp;2020 and Apr.&nbsp;15, 2023.</p></li>
+</ul>
+<p>This data is the number of reported COVID-19 cases in British Columbia between January 2020 and April 15, 2023. The values are.up-to-date as of August 2023. ::: {.cell layout-align=“center”} ::: {.cell-output-display} <img data-src="day1-afternoon_files/figure-revealjs/nowcasting-1.svg" class="quarto-figure quarto-figure-center" height="400"> ::: :::</p>
+<ul>
+<li><p>Group built <a href="https://dajmcdon.github.io/rtestim"><code>{rtestim}</code></a> doing for this nonparametrically.</p></li>
+<li><p>We may come back to this later…</p></li>
+</ul>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="gfx/delphi.jpg" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>Nowcasting — <a href="https://github.com/cmu-delphi/micom-tooling-workshop-2025">cmu-delphi/micom-tooling-workshop-2025</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+                // target, if specified
+                link.setAttribute("target", "_blank");
+                if (link.getAttribute("rel") === null) {
+                  link.setAttribute("rel", "noopener");
+                }
+                // default icon
+                link.classList.add("external");
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
