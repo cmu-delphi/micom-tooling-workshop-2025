@@ -150,7 +150,7 @@ cases_deaths <- full_join(cases, deaths, by = c("time_value", "geo_value")) |>
   as_epi_df()
 ```
 
-## Get some data
+## Creating a dataset to forecast with: first, fetch data
 
 ```{r get-data}
 #| echo: true
@@ -289,6 +289,7 @@ cases_deaths$cases <- cases_outlr$replacement
 
 
 # Basic Usage of `arx_forecaster`
+
 ## Fit `arx_forecaster` on training set
 
 * Back to the [ARX(1)]{.primary} model for COVID deaths:
@@ -298,11 +299,10 @@ $\quad \hat y_{t+28} = \hat\phi + \hat\phi_0 y_{t} + \hat\beta_0 x_{t}$
 
 ```{r epipredict-arx}
 #| echo: true
-#| code-line-numbers: "|7-14"
-# split into train and test
+#| code-line-numbers: "|5-12"
+# threshold data at our forecast date, to be historically accurate
 t0_date <- as.Date('2021-04-01')
-train <- cases_deaths |> filter(time_value <= t0_date)
-test <- cases_deaths |> filter(time_value > t0_date)
+train <- cases_deaths %>% epix_as_of(version = t0_date)
 
 # fit ARX
 epi_arx <- arx_forecaster(
@@ -314,7 +314,13 @@ epi_arx <- arx_forecaster(
 )
 ```
 
-## `arx_forecaster` output{.smaller}
+```{r}
+#| echo: false
+train <- cases_deaths |> filter(time_value <= t0_date)
+test <- cases_deaths |> filter(time_value > t0_date)
+```
+
+## `arx_forecaster` outputs the predictions and a workflow object we can reuse{.smaller}
 
 * A [forecast]{.primary} (point prediction + quantiles) for 28 days after the
 last available time value in the data (`$predictions`).
@@ -370,7 +376,7 @@ epi_arx$predictions |>
 ```
 
 
-## `arx_forecaster` output
+## `arx_forecaster` output{visibility="hidden"}
 
 ```{r output-arx, message=TRUE}
 #| echo: true
@@ -657,6 +663,7 @@ pred_arx_more_lags <- covid_archive_dv |> epix_slide(
 ```{r arx-with-more-lags-plot}
 #| fig-align: left
 pred_arx_hosp |>
+  filter(geo_value == "ca") |>
   ggplot(aes(target_date, .pred)) +
   geom_line(data = ca, aes(x = time_value, y = deaths), inherit.aes = FALSE, col = base) +
   geom_line(col = primary) +
@@ -884,108 +891,6 @@ rbind(getAccuracy(ca,
 
 The extent to which this occurs differs based on the horizon.
 
-Previously we studied $h=28$. What happens for $h=7$?
-
-```{r arx-geo-pooling-h7}
-pred_arx_geo_pool_7 <- covid_archive_dv |>
-  epix_slide(
-    ~ arx_forecaster(epi_data = .x,
-                     outcome = "deaths",
-                     predictors = c("deaths", "doctor_visits"),
-                     trainer = quantile_reg(),
-                     args_list = arx_args_list(
-                       lags = 0,
-                       ahead = 7))
-                     $predictions |>
-        pivot_quantiles_wider(.pred_distn),
-  .before = Inf,
-  .versions = fc_time_values
-) 
-
-pred_no_geo_pool_7 <- pred_arx_no_geo_pool(usa_archive_dv$DT |>
-                                              filter(geo_value %in% c("ca", "ma", "ny", "tx")) |>
-                                              as_epi_archive(), ahead = 7)
-```
-
-
-## Predictions (geo-pooling, $h = 7$)
-
-```{r arx-geo-pooling-plot-h7}
-#| fig-width: 7
-pred_arx_geo_pool_7 |>
-  filter(geo_value %in% c("ca", "ma", "ny", "tx")) |>
-  ggplot(aes(target_date, .pred)) +
-  geom_line(data = rbind(ca, ma, ny, tx),  aes(x = time_value, y = deaths),
-    inherit.aes = FALSE, na.rm = TRUE, alpha = .5) +
-  geom_line(col = tertiary) +
-  geom_ribbon(aes(ymin = `0.1`, ymax = `0.9`), alpha = .3, fill = tertiary) +
-  geom_vline(xintercept = t0_date) +
-  geom_vline(xintercept = t0_date + 28, lty = 2) +
-  facet_wrap(vars(geo_value), scales = 'free_y') +
-  labs(x = "", y = "Deaths per 100k people") +
-  scale_y_continuous(expand = expansion(c(0, .05))) +
-  theme(legend.position = "none")
-3
-```
-
-```{r error-geo-pooling-all-states-h7}
-rbind(getAccuracy(ca,
-                  pred_arx_geo_pool_7 |>
-                    filter(geo_value == "ca" & target_date %in% ca$time_value),
-                  "CA"),
-      getAccuracy(ma,
-                  pred_arx_geo_pool_7 |>
-                    filter(geo_value == "ma" & target_date %in% ma$time_value),
-                  "MA"),
-      getAccuracy(ny,
-                  pred_arx_geo_pool_7 |>
-                    filter(geo_value == "ny" & target_date %in% ny$time_value),
-                  "NY"),
-      getAccuracy(tx,
-                  pred_arx_geo_pool_7 |>
-                    filter(geo_value == "tx" & target_date %in% tx$time_value),
-                  "TX"))
-```
-
-
-## Predictions (without geo-pooling, $h=7$)
-
-```{r arx-no-geo-pooling-plot-h7}
-#| fig-width: 7
-pred_no_geo_pool_7 |>
-  filter(geo_value %in% c("ca", "ma", "ny", "tx")) |>
-  ggplot(aes(target_date, .pred)) +
-  geom_line(data = rbind(ca, ma, ny, tx),  aes(x = time_value, y = deaths),
-    inherit.aes = FALSE, na.rm = TRUE, alpha = .5) +
-  geom_line(col = primary) +
-  geom_ribbon(aes(ymin = `0.1`, ymax = `0.9`), alpha = .3, fill = primary) +
-  geom_vline(xintercept = t0_date) +
-  geom_vline(xintercept = t0_date + 28, lty = 2) +
-  facet_wrap(vars(geo_value), scales = 'free_y') +
-  labs(x = "", y = "Deaths per 100k people") +
-  scale_y_continuous(expand = expansion(c(0, .05))) +
-  theme(legend.position = "none")
-```
-
-```{r error-no-geo-pooling-all-states-h7}
-rbind(getAccuracy(ca,
-                  pred_no_geo_pool_7 |>
-                    filter(geo_value == "ca" & target_date %in% ca$time_value),
-                  "CA"),
-      getAccuracy(ma,
-                  pred_no_geo_pool_7 |>
-                    filter(geo_value == "ma" & target_date %in% ma$time_value),
-                  "MA"),
-      getAccuracy(ny,
-                  pred_no_geo_pool_7 |>
-                    filter(geo_value == "ny" & target_date %in% ny$time_value),
-                  "NY"),
-      getAccuracy(tx,
-                  pred_no_geo_pool_7 |>
-                    filter(geo_value == "tx" & target_date %in% tx$time_value),
-                  "TX"))
-```
-
 ## What are these ARX intervals?{visibility="hidden"}
 
 * `{epipredict}` takes quantiles of training residuals to form its prediction intervals
@@ -1113,7 +1018,7 @@ rbind(getAccuracy(ca,
 ```
 
 
-## Plot our forecasts
+## Plot our forecasts{visibility="hidden"}
 
 ```{r plot-prod}
 #| fig-width: 7
@@ -1133,9 +1038,9 @@ ggplot() +
 ```
 
 
-# Ensembling
+# Ensembling{visibility="hidden"}
 
-## Ensembling
+## Ensembling{visibility="hidden"}
 
 Instead of choosing one model, we can [combine]{.primary} the predictions from multiple base models. Ensemble types:
 
@@ -1155,11 +1060,11 @@ $$
 \hat{y}^{\text{med}}_{t+h|t} = \mathrm{median}\Big\{ \hat{y}^j_{t+h|t} : j = 1,\dots,p \Big\}
 $$
 
-## Example from the Covid-19 Forecast Hub
+## Example from the Covid-19 Forecast Hub{visibility="hidden"}
 
 ![](gfx/cramer.png)
 
-## Two key goals of ensembling
+## Two key goals of ensembling{visibility="hidden"}
 
 1 [Compete-with-best]{.primary}: ensemble should have accuracy competitive with best individual constituent model
 
